@@ -54,7 +54,7 @@
         overlays = overlays ++ (lib.attrValues self.overlays);
       };
 
-      pkgs = mkPkgs nixpkgs [ self.overlay ];
+      pkgs = mkPkgs nixpkgs [ self.overlay inputs.polymc.overlay.${system} ];
     in {
       packages."${system}" = mapModules ./packages (p: pkgs.callPackage p {});
       overlay = final: prev: {
@@ -64,7 +64,7 @@
 #        blender = inputs.blender-30;
         unstable = mkPkgs nixpkgs-unstable [];
       };
-      overlays = mapModules ./overlays import ++ [ inputs.polymc.overlay.${system} ];
+      overlays = mapModules ./overlays import;
       nixosModules = mapModulesRec ./modules import;
       nixosConfigurations = mapModules ./hosts (mkHost system);
       devShell."${system}" =

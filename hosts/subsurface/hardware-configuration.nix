@@ -6,7 +6,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-#    inputs.nixos-hardware.nixosModules.microsoft-surface
+    inputs.nixos-hardware.nixosModules.microsoft-surface
   ];
 
   # Kernel Modules
