@@ -1,0 +1,88 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "SF Pro Display";
+  font-size: 13px;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* Universal Attributes */
+
+#tray,
+#cpu,
+#memory,
+#pulseaudio,
+#battery,
+#clock,
+#workspaces button,
+#window {
+  background: rgba(40, 50, 80, 0.60);
+  border-radius: 5px;
+  color: rgba(240, 240, 240, 1.00);
+}
+
+/* Font Sizes */
+
+#workspaces button {
+  font-size: 15px;
+}
+
+/* Padding */
+
+#workspaces button,
+#window {
+  padding: 2px 5px;
+}
+
+#clock {
+  padding: 2px 8px;
+}
+
+#cpu,
+#memory,
+#battery {
+  padding: 2px 7px;
+}
+
+
+/* Margins */
+
+#workspaces button,
+#window {
+  margin: 10px 0 0 10px;
+}
+
+#clock {
+  margin: 10px 0 0 0;
+}
+
+#tray,
+#cpu,
+#memory,
+#pulseaudio,
+#battery {
+  margin: 10px 10px 0 0 ;
+}
+
+/* Colours */
+
+#workspaces button.active {
+  background: rgba(40, 70, 125, 0.40);
+}
+
+#workspaces button:hover,
+#battery.charging {
+  background: rgba(45, 80, 140, 1.00);
+}
+
+#workspaces button.urgent,
+#battery.critical:not(.charging) {
+  background: rgba(255, 100, 80, 1.00);
+}
