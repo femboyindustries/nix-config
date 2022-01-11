@@ -38,7 +38,7 @@
 #    blender-30.url = "github:blender/blender/blender-v3.0-release";
 #    blender-30.flake = false;
 
-    multimc.url = "github:PolyMC/PolyMC";
+    polymc.url = "github:PolyMC/PolyMC";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
