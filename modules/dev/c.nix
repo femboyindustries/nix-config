@@ -16,7 +16,7 @@ in {
     environment.systemPackages = if !withLLVM then with pkgs; [
       gcc
     ] else with pkgs; [
-      clang
+      clang_12
 #      clang-utils
     ];
   };

@@ -10,7 +10,6 @@
       curl
       dolphin
       discord
-      firefox-wayland
       wl-clipboard
       inkscape
       blender
@@ -48,6 +47,9 @@
         alacritty.enable = true;
         obs.enable = true;
         firefox.enable = true;
+        menus = {
+          nwggrid.enable = true;
+        };
       };
       editors = {
          neovim.enable = true;

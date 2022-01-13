@@ -22,6 +22,10 @@ in {
         (mkIf desktop.sway.enable {
           "sway" = { source = ./config/sway; target = "$HOME.config/sway"; recursive = true; };
         })
+
+        (mkIf desktop.nwg-launchers.enable {
+          "nwg-launchers/nwggrid/style.css" = { source = ./config/nwggrid/style.css; };
+        })
       ];
     }
   ]);

@@ -11,6 +11,11 @@ in {
       default = false;
       description = "Enables the sway window manager for Wayland.";
     };
+    menu = mkOption {
+      type = types.str;
+      default = "nwggrid";
+      description = "";
+    };
     term = mkOption {
       type = types.str;
       default = "alacritty";
@@ -60,7 +65,7 @@ in {
     };
 
     modules.desktop.apps."${cfg.term}".enable = true;
-    modules.desktop.apps.wofi.enable = true;
+    modules.desktop.apps.menus.${cfg.menu}.enable = true;
 
 #    modules.desktop.services.swaylock.enable = true;
     modules.desktop.services.swayidle.enable = true;
@@ -89,7 +94,7 @@ in {
 #          { command = "mako"; }
         ];
         terminal = config.modules.desktop.apps.${cfg.term}.executable;
-        menu = config.modules.desktop.apps.wofi.executable;
+        menu = config.modules.desktop.apps.menus.${cfg.menu}.executable;
         output."eDP-1" = {
           bg = "${config.modules.theme.wallpaper} fill";
           scale = "1.5";
@@ -98,7 +103,7 @@ in {
 #          "${mod}+l" = "exec lock";
           "${mod}+q" = "reload";
           "${mod}+Shift+c" = "kill";
-          "${mod}+p" = "exec ${config.home._.wayland.windowManager.sway.config.menu} --show=drun";
+          "${mod}+p" = "exec ${config.home._.wayland.windowManager.sway.config.menu}";
           "${mod}+Shift+Return" = "exec ${config.home._.wayland.windowManager.sway.config.terminal}";
           "${mod}+Shift+e" = "exit";
 
