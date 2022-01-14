@@ -60,7 +60,7 @@
     "/" = {
       device = "/dev/disk/by-uuid/e1416adb-648e-4b34-b665-8305b7a765f8";
       fsType = "f2fs";
-      options = [ "defaults" "noatime" "noadirtime" ];
+      options = [ "defaults" "noatime" "nodiratime" ];
     };
 
     "/boot" = {
@@ -75,7 +75,7 @@
 
     "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56" = {
       device = "/dev/disk/by-uuid/bf2d91f1-a6b3-4629-8755-76301b3f6f56";
-#      fsType = "ext4";
+      fsType = "f2fs";
       options = [ "defaults" "noatime" "nodiratime" "user" "nofail" ];
     };
 
@@ -89,12 +89,13 @@
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/Pictures";
       options = [ "bind" ];
     };
+*/
 
     "/home/aether/Documents" = {
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/Documents";
       options = [ "bind" ];
     };
-*/
+
     "/home/aether/Music" = {
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/home delta delta/Music";
       options = [ "bind" ];

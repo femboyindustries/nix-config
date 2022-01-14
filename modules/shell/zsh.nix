@@ -3,7 +3,6 @@
 with lib;
 let
   cfg = config.modules.shell.zsh;
-  inherit (config) configDir;
 in {
   options.modules.shell.zsh = {
     enable = mkOption {
@@ -12,7 +11,7 @@ in {
     };
     executable = mkOption {
       type = types.str;
-      default = "${pkgs.fish}/bin/zsh";
+      default = "${pkgs.zsh}/bin/zsh";
     };
   };
 
@@ -26,7 +25,7 @@ in {
       enableCompletion = true;
       enableAutosuggestions = true;
 #      dotDir = "${config.home.configFile."zsh".source}";
-     dotDir = ".config/zsh";
+      dotDir = ".config/zsh";
       history = {
         path = "$XDG_DATA_HOME/zsh/zsh_history";
         save = 1000;

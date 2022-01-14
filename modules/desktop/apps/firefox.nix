@@ -8,17 +8,15 @@ in {
   options.modules.desktop.apps.firefox = {
     enable = mkOption {
       type = types.bool;
-      default = trace "penis" false;
+      default = false;
     };
   };
 
-  config = mkIf cfg.enable {
-/*
-    user.packages = with pkgs; [
+  config = trace "penis" (mkIf cfg.enable {
+    user.packages = mkMerge (if wayland then with pkgs; [
       firefox-wayland
-#      firefox
-    ];
-*/
-    user.packages = abort "sussy balls";
-  };
+    ] else with pkgs; [
+      firefox
+    ]);
+  });
 }

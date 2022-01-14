@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.nwg-launchers;
+  cfg = config.modules.desktop.apps.nwg-launchers;
 in {
-  options.modules.desktop.nwg-launchers = {
-    enable = mkOptions {
+  options.modules.desktop.apps.nwg-launchers = {
+    enable = mkOption {
       type = types.bool;
       default = false;
     };

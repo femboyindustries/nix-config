@@ -11,8 +11,10 @@
       dolphin
       discord
       wl-clipboard
+      firefox-wayland
       inkscape
       blender
+      polymc
     ];
   };
 
@@ -54,6 +56,9 @@
       editors = {
          neovim.enable = true;
          codium.enable = true;
+      };
+      gaming = {
+        minecraft.enable = true;
       };
     };
     dev = {

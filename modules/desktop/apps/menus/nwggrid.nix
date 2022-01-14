@@ -16,6 +16,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    config.modules.desktop.apps.nwg-launchers.enale = true;
+    modules.desktop.apps.nwg-launchers.enable = true;
   };
 }
