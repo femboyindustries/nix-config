@@ -58,13 +58,23 @@
   # Filesystems
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/e1416adb-648e-4b34-b665-8305b7a765f8";
+      device = "/dev/disk/by-uuid/b892a566-b6d7-4f62-a384-71ccca4ff4d8";
       fsType = "f2fs";
       options = [ "defaults" "noatime" "nodiratime" ];
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/EB60-12E5";
+      device = "/dev/disk/by-uuid/C507-604E";
+      fsType = "vfat";
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-uuid/f3a44427-a212-48c2-91e7-f40e82bbcc02";
+      fsType = "vfat";
+    };
+
+    "/etc/dotfiles" = {
+      device = "/dev/disk/by-uuid/2777d90a-20f0-4b35-88f1-653ba14114db";
       fsType = "vfat";
     };
 
@@ -72,12 +82,13 @@
       device = "none";
       fsType = "tmpfs";
     };
-
+/*
     "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56" = {
       device = "/dev/disk/by-uuid/bf2d91f1-a6b3-4629-8755-76301b3f6f56";
       fsType = "f2fs";
       options = [ "defaults" "noatime" "nodiratime" "user" "nofail" ];
     };
+*/
 
 /*
     "/home/aether/Videos" = {
@@ -102,5 +113,5 @@
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/537cffdc-a67d-4b25-a649-32455cec4661"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/e4a7edca-2c4e-4979-8368-377bc067b8bd"; }];
 }

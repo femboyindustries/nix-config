@@ -8,13 +8,13 @@
   user = {
     packages = with pkgs; [
       curl
-      dolphin
-      discord
-      wl-clipboard
-      firefox-wayland
-      inkscape
-      blender
-      polymc
+#      dolphin
+#      discord
+#      wl-clipboard
+#      firefox-wayland
+#      inkscape
+#      blender
+#      polymc
     ];
   };
 
@@ -44,6 +44,7 @@
         enable = true;
         term = "alacritty";
       };
+/*
       apps = {
         mpc.enable = true;
         alacritty.enable = true;
@@ -53,26 +54,33 @@
           nwggrid.enable = true;
         };
       };
+*/
       editors = {
          neovim.enable = true;
          codium.enable = true;
       };
+/*
       gaming = {
         minecraft.enable = true;
       };
+*/
     };
+/*
     dev = {
       llvm.enable = true;
       haskell.enable = true;
       c.enable = true;
     };
+*/
     services = {
       ssh.enable = true;
+/*
       mpd = {
         enable = true;
         # TODO: Make this more dynamic?
         musicDir = "/home/aether/Music";
       };
+*/
     };
   };
 
@@ -82,22 +90,7 @@
   programs.ssh.startAgent = true;
   services.openssh.startWhenNeeded = true;
 
-  # Fuck sudo all my homies hate sudo
-  security.sudo.enable = false;
-  security.doas = {
-    enable = true;
-    extraRules = [
-      { users = [ "aether" ]; keepEnv = true; }
-    ];
-  };
-
-  # Weird hack to get GDM to not explode on startup
-  # TODO: This might not be needed anymore
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   networking = {
-    hostName = "subsurface";
     networkmanager.enable = true;
     useDHCP = false;
     interfaces.wlp1s0.useDHCP = true;

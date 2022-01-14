@@ -8,6 +8,7 @@ let
   secretsDir = "${toString ../hosts}/${config.networking.hostName}/secrets";
   secretsFile = "${secretsDir}/secrets.nix";
 in {
+/*
   imports = [ agenix.nixosModules.age ];
   environment.systemPackages = [ agenix.defaultPackage.x86_64-linux ];
 
@@ -21,4 +22,5 @@ in {
 #      ".ssh/id_rsa"
     ]);
   };
+*/
 }
