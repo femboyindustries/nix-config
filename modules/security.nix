@@ -73,5 +73,15 @@ in {
       "net.ipv4.tcp_conjestion_control" = "bbr";
       "net.core.default_qdisc" = "cake";
     };
+
+    user = {
+      initialPassword = "nixos";
+    };
+
+    users.users.root = {
+      packages = [ pkgs.nologin ];
+      shell = pkgs.nologin;
+      hashedPassword = "!";
+    };
   };
 }

@@ -16,9 +16,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+/*
     user.packages = with pkgs; [
       alacritty
     ];
+*/
     home._.programs.alacritty = {
       enable = true;
 /*

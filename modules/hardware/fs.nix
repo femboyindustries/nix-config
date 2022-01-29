@@ -24,6 +24,9 @@ in {
 
     (mkIf cfg.ssd.enable {
       services.fstrim.enable = true;
+      environment.systemPackages = with pkgs; [
+        nvme-cli
+      ];
     })
   ]);
 }

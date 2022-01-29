@@ -31,6 +31,7 @@ in {
       extraPackages = with pkgs; [ xwayland ];
     };
 
+/*
     user.packages = with pkgs; [
       grim
       slurp
@@ -39,9 +40,10 @@ in {
       autotiling
       brightnessctl
       wdisplays
-    ] ++ (mkIf audioSupport (with pkgs; [
+    ] ++ (if audioSupport then (with pkgs; [
       playerctl
-    ]));
+    ]) else [ ]);
+*/
 
     xdg.portal = {
       enable = true;
@@ -128,6 +130,8 @@ in {
           "${mod}+Shift+8" = "move container to workspace 8";
           "${mod}+Shift+9" = "move container to workspace 9";
           "${mod}+Shift+0" = "move container to workspace 10";
+
+	  "Print" = "exec grim -g \"$(slurp -d)\" - | ${scProc}";
         };
       };
       extraSessionCommands = ''

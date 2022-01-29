@@ -16,7 +16,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; [ nix-zsh-completions ];
+#    user.packages = with pkgs; [ nix-zsh-completions ];
 
 #    home.configFile."zsh".source = "${configDir}/zsh";
 

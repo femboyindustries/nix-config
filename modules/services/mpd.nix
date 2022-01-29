@@ -12,21 +12,27 @@ in {
       default = false;
     };
 
-    musicDir = mkOption {
+    user = mkOption {
       type = types.str;
       default = "";
+      description = "Which user MPD should run on";
+    };
+
+    musicDir = mkOption {
+      type = types.str;
+      defaultText = "$XDG_MUSIC_DIR";
     };
   };
 
   config = mkIf cfg.enable {
     services.mpd = {
       enable = true;
-      user = "aether";
+      user = cfg.user;
     };
 
     home._.services.mpd = {
       enable = true;
-      musicDirectory = builtins.trace cfg.musicDir cfg.musicDir;
+      musicDirectory = cfg.musicDir;
       extraConfig =
 ''
 zeroconf_enabled "no"
@@ -38,6 +44,7 @@ replaygain "track"
 audio_output {
   type "pipewire"
   name "PipeWire Audio Server"
+  server "127.0.0.1"
 }
 '' else "");
     };

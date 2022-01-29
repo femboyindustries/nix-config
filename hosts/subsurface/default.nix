@@ -5,22 +5,9 @@
     ./hardware-configuration.nix
   ];
 
-  user = {
-    packages = with pkgs; [
-      curl
-#      dolphin
-#      discord
-#      wl-clipboard
-#      firefox-wayland
-#      inkscape
-#      blender
-#      polymc
-    ];
-  };
-
   defaultUsers = {
     aether = {
-      packages = [ ];
+      packages = with pkgs; [ htop curl mpc_cli gammastep discord obs-studio youtube-dl inkscape audacity dolphin firefox-wayland wl-clipboard steam bitwarden blender neofetch krita celluloid imv firefox zathura ];
       uid = 1024;
       isNormalUser = true;
       shell = "zsh";
@@ -44,7 +31,6 @@
         enable = true;
         term = "alacritty";
       };
-/*
       apps = {
         mpc.enable = true;
         alacritty.enable = true;
@@ -54,7 +40,6 @@
           nwggrid.enable = true;
         };
       };
-*/
       editors = {
          neovim.enable = true;
          codium.enable = true;
@@ -65,22 +50,23 @@
       };
 */
     };
-/*
     dev = {
       llvm.enable = true;
-      haskell.enable = true;
+      haskell = {
+        enable = true;
+        version = "ghc902";
+      };
       c.enable = true;
     };
-*/
     services = {
       ssh.enable = true;
-/*
       mpd = {
         enable = true;
         # TODO: Make this more dynamic?
-        musicDir = "/home/aether/Music";
+	musicDir = "/home/aether/Music";
+	user = "aether";
       };
-*/
+      geoclue2.enable = true;
     };
   };
 

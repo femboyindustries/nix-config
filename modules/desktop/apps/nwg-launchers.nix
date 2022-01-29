@@ -12,6 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = [ nwg-launchers ];
+    user.packages = with pkgs; [ nwg-launchers ];
   };
 }

@@ -13,8 +13,10 @@ in {
 
   config = mkIf cfg.enable {
     modules.services.mpd.enable = true;
-    environment.systemPackages = with pkgs; [
+/*
+    user.packages = with pkgs; [
       mpc_cli
     ];
+*/
   };
 }

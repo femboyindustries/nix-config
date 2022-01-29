@@ -63,18 +63,20 @@
       options = [ "defaults" "noatime" "nodiratime" ];
     };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/C507-604E";
-      fsType = "vfat";
-    };
-
     "/home" = {
       device = "/dev/disk/by-uuid/f3a44427-a212-48c2-91e7-f40e82bbcc02";
-      fsType = "vfat";
+      fsType = "f2fs";
+      options = [ "defaults" "noatime" "nodiratime" ];
     };
 
     "/etc/dotfiles" = {
       device = "/dev/disk/by-uuid/2777d90a-20f0-4b35-88f1-653ba14114db";
+      fsType = "f2fs";
+      options = [ "defaults" "noatime" "nodiratime" ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/C507-604E";
       fsType = "vfat";
     };
 
@@ -82,17 +84,15 @@
       device = "none";
       fsType = "tmpfs";
     };
-/*
+
     "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56" = {
       device = "/dev/disk/by-uuid/bf2d91f1-a6b3-4629-8755-76301b3f6f56";
-      fsType = "f2fs";
+#      fsType = "f2fs";
       options = [ "defaults" "noatime" "nodiratime" "user" "nofail" ];
     };
-*/
 
-/*
     "/home/aether/Videos" = {
-      device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/home delta delta/Videos";
+      device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/Videos";
       options = [ "bind" ];
     };
 
@@ -100,7 +100,6 @@
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/Pictures";
       options = [ "bind" ];
     };
-*/
 
     "/home/aether/Documents" = {
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/Documents";
@@ -114,4 +113,7 @@
   };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/e4a7edca-2c4e-4979-8368-377bc067b8bd"; }];
+
+  # Allows for hibernation
+  boot.resumeDevice = "/dev/disk/by-uuid/e4a7edca-2c4e-4979-8368-377bc067b8bd";
 }

@@ -23,7 +23,7 @@ with lib;
     user = mkOption {
       type = types.attrs;
       default = {};
-      description = "Universal system-level user configuration. Change the default username attribute and I'll change the position of your fucking cranium.";
+      description = "Universal system-level user configuration";
     };
     configDir = mkOption {
       type = types.path;
@@ -33,6 +33,18 @@ with lib;
 
   config = {
     home-manager.useUserPackages = true;
+
+/*
+    user = {
+      packages = with pkgs; [ curl ];
+      extraGroups = [ "wheel" ];
+      shell = {};
+      home = "/home/default";
+      isNormalUser = false;
+      isSystemUser = false;
+      group = "";
+    };
+*/
 
     home._ = {
       home.stateVersion = config.system.stateVersion;
@@ -51,13 +63,13 @@ with lib;
       };
     };
 
-    users.users = mapAttrs (user: prop: {
-      inherit (prop) uid;
-      extraGroups = prop.extraGroups ++ config.user.extraGroups;
-      packages = prop.packages ++ config.user.packages;
+    users.users = mapAttrs (user: prop: /* (mkAliasDefinitions options.user) // */ {
+      packages = prop.packages;
+      extraGroups = prop.extraGroups;
       shell = pkgs."${config.defaultUsers."${user}".shell}";
-      home = "/home/${user}/";
+      home = "/home/${user}";
       isNormalUser = true;
+      group = user;
     }) config.defaultUsers;
 
     home-manager.users = mapAttrs (user: prop: mkAliasDefinitions options.home._

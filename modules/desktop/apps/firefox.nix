@@ -12,11 +12,13 @@ in {
     };
   };
 
-  config = trace "penis" (mkIf cfg.enable {
-    user.packages = mkMerge (if wayland then with pkgs; [
+  config = mkIf cfg.enable {
+/*
+    user.packages = if wayland then (with pkgs; [
       firefox-wayland
-    ] else with pkgs; [
+    ]) else (with pkgs; [
       firefox
     ]);
-  });
+*/
+  };
 }
