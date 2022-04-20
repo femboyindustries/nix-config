@@ -31,7 +31,6 @@ in {
       extraPackages = with pkgs; [ xwayland ];
     };
 
-/*
     user.packages = with pkgs; [
       grim
       slurp
@@ -40,10 +39,10 @@ in {
       autotiling
       brightnessctl
       wdisplays
+      gammastep
     ] ++ (if audioSupport then (with pkgs; [
       playerctl
     ]) else [ ]);
-*/
 
     xdg.portal = {
       enable = true;
@@ -101,6 +100,7 @@ in {
           bg = "${config.modules.theme.wallpaper} fill";
           scale = "1.5";
         };
+        output."DP-4".bg = "${config.modules.theme.wallpaper} fill";
         keybindings = let mod = config.home._.wayland.windowManager.sway.config.modifier; scProc = "wl-copy -t image/png && notify-send \"Screenshot Taken\""; in {
 #          "${mod}+l" = "exec lock";
           "${mod}+q" = "reload";
@@ -131,7 +131,9 @@ in {
           "${mod}+Shift+9" = "move container to workspace 9";
           "${mod}+Shift+0" = "move container to workspace 10";
 
-	  "Print" = "exec grim -g \"$(slurp -d)\" - | ${scProc}";
+          "Print" = "exec grim -g \"$(slurp -d)\" - | ${scProc}";
+          "XF86AudioPlay" = "playerctl play-pause";
+          "Shift+XF86AudioPlay" = "playerctl loop";
         };
       };
       extraSessionCommands = ''

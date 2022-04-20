@@ -20,7 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs.haskell.packages."${cfg.version}"; [
+    user.packages = with pkgs.haskell.packages."${cfg.version}"; [
       ghc
       cabal-install
     ] ++ config.modules.dev.haskell.packages;

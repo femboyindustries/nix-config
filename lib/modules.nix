@@ -15,8 +15,8 @@ in rec {
         in
           if type == "directory" then
             nameValuePair name (dirfn path)
-#          else if type == "regular" && name != "default.nix" && hasSuffix ".nix" name then
-          else if type == "regular" && hasSuffix ".nix" name then
+          else if type == "regular" && name != "default.nix" && hasSuffix ".nix" name then
+#          else if type == "regular" && hasSuffix ".nix" name then
             nameValuePair (removeSuffix ".nix" name) (fn path)
           else
             nameValuePair "" null

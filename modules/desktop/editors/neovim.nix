@@ -41,7 +41,9 @@ in {
         ghcid
         fzf-vim
 #        inputs.fzf-hoogle-vim
-      ] else [ ]);
+      ] else if config.modules.dev.zig.enable then with pkgs.vimPlugins; [
+        zig-vim
+      ] else []);
 
       viAlias = true;
       vimAlias = true;

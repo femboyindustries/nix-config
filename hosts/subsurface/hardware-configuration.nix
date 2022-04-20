@@ -110,6 +110,16 @@
       device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home delta/home delta delta/Music";
       options = [ "bind" ];
     };
+
+    "/home/aether/Textures" = {
+      device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home\ delta/Textures";
+      options = [ "bind" ];
+    };
+
+    "/home/aether/Porn" = {
+      device = "/run/media/aether/bf2d91f1-a6b3-4629-8755-76301b3f6f56/home\ delta/Porn";
+      options = [ "bind" ];
+    };
   };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/e4a7edca-2c4e-4979-8368-377bc067b8bd"; }];

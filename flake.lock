@@ -88,23 +88,6 @@
         "type": "github"
       }
     },
-    "meson": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1640155612,
-        "narHash": "sha256-XrEIlf0W8mKEa97Uyc0w/187KBGEZOD+dJFNsn3UeNg=",
-        "owner": "mesonbuild",
-        "repo": "meson",
-        "rev": "06aad5233e6bec97bfe21ae79c85aa7171089d3b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mesonbuild",
-        "ref": "0.60",
-        "repo": "meson",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1639986101,
@@ -208,28 +191,10 @@
       "inputs": {
         "agenix": "agenix",
         "home-manager": "home-manager",
-        "meson": "meson",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "polymc": "polymc",
-        "sway-borders": "sway-borders"
-      }
-    },
-    "sway-borders": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1640037473,
-        "narHash": "sha256-gCdnim7excF11GEoni5YbIGTWSIx+wjHc8NO8lVNFts=",
-        "owner": "fluix-dev",
-        "repo": "sway-borders",
-        "rev": "5f4162f449b19f6d198b365fc6d3dd0febc065e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fluix-dev",
-        "repo": "sway-borders",
-        "type": "github"
+        "polymc": "polymc"
       }
     }
   },

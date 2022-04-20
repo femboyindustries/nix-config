@@ -8,19 +8,17 @@ let
   secretsDir = "${toString ../hosts}/${config.networking.hostName}/secrets";
   secretsFile = "${secretsDir}/secrets.nix";
 in {
-/*
   imports = [ agenix.nixosModules.age ];
   environment.systemPackages = [ agenix.defaultPackage.x86_64-linux ];
 
   age = {
-    secrets = mkIf (pathExists secretsFile) (mapAttrs (n: o: {
-      file = "${secretsDir}/" + n;
-      owner = o.owner;
-    }) (import secretsFile));
-    identityPaths = options.age.identityPaths.default ++ (filter pathExists [
-#      ".ssh/id_ed25519"
-#      ".ssh/id_rsa"
-    ]);
+    secrets = mkMerge (map (x: {"x".file = "${secretsDir}/${x}";}) (attrNames (import secretsFile)));
+    identityPaths = options.age.identityPaths.default ++ (foldr (l: r: l ++ r) [] (map (user:
+      let
+        d = "/home/${user}/.ssh";
+        fs = map (f: d + "/" + f)
+          (filter (f: (f != "known_hosts") && (f != "*.old"))
+            (attrNames (readDir d)));
+      in fs) (attrNames config.defaultUsers)));
   };
-*/
 }

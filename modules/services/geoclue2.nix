@@ -6,7 +6,7 @@ let
 in {
   options.modules.services.geoclue2 = {
     enable = mkOption {
-      type = types.bool
+      type = types.bool;
       default = false;
     };
   };

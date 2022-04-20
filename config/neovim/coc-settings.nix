@@ -24,6 +24,11 @@
       command = "rnix-lsp";
       filetypes = [ "nix" ];
     };
+
+    zig = {
+      command = "zls";
+      filetypes = [ "zig" ];
+    };
   };
 
   "yank.highlight.duration" = 700;

@@ -13,12 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-/*
     user.packages = if wayland then (with pkgs; [
       firefox-wayland
     ]) else (with pkgs; [
       firefox
     ]);
-*/
   };
 }

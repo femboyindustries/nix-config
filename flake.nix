@@ -29,11 +29,6 @@
     asyncrun-vim.url = "github:skywind3000/asyncrun.vim";
     asyncrun-vim.flake = false;
 */
-    meson.url = "github:mesonbuild/meson/0.60";
-    meson.flake = false;
-
-    sway-borders.url = "github:fluix-dev/sway-borders";
-    sway-borders.flake = false;
 
 #    blender-30.url = "github:blender/blender/blender-v3.0-release";
 #    blender-30.flake = false;
@@ -59,15 +54,11 @@
       packages."${system}" = mapModules ./packages (p: pkgs.callPackage p {});
       overlay = final: prev: {
         _ = self.packages."${system}";
-#        meson = inputs.meson;
-#        sway-unwrapped = inputs.sway-borders;
-#        blender = inputs.blender-30;
         unstable = mkPkgs nixpkgs-unstable [];
       };
       overlays = mapModules ./overlays import;
       nixosModules = mapModulesRec ./modules import;
       nixosConfigurations = mapModules ./hosts (mkHost system);
-      devShell."${system}" =
-        import ./shell.nix { inherit pkgs; };
+      devShell."${system}" = import ./shell.nix { inherit pkgs; };
     };
 }

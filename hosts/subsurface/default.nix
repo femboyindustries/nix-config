@@ -7,7 +7,7 @@
 
   defaultUsers = {
     aether = {
-      packages = with pkgs; [ htop curl mpc_cli gammastep discord obs-studio youtube-dl inkscape audacity dolphin firefox-wayland wl-clipboard steam bitwarden blender neofetch krita celluloid imv firefox zathura ];
+      packages = with pkgs; with pkgs._; [ htop discord youtube-dl inkscape audacity dolphin steam bitwarden blender neofetch krita celluloid imv firefox zathura zip unzip ffmpeg pijul pavucontrol killall ripcord steam-run appimage-run openjdk11 ];
       uid = 1024;
       isNormalUser = true;
       shell = "zsh";
@@ -44,11 +44,9 @@
          neovim.enable = true;
          codium.enable = true;
       };
-/*
       gaming = {
         minecraft.enable = true;
       };
-*/
     };
     dev = {
       llvm.enable = true;
@@ -57,14 +55,16 @@
         version = "ghc902";
       };
       c.enable = true;
+      rust.enable = true;
+      zig.enable = true;
     };
     services = {
       ssh.enable = true;
       mpd = {
         enable = true;
         # TODO: Make this more dynamic?
-	musicDir = "/home/aether/Music";
-	user = "aether";
+        musicDir = "/home/aether/Music";
+        user = "aether";
       };
       geoclue2.enable = true;
     };

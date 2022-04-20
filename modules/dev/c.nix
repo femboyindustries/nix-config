@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = if !withLLVM then with pkgs; [
+    user.packages = if !withLLVM then with pkgs; [
       gcc
     ] else with pkgs; [
       clang_12

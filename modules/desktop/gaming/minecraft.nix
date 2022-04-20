@@ -13,6 +13,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-#    user.packages = [ polymc ];
+    environment.systemPackages = with pkgs; [ polymc ];
   };
 }

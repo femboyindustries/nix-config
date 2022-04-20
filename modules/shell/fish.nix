@@ -25,7 +25,7 @@ in {
     home.configFile = {
       "fish" = {
         source = "${cfgDir}/fish";
-        target = "$HOME.config/fish";
+        target = "$HOME/.config/fish";
       };
     };
   };

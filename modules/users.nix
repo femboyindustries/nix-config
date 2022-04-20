@@ -34,21 +34,14 @@ with lib;
   config = {
     home-manager.useUserPackages = true;
 
-/*
     user = {
       packages = with pkgs; [ curl ];
       extraGroups = [ "wheel" ];
-      shell = {};
-      home = "/home/default";
-      isNormalUser = false;
-      isSystemUser = false;
-      group = "";
     };
-*/
 
     home._ = {
       home.stateVersion = config.system.stateVersion;
-#      home.file = mkAliasDefinitions options.home.file;
+      home.file = mkAliasDefinitions options.home.configFile;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.home.configFile;
     };
@@ -63,14 +56,14 @@ with lib;
       };
     };
 
-    users.users = mapAttrs (user: prop: /* (mkAliasDefinitions options.user) // */ {
+    users.users = mapAttrs (user: prop: mkMerge [(mkAliasDefinitions options.user) {
       packages = prop.packages;
       extraGroups = prop.extraGroups;
-      shell = pkgs."${config.defaultUsers."${user}".shell}";
+      shell = trace "penis" pkgs."${config.defaultUsers."${user}".shell}";
       home = "/home/${user}";
       isNormalUser = true;
       group = user;
-    }) config.defaultUsers;
+    }]) config.defaultUsers;
 
     home-manager.users = mapAttrs (user: prop: mkAliasDefinitions options.home._
     ) config.defaultUsers;

@@ -14,12 +14,17 @@
   defaultUsers = {
     aether = {
       packages = [ ];
-      shell = "zsh";
+      shell = "fish";
       extraGroups = [ "wheel" ];
     };
     oatmealine = {
       packages = [ ];
       shell = "zsh";
+      extraGroups = [ "wheel" ];
+    };
+    skye = {
+      packages = [ ];
+      shell = "fish";
       extraGroups = [ "wheel" ];
     };
   };
@@ -48,6 +53,11 @@
       gitea = {
         enable = true;
         site = "git.oat.zone";
+      };
+      wireguard = {
+        enable = true;
+        server = true;
+        interfaces = mkMerge (import ./interfaces);
       };
     };
   };
