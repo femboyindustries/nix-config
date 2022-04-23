@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-{
+let
+
+in {
   options = {
     defaultUsers = mkOption {
       type = types.attrs;
@@ -35,8 +37,8 @@ with lib;
     home-manager.useUserPackages = true;
 
     user = {
-      packages = with pkgs; [ curl ];
-      extraGroups = [ "wheel" ];
+      packages = with pkgs; [ wget ];
+      extraGroups = [ ];
     };
 
     home._ = {
@@ -56,16 +58,22 @@ with lib;
       };
     };
 
-    users.users = mapAttrs (user: prop: mkMerge [(mkAliasDefinitions options.user) {
-      packages = prop.packages;
-      extraGroups = prop.extraGroups;
-      shell = trace "penis" pkgs."${config.defaultUsers."${user}".shell}";
-      home = "/home/${user}";
-      isNormalUser = true;
-      group = user;
-    }]) config.defaultUsers;
+    users.users = mapAttrs (user: prop: mkMerge [
+      (mkAliasDefinitions options.user)
 
-    home-manager.users = mapAttrs (user: prop: mkAliasDefinitions options.home._
-    ) config.defaultUsers;
+      {
+        packages = prop.packages;
+        extraGroups = prop.extraGroups;
+        shell = pkgs."${config.defaultUsers."${user}".shell}";
+        home = "/home/${user}";
+        isNormalUser = true;
+        group = user;
+      }
+    ]) config.defaultUsers;
+
+    home-manager.users = mapAttrs (user: prop: mkMerge [
+      (mkAliasDefinitions options.home._)
+#      (import "${prop.homeDir}/.home/")
+    ]) config.defaultUsers;
   };
 }

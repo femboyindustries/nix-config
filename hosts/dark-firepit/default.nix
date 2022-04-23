@@ -46,6 +46,7 @@ in {
   modules = {
 #    theme.active = "still";
     shell.zsh.enable = true;
+    shell.fish.enable = true;
     security = {
       isLocalMachine = false;
     };

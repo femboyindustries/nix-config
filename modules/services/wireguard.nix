@@ -46,7 +46,7 @@ in {
         }] ++
 
         (mapAttrsToList (iname: iattrs: {
-          firewall.allowedUDPPorts = iattrs.listenPort;
+          firewall.allowedUDPPorts = [ iattrs.listenPort ];
 
           wireguard.interfaces.${iname} = mkMerge [ iattrs {
             postSetup = ''

@@ -2,7 +2,7 @@
 
 with lib;
 let
-  peerKeys = import ../authorizedKeys.nix;
+  peerKeys = import ./authorizedKeys.nix;
 in {
   ips = [ "10.100.0.1/24" ];
 
@@ -11,7 +11,7 @@ in {
   listenPort = 51820;
 
   peers = genList (n: {
-    publicKey = elemAt (attrValues peerKeys) n;
-    allowedIPs = [ "10.100.0.${n+2}/32" ];
+    publicKey = (elemAt (attrValues peerKeys) n).wg;
+    allowedIPs = [ "10.100.0.${toString (n+2)}/32" ];
   }) (length (attrValues peerKeys));
 }
