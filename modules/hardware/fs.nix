@@ -13,6 +13,10 @@ in {
       type = types.bool;
       default = false;
     };
+    xfs.enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -27,6 +31,10 @@ in {
       environment.systemPackages = with pkgs; [
         nvme-cli
       ];
+    })
+
+    (mkIf cfg.xfs.enable {
+      boot.supportedFilesystems = [ "xfs" ];
     })
   ]);
 }

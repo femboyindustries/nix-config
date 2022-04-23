@@ -1,12 +1,15 @@
 { pkgs, inputs, lib, ... }:
 
-{
+let
+  keys = import ./authorizedKeys;
+in {
   imports = [
     ./hardware-configuration.nix
   ];
 
   user = {
     packages = with pkgs; [
+      git
       curl
     ];
   };
@@ -16,16 +19,22 @@
       packages = [ ];
       shell = "fish";
       extraGroups = [ "wheel" ];
+      initialHashedPassword = "!";
+      openssh.authorizedKeys.keys = [ keys."aether@subsurface".ssh ];
     };
     oatmealine = {
       packages = [ ];
       shell = "zsh";
       extraGroups = [ "wheel" ];
+      initialHashedPassword = "!";
+      openssh.authorizedKeys.keys = [ keys."oatmealine@beppy".shh ];
     };
     skye = {
       packages = [ ];
       shell = "fish";
       extraGroups = [ "wheel" ];
+      initialHashedPassword = "!";
+      openssh.authorizedKeys.keys = [ keys."skye@DESKTOP-VB4940J".shh ];
     };
   };
 
@@ -57,17 +66,18 @@
       wireguard = {
         enable = true;
         server = true;
-        interfaces = mkMerge (import ./interfaces);
+        externalInterface = "eno1";
+        interfaces."wg0" = import ./wireguardInterface.nix;
       };
+      webapps = lib.mkMerge (import ./webapps);
     };
   };
 
-  time.timeZone = "Europe/Frankfurt";
-
-  programs.ssh.startAgent = true;
-  services.openssh.startWhenNeeded = true;
-
-  networking = {
-    hostName = "firepit";
+  security.doas = {
+    extraRules = [
+      { users = [ "aether" "oatmealine" "skye" ]; noPass = false; keepEnv = true; }
+    ];
   };
+
+  time.timeZone = "Europe/Amsterdam";
 }

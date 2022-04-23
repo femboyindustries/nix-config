@@ -35,6 +35,9 @@ in {
       }
     ];
 
+    boot.tmpOnTmpfs = lib.mkDefault true;
+    boot.cleanTmpDir = lib.mkDefault (!config.boot.tmpOnTmpfs);
+
     security.rtkit.enable = true;
 
     boot.loader.systemd-boot.editor = false;
@@ -48,7 +51,7 @@ in {
     security.sudo.enable = false;
     security.doas = {
       enable = true;
-      extraRules = if cfg.isLocalMachine then [{ users = builtins.attrNames config.defaultUsers; }] else [];
+      extraRules = if cfg.isLocalMachine then [{ users = builtins.attrNames config.defaultUsers; keepEnv = true; noPass = true; }] else [];
     };
 
     boot.kernel.sysctl = {

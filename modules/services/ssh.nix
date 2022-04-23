@@ -14,7 +14,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.openssh.enable = true;
-#    services.sshd.enable = true;
+    services.openssh = {
+      enable = true;
+      passwordAuthentication = false;
+      permitRootLogin = "no";
+    };
   };
 }

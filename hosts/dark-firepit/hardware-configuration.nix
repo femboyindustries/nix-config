@@ -22,26 +22,26 @@
   modules.hardware.fs = {
     enable = true;
     ssd.enable = true;
+    xfs.enable = true;
   };
-
-  extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/?";
-      fsType = "?";
-      options = [ "defaults" "noatime" "nodiratime" ];
-    };
-
-    "/etc/dotfiles" = {
-      device = "/dev/disk/by-uuid/?";
-      fsType = "f2fs";
-      options = [ "defaults" "noatime" "nodiratime" ];
+      device = "/dev/disk/by-uuid/819f03bb-73d2-4ae1-9fd2-01099e8efae6";
+      fsType = "xfs";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/?";
+      device = "/dev/disk/by-uuid/D018-F9AF";
       fsType = "vfat";
     };
   };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/01ba93e4-71e3-404d-9549-351e22130185"; }
+    { device = "/dev/disk/by-uuid/dee63218-1666-4035-8d63-b9e0e0b2cd28"; }
+  ];
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
