@@ -8,7 +8,7 @@ in {
     enable = mkOption {
       type = types.bool;
       default = false;
-      description = "Enables the wiregyard VPN service.";
+      description = "Enables wireguard. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld.";
     };
 
     server = mkOption {
@@ -38,6 +38,8 @@ in {
         }
       ];
 
+      environment.systemPackages = [ pkgs.nftables ];
+
       networking = mkMerge (
         [{
           nat.enable = true;
@@ -46,6 +48,7 @@ in {
         }] ++
 
         (mapAttrsToList (iname: iattrs: {
+          firewall.allowedTCPPorts = [ iattrs.listenPort ];
           firewall.allowedUDPPorts = [ iattrs.listenPort ];
 
           wireguard.interfaces.${iname} = mkMerge [ iattrs {

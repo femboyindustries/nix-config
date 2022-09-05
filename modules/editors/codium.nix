@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.editors.codium;
+  cfg = config.modules.editors.codium;
 in {
-  options.modules.desktop.editors.codium = {
+  options.modules.editors.codium = {
     enable = mkOption {
       type = types.bool;
       default = false;

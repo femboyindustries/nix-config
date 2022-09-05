@@ -82,8 +82,8 @@ in {
     };
 
     users.users.root = {
-      packages = [ pkgs.nologin ];
-      shell = pkgs.nologin;
+      packages = [ pkgs.shadow ];
+      shell = pkgs.shadow;
       hashedPassword = "!";
     };
   };

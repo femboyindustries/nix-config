@@ -2,41 +2,31 @@
   description = "Frosted Flakes";
 
   inputs = {
-    # NixOS unstable
-#    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs.url = "nixpkgs/nixos-21.11";
+    nixpkgs.url = "nixpkgs/nixos-22.05";
+
+    # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    # home-manager
-#    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.url = "github:nix-community/home-manager/release-21.11";
+    # WARNING: The master branch of nixpkgs is unsafe to use and software may break or contain various security vulnerabilities. Use at your own discretion.
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+
+    home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # agenix - age-encrypted secrets
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixos-hardware
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
-/*
-    # fzf-hoogle
-    fzf-hoogle-vim.url = "github:monkoose/fzf-hoogle.vim";
-    fzf-hoogle-vim.flake = false;
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
-    # asyncrun-vim
-    asyncrun-vim.url = "github:skywind3000/asyncrun.vim";
-    asyncrun-vim.flake = false;
-*/
-
-#    blender-30.url = "github:blender/blender/blender-v3.0-release";
-#    blender-30.flake = false;
-
-    polymc.url = "github:PolyMC/PolyMC";
+    jillo.url = "/home/oatmealine/jillo";
+    watch-party.url = "/home/oatmealine/watch-party";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nix-minecraft, ... }:
     let
       system = "x86_64-linux";
 
@@ -49,16 +39,19 @@
         overlays = overlays ++ (lib.attrValues self.overlays);
       };
 
-      pkgs = mkPkgs nixpkgs [ self.overlay inputs.polymc.overlay.${system} ];
+      pkgs = mkPkgs nixpkgs [ self.overlay nix-minecraft.overlay ];
     in {
       packages."${system}" = mapModules ./packages (p: pkgs.callPackage p {});
       overlay = final: prev: {
         _ = self.packages."${system}";
         unstable = mkPkgs nixpkgs-unstable [];
+        master = mkPkgs nixpkgs-master [];
       };
       overlays = mapModules ./overlays import;
       nixosModules = mapModulesRec ./modules import;
-      nixosConfigurations = mapModules ./hosts (mkHost system);
+      nixosConfigurations = mapModules ./hosts (host: mkHost host { inherit system; });
       devShell."${system}" = import ./shell.nix { inherit pkgs; };
     };
 }
+
+

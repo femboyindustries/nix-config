@@ -6,7 +6,7 @@ let
 in {
   ips = [ "10.100.0.1/24" ];
 
-  privateKeyFile = readFile "/etc/wg0.keys/wg0";
+  privateKeyFile = "/etc/wg0.keys/wg0";
 
   listenPort = 51820;
 
@@ -15,3 +15,4 @@ in {
     allowedIPs = [ "10.100.0.${toString (n+2)}/32" ];
   }) (length (attrValues peerKeys));
 }
+

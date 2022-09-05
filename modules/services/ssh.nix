@@ -11,13 +11,21 @@ in {
       default = false;
       description = "Provide system SSH support though OpenSSH.";
     };
+    requirePassword = mkOption {
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      passwordAuthentication = false;
+      passwordAuthentication = cfg.requirePassword;
       permitRootLogin = "no";
+    };
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
     };
   };
 }

@@ -5,10 +5,23 @@ let
 
 in {
   options = {
-    defaultUsers = mkOption {
+    user = mkOption {
       type = types.attrs;
       default = {};
-      description = "Collection of users";
+      description = "Defaults to apply to all normal users in the system.";
+    };
+    normalUsers = mkOption {
+      type = types.attrsOf (types.submodule { options = {
+        conf = mkOption {
+          type = types.attrs;
+          default = {};
+        };
+        homeConf = mkOption {
+          type = types.attrs;
+          default = {};
+        };
+      };});
+      default = {};
     };
     home = {
       _ = mkOption {
@@ -18,14 +31,9 @@ in {
       };
       configFile = mkOption {
         type = types.attrs;
-	default = {};
-	description = "(XDG) Configuration files managed by home-manager";
+        default = {};
+        description = "(XDG) Configuration files managed by home-manager";
       };
-    };
-    user = mkOption {
-      type = types.attrs;
-      default = {};
-      description = "Universal system-level user configuration";
     };
     configDir = mkOption {
       type = types.path;
@@ -58,22 +66,17 @@ in {
       };
     };
 
-    users.users = mapAttrs (user: prop: mkMerge [
+    users.groups = mapAttrs (_: _: {}) config.normalUsers;
+    
+    users.users = mapAttrs (username: user: (mkMerge [
       (mkAliasDefinitions options.user)
-
+      user.conf
       {
-        packages = prop.packages;
-        extraGroups = prop.extraGroups;
-        shell = pkgs."${config.defaultUsers."${user}".shell}";
-        home = "/home/${user}";
         isNormalUser = true;
-        group = user;
+        group = username;
       }
-    ]) config.defaultUsers;
+    ])) config.normalUsers;
 
-    home-manager.users = mapAttrs (user: prop: mkMerge [
-      (mkAliasDefinitions options.home._)
-#      (import "${prop.homeDir}/.home/")
-    ]) config.defaultUsers;
+    home-manager.users = mapAttrs (username: user: (mkMerge [(mkAliasDefinitions options.home._) user.homeConf])) config.normalUsers;
   };
 }

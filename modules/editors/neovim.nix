@@ -3,9 +3,9 @@
 with lib;
 let
   configDir = config.configDir;
-  cfg = config.modules.desktop.editors.neovim;
+  cfg = config.modules.editors.neovim;
 in {
-  options.modules.desktop.editors.neovim = {
+  options.modules.editors.neovim = {
     enable = mkOption {
       type = types.bool;
       default = false;

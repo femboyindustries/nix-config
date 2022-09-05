@@ -9,21 +9,49 @@ in {
       type = types.bool;
       default = false;
     };
-    site = mkOption {
+    domain = mkOption {
       type = types.str;
       default = "git.oat.zone";
+    };
+    port = mkOption {
+      type = types.int;
+      default = 3000;
     };
   };
 
   config = mkIf cfg.enable {
-    modules.services.postgres.enable = true;
-    services.gitea = {
-      enable = true;
-      domain = cfg.site;
-      rootUrl = "https://${cfg.site}/";
-      appName = "Gitea: Fire Pit hosted Git";
-      database = {
-        type = "postgres";
+    services = {
+      gitea = {
+        enable = true;
+        package = pkgs.master.gitea;
+        disableRegistration = true;
+        domain = cfg.domain;
+        httpPort = cfg.port;
+        rootUrl = "https://${cfg.domain}/";
+        stateDir = "/var/lib/${cfg.domain}";
+        cookieSecure = true;
+        appName = "Gitea: dark-firepit hosted Git";
+        database = {
+          type = "postgres";
+          name = "gitea";
+        };
+        settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/gitea/app.toml")) {
+          "ui.meta" = {
+            AUTHOR = "aether & oat";
+            DESCRIPTION = "dark-firepit's shared git instance";
+          };
+        }];
+      };
+
+      nginx.virtualHosts."${cfg.domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        # using manual extraconfig because else    nginx spits out a runtime error????
+        # thanks nginx
+        #locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port};";
+        locations."/".extraConfig = ''
+          proxy_pass http://127.0.0.1:${toString cfg.port};
+        '';
       };
     };
   };

@@ -1,14 +1,14 @@
 {
   "aether@subsurface" = {
-    ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4lh7dN9Ohh2/WoGiZ4WlpVb01YPNto/9ungOAk6TH+65wkxMjY4a+1OsO8Znguj46tXVErn8xv2ZVX0K7ql0hzypPkP2Dvvim99tz6FKSf9Nwj6RRtIKPoYkJjtGYAqLJl8JPy50HkFXkDVQ/z4d4iwpneSODIJdkUFSzZR91jz9FX+4t2h+2xtuuRDI43+gHRqvwPP8XaE0srtMzZoQDUBKhwOynoo2vZnyd3O7kkpD9T+jzYEeLKppHdaoYN5UxZ4L0xnig0WFZiBH36/YGXA8gT56FHRw5GKhwWwfSvliEw63/6IxiVZBuM1Mj7syg2Ndhhmmay05QqvyTrdHA9veyzJG5l0HlnCmXe7ss9lVQnxxPfbHbnDZUhH1ax01sQUeTK3Bs3AvbsTLyXBbd4NCY5ovz85MqzM/Q84B1zX1i8KbFEBh0xkumNsPAXzY8ar+tq5rFa23bY9qF4s6CMv++JEXSJJufcf3BS2dBlw0lTGBn7UEO9FHHsU3xKCc= aether@subsurface";
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFLDtlpOnQFQq9mPMhR1uQnjrTexcof+c+y+ot/7Jgnt aether@subsurface";
     wg = "XEVSwNNPR7RTt/O0ihYmv3nopbPmqkCMGrVRCixnPWw=";
   };
-  "oatmealine@beppy" = {
+  "oatmealine@void-defragmented" = {
     ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDbJDo79TD9RV77MnArQwS94wzBo+6l6dYQnaNdPk2xo019+tc7GyuQ+GHyh4qewIUQOwe3Ddj4YxJN9IS3E360/6RdaNDxn3hUp2jh/x9SOjh0W86FJfdHEQViNeFVSXJv+QBZT9ibR9IbOHYezhD6gtz15pNhEqhQyqw2hJuQzxLvnictTc4lPQnWN9I8ga+OVSh7Uauu5OKbUOyRRj1Er/hasNviCaGBJnLDYjSqTDRvEbdYlfuhrYITJ+viZOQq7Nczs6dbsl627FCvhr5vQi+/vvpx9DKHDvpGvbEglOmOwgffSkaOIIx/pNHTsRccX7c3/im6z4pCDj4bEuiqqawv2C6DV0aM01bW8cchOJrmSQGTygTrJuuVPHp4IRIZNvQGS+97j4u+d7ofricLR1RoxJcQibvRA9rhhYI2FhwrAweuuLktjSj5RkQnypd9kjOuH+nhgLZunreNoyPNDCmcOBA7BA0rD2pCIKB9SzlelMjVuvy0PA8uWfNFfxGU+m3BH7lQS/A6V+NeYrMGiZ+u+t9Pgr6kAoR7mAUO+obIdMM/lOp1/zGBY8lk2Aq3GQcyGVNi18VR0uA+NMaJYXA1JzSiPCz7cQn1pKIAKiDEnzicf5MxDHIi5F1iQ/Lc+NftgmDXZEAHDY1bQepScOttaOZQZLpYP/eWwlEQJQ== oatmealine@beppy";
     wg = "533BncNpHKzJVx5lwdxBg+aUfLGqea9uUYz70C6wxyg=";
   };
-  "skye@DESKTOP-VB4940J" = {
-    ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDGPFAyr1zYL5+/VIUVhT5sIfikhlj37tuTHVSfW/xbHfBqvR/Ga21j2k6HAa6acpHBa3+Ri1DZIjIkzjco447ZP7ahwOF3Ci6Cv9oSXxmw43hUMypfMTLu9+v9sjFJFPg7F39X2ngZzzLxO1/fPMuQm3kK6T3WyVqpNUMaenXhnT2i641lo2tRjs1LeGIk6h3Ermp4V3WQo+exbf+nc1Lqt5Yos/jWn1HnsjxI2N1SQDiT9J+MpNN7wUz4Q57+aDKeXH2oBsnRjNGU90qudwZIdUUJunfVaFXZHuVopLv1DlY1rcjtTP/8P9WcFXsnqb4yiA4uon0fbo7IZISt+ffw+TDjPaDH/8TsfgeT36Dd2mKZ/Z9XdzdWiez4fZxExR9MZcJafxnnw6Bfsfb4sSw52VRE2R65apasDTHTE3toRr7JWDNOg35ULDuGiQMnWhbr1c/0aHOtxoIIjOTtWUAl1LqemAELq/sJhKc/B/ywN1421FCcyivn8meZUII0Ccc= skye@DESKTOP-VB4940J";
-    wg = "";
+  "oatmealine@beppy-phone" = {
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUgEsAQ7EL5/3STLAk/0qWJddYqfBY71yS9RtRSWd3w JuiceSSH";
+    wg = "qT7gX8beM/kW9AYg5dV1e3cLzLDTLxMO2CmnbFpMVj4=";
   };
 }

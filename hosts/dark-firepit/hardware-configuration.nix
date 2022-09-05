@@ -19,6 +19,9 @@
     };
   };
 
+  nix.settings.cores = 3;
+  nix.settings.max-jobs = 6;
+
   modules.hardware.fs = {
     enable = true;
     ssd.enable = true;

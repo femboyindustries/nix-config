@@ -1,7 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 
 let
-  inherit (lib) _;
+  inherit (lib) filterAttrs _;
 in {
   imports =
     [ inputs.home-manager.nixosModules.home-manager ]
@@ -15,18 +15,18 @@ in {
   boot.loader.systemd-boot.configurationLimit = 10;
 
   nix = let
-    registry = lib.mapAttrs (_: v: { flake = v; }) (_.filterSelf inputs);
+    registry = lib.mapAttrs (name: value: { flake = value; }) (filterAttrs (name: value: name != "attrs") inputs);
   in {
     package = pkgs.nixFlakes;
-    autoOptimiseStore = true;
-    extraOptions = "experimental-features = nix-command flakes";
-    binaryCaches = [
+    registry = registry // { dotfiles.flake = inputs.self; };
+    settings.auto-optimise-store = true;
+    settings.experimental-features = [ "nix-command" "flakes"];
+    settings.substituters = [
       "https://nix-community.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    settings.trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    registry = registry // { dotfiles.flake = inputs.self; };
   };
 
   environment.systemPackages = with pkgs; [

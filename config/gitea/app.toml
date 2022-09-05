@@ -1,0 +1,40 @@
+[security]
+INSTALL_LOCK       = true
+PASSWORD_HASH_ALGO = "argon2"
+PASSWORD_CHECK_PWN = true
+
+[repository]
+DEFAULT_BRANCH = "main"
+
+[ui]
+DEFAULT_THEME = "arc-pink"
+THEMES="auto,gitea,arc-green,arc-pink,arc-pink-modern,darkred,gitea-blue,gitea-modern,github"
+CUSTOM_EMOJIS = "blurry_eyes,whenyoubigshit,he,ancapistanian,oralpleasure,horny,acab,tastymilk,gluttony,soul_of_fright,soul_of_night,soul_of_might,soul_of_blight,michael,bottom,spongesad,scripulous_fingore_point,scripulous_fingore,Tainted_John_F_Kennedy,John_F_Kennedy_Tainted,John_F_Kennedy,plumspin,despair,ihaveyourip,rusty50,entropy,peeeh,penis,gloopy,twister,stupib,speed,deadchat,cock,housj,dothejej,b_,trollgecommence,handsl,handsr,face,aiki,nervous,coffee,the_cowboy,dilf,child,closer,feddynite,orang,feddy_glamcock,elonmusk,slugclose,zonkerdoodle,pls,x3,slugloafspin,observer,pickle,zamiel_approves,ohgod,hapykity,i_see_chicory,i_see_pizza,cutely_blushes,gamer_boi,eeeeeeeeee,babytime,sleeby"
+
+[mailer]
+ENABLED = false
+
+[service]
+REGISTER_EMAIL_CONFIRM            = false
+ENABLE_NOTIFY_MAIL                = false
+ALLOW_ONLY_EXTERNAL_REGISTRATION  = false
+ENABLE_CAPTCHA                    = false
+REQUIRE_SIGNIN_VIEW               = false
+DEFAULT_KEEP_EMAIL_PRIVATE        = true
+DEFAULT_ALLOW_CREATE_ORGANIZATION = true
+DEFAULT_ENABLE_TIMETRACKING       = true
+NO_REPLY_ADDRESS                  = "noreply.oat.zone"
+
+[picture]
+DISABLE_GRAVATAR        = false
+ENABLE_FEDERATED_AVATAR = true
+
+[openid]
+ENABLE_OPENID_SIGNIN = false
+ENABLE_OPENID_SIGNUP = false
+
+[session]
+PROVIDER = "file"
+
+[other]
+SHOW_FOOTER_BRANDING = true
