@@ -5,6 +5,7 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
+    ./yugoslavia-best.nix
     inputs.nix-minecraft.nixosModules.minecraft-servers
     #inputs.watch-party.nixosModules.watch-party
     (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
@@ -20,12 +21,14 @@ in {
     ];
   };
 
+  users.groups.dotfiles = {};
+
   normalUsers = {
     aether = {
       conf = {
         packages = with pkgs; [ bat duf broot nftables tmux ];
         shell = pkgs.unstable.fish;
-        extraGroups = [ "wheel" "nix-users" ];
+        extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = [ keys."aether@subsurface".ssh ];
       };
@@ -38,11 +41,12 @@ in {
       };
     };
 
+    # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
         packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep ];
         shell = pkgs.unstable.fish;
-        extraGroups = [ "wheel" "nix-users" ];
+        extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = [ keys."oatmealine@void-defragmented".ssh keys."oatmealine@beppy-phone".ssh ];
       };
@@ -168,7 +172,7 @@ in {
         "modfiles.oat.zone".dataDir = "/var/www/modfiles.oat.zone";
         "shop.yugoslavia.best".dataDir = "/var/www/shop.yugoslavia.best";
         "tesco-underground-dev.oat.zone".dataDir = "/var/www/tesco-underground-dev.oat.zone";
-        "tesco-underground-dev.oat.zone".auth = { tesco = "Jn2DVTM7yVZtRKKyz3b2Tjj7Ss8vpuLB"; };
+        "tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };
         "oat.zone".dataDir = "/var/www/oat.zone";
         "oat.zone".php = true;
         "yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
@@ -205,17 +209,12 @@ in {
         enable = true;
         port = 1995;
       };
-
-      yugoslavia-best = {
-        enable = true;
-        domain = "yugoslavia.best";
-      };
     };
   };
 
   services.nginx.virtualHosts."oat.zone" = {
     locations."/f/".extraConfig = ''
-		  add_header Access-Control-Allow-Origin "*";
+      add_header Access-Control-Allow-Origin "*";
     '';
   };
 
