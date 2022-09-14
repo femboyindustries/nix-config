@@ -13,6 +13,12 @@ in {
   
     services = {
       nginx.virtualHosts.${domain} = {
+        locations."/" = {
+          extraConfig = ''
+            error_page 404 /error.php;
+          '';
+        };
+
         locations."/modding-txts/" = {
           extraConfig = ''
             autoindex on;
