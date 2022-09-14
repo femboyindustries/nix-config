@@ -30,7 +30,7 @@ in {
       #isSystemUser = true;
       isNormalUser = true;
       group = "remote";
-      extraGroups = [ "nix-users" ];
+      extraGroups = [ "nix-users" "yugoslavia" ];
       initialHashedPassword = "!";
       openssh.authorizedKeys.keys = cfg.keys;
       packages = cfg.packages;

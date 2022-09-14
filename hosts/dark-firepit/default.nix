@@ -22,6 +22,7 @@ in {
   };
 
   users.groups.dotfiles = {};
+  users.groups.yugoslavia = {};
 
   normalUsers = {
     aether = {
@@ -46,7 +47,7 @@ in {
       conf = {
         packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep ];
         shell = pkgs.unstable.fish;
-        extraGroups = [ "wheel" "nix-users" "dotfiles" ];
+        extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = [ keys."oatmealine@void-defragmented".ssh keys."oatmealine@beppy-phone".ssh ];
       };
@@ -75,10 +76,12 @@ in {
         "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAoV7ymOtfC8SYvv31/GGso8DoHKE/KOfoEZ0hjmYtaQg7dyi5ijfDikLZUux8aWivvRofa7SqyaK0Ea+s9KuTX/dreJKz/RKG+QHLjw6U0FSoJ765q56pUy0j0TZoVy4PjSb38of56urg1UmHkK13WQXrvjwdHUjAcVx6PurHAxsbmxhYkJO9Jmvr8CB+PZFKIHjewkgBWkBxD97WFNwDfmBmvh1F5xRn8WhgT+2DVdQ2coN4Eqwc4NWzBUSfrro0gARsJsUvQxdx8f1kJDQKy2lQWCnlgRiD+pK5ocf1wCZfJMs0NQ6xqCZDKDJTcyGNLWH/L57Pg5U5t7BWRTTPmQ== yugoslavia"
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCX2uRTaL1Nu4KzsSJSVc7R2yCIa4Mw3KuJAMluQO746eXBFeTmRN6Pqc+H0Rpz9nkQ/fB8tYl70FfrYy4suM0QCY1IDbPWaUBmLQYCt6nzCfFY8PTpLoJmeQW3jzG7VqSjjl+uG2KLQqPtzxmvukIJRovhrKcUnPzw4tU4BLy2uGWgJN9sGofWczmtxdijADyOYtasVIr6/Hca5IwMCldbqQ9B1k+VIE87Kv2k5n+LVRVMsVHaVSubIMYZFbZFDW2/oRVg2ainewO0e9XPbtBREVraPnuf7s4uBByk4goQfLhz3B6L4JLbYYijw25+SmeJcesDxJUIIKMCuZChNcyb aura@LAPTOP-MEN8UH6Q"
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRI9sGl0EmOkNNnh8SgRq197gkEy3XEwKZjLIr27V9PfaVOLIAcZiGcOa5q7rc5FjcCtkQ9+/twE24bZpxkK0ygrRJBEdT+HGAUmpY/kRPEn/tqjmwNu43vQqOhNSYmAAzdjJ4AuRPK5st8QQyOzKv5Pnghwy8xPAjOM3o4n9ULMLjVvAu0eTmCJMKxEvz5FUEIVZtEid/ng46k/bJ/njSh8vyGBQV4fJei6M9Ovw0HPqqzWyV/e0c3hTClG4dfLCK3Qv3hLhXQ+8I9iaL7D2wZdr3F2lbg0vS/QctPZc28f1gpkFEzVflEzAk4aFwJMMflY04IG1Dr44IfM1gJbpj rsa-key-20220423"
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCL75/Pg5bP7LaXE6uPyyv8QDRivWJC6YcH6oJJztkjqL6g+0xPPiN6I54q/bNF4nHA2BHVUktKUU9bGDEOpYIRq7kegp2/K/+FNTM1Kz6rJSrSc8e0Ogxg8vhD6maxqLU8q+D1OMhBu0UiWUB+GxXmeYfBtXPjpcE+AaJ80BPs7vwiulHPGn7UAcRuP36Z+3JJiN2BQnU2aizXWsgyU575Uy3DVvAt7eHon+SoJiTCs2//5KexJ42U6ZiE6f/oTFdiud70lpxhGgiiFvj6M9RZ0aLoxspiskW45jKLXIMJ+mO6husg9GfvCchbps3YkmH0hZ24Ii1EiFhi5HZMY0Lt mayflower"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrlqH2OShvXdzq1sV5IDuWQzeC9OHBVvwj0+Y0XXwi7 mayflower-thinkpad"
         keys."oatmealine@void-defragmented".ssh
         keys."oatmealine@beppy-phone".ssh
       ];
-      packages = with pkgs; [ tmux ];
+      packages = with pkgs; [ tmux micro ];
       shell = pkgs.unstable.fish;
     };
     services = {
@@ -210,6 +213,15 @@ in {
         port = 1995;
       };
     };
+  };
+
+  systemd.services.minecraft-server-dark-firepit.serviceConfig = {
+    # packwiz workaround
+    # https://github.com/Infinidoge/nix-minecraft/issues/12#issuecomment-1235999072
+    # TODO: this doesn't work!!! it just goes "error code 1" and refuses to elaborate
+    #ExecStartPre = [
+    #  ''cd "/srv/minecraft/dark-firepit"; nix-shell -p adoptopenjdk-hotspot-bin-16 --run "java -jar /srv/minecraft/dark-firepit/packwiz-installer-bootstrap.jar -g 'https://dark-firepit.oat.zone/Fire Pit 1.19.2/pack.toml'"''
+    #];
   };
 
   services.nginx.virtualHosts."oat.zone" = {
