@@ -183,6 +183,8 @@ in {
         "educationmath.oat.zone".dataDir = "/var/www/proxy.oat.zone";
         "educationmath.oat.zone".php = true;
         "educationmath.oat.zone".auth = { twh = builtins.readFile /etc/proxy_twh; };
+        "rivervalleychocolate.com".dataDir = "/var/www/rivervalleychocolate.com";
+        "rivervalleychocolate.com".php = true;
       };
 
       nitter = {
