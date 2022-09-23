@@ -180,6 +180,9 @@ in {
         "oat.zone".php = true;
         "yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
         "yugoslavia.fishing".php = true;
+        "educationmath.oat.zone".dataDir = "/var/www/proxy.oat.zone";
+        "educationmath.oat.zone".php = true;
+        "educationmath.oat.zone".auth = { twh = builtins.readFile /etc/proxy_twh; };
       };
 
       nitter = {
