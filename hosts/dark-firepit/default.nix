@@ -185,8 +185,6 @@ in {
         "educationmath.oat.zone".auth = { twh = builtins.readFile /etc/proxy_twh; };
         "rivervalleychocolate.com".dataDir = "/var/www/rivervalleychocolate.com";
         "rivervalleychocolate.com".php = true;
-        "tracker.oat.zone".dataDir = "/var/www/tracker.oat.zone";
-        "tracker.oat.zone".php = true;
       };
 
       nitter = {
