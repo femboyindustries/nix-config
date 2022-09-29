@@ -52,6 +52,8 @@ in {
         locations."~ \.php$".extraConfig = mkIf site.php ''
           fastcgi_pass  unix:${config.services.phpfpm.pools."${domain}".socket};
           fastcgi_index index.php;
+          include ${pkgs.nginx}/conf/fastcgi_params;
+          include ${pkgs.nginx}/conf/fastcgi.conf;
         '';
         locations."/".index = mkIf site.php "index.php index.html";
         forceSSL = true;
@@ -79,6 +81,7 @@ in {
           "pm.max_spare_servers" = 25;
         };
         phpEnv."PATH" = lib.makeBinPath [ pkgs.unstable.php ];
+        phpPackage = pkgs.unstable.php;
       };
     }) sites);
   };
