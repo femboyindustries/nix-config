@@ -27,6 +27,24 @@ let
       description = "Does this site use php (phpfpm)?";
       default = false;
     };
+
+    phpHandlePathing = mkOption {
+      type = types.bool;
+      description = "Let PHP handle pathing (for eg. Laravel)";
+      default = false;
+    };
+
+    disableLogsForMisc = mkOption {
+      type = types.bool;
+      description = "Disables access logs for /favicon.ico and /robots.txt";
+      default = true;
+    };
+
+    denySensitivePaths = mkOption {
+      type = types.bool;
+      description = "Disables access to paths starting with a . (except well-known) to prevent leaking potentially sensitive data";
+      default = true;
+    };
   };
 in {
   options.modules.services.staticSites = mkOption {
@@ -48,14 +66,50 @@ in {
 
     services.nginx.virtualHosts = mkMerge (mapAttrsToList (domain: site: {
       ${domain} = {
-        locations."/".basicAuth = site.auth;
-        locations."~ \.php$".extraConfig = mkIf site.php ''
-          fastcgi_pass  unix:${config.services.phpfpm.pools."${domain}".socket};
-          fastcgi_index index.php;
-          include ${pkgs.nginx}/conf/fastcgi_params;
-          include ${pkgs.nginx}/conf/fastcgi.conf;
-        '';
-        locations."/".index = mkIf site.php "index.php index.html";
+        locations = mkMerge [
+          { "/".basicAuth = site.auth; }
+
+          ( mkIf site.php { "/".index = "index.php index.html"; })
+
+          ( mkIf site.disableLogsForMisc {
+            "= /favicon.ico".extraConfig = ''
+              access_log off;
+              log_not_found off;
+            '';
+            "= /robots.txt".extraConfig = ''
+              access_log off;
+              log_not_found off;
+            '';
+          })
+
+          ( mkIf site.denySensitivePaths {
+            "${''~ /\.(?!well-known).*''}".extraConfig = ''deny all;'';
+          })
+
+          ( mkIf (site.php && (!site.phpHandlePathing)) {
+              "${''~ \.php$''}".extraConfig = ''
+                fastcgi_pass  unix:${config.services.phpfpm.pools."${domain}".socket};
+                fastcgi_index index.php;
+                include ${pkgs.nginx}/conf/fastcgi_params;
+                include ${pkgs.nginx}/conf/fastcgi.conf;
+              '';
+            }
+          )
+
+          ( mkIf (site.php && site.phpHandlePathing) {
+              "${''~ \.php$''}".extraConfig = ''
+                fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+                fastcgi_pass  unix:${config.services.phpfpm.pools."${domain}".socket};
+                fastcgi_index index.php;
+                include ${pkgs.nginx}/conf/fastcgi_params;
+                include ${pkgs.nginx}/conf/fastcgi.conf;
+              '';
+              "/".extraConfig = ''
+                try_files $uri $uri/ /index.php?$query_string;
+              '';
+            }
+          )
+        ];
         forceSSL = true;
         enableACME = true;
         root = site.dataDir;
