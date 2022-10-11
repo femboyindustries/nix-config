@@ -139,6 +139,43 @@ in {
             package = pkgs.minecraftServers.fabric-1_19_2;
             jvmOpts = "-Xmx6G";
           };
+          "gbj" = {
+            enable = true;
+            autoStart = true;
+            openFirewall = true;
+            serverProperties = {
+              server-port = 25585;
+              gamemode = 0;
+              motd = "gay baby jail";
+              max-players = 16;
+              allow-flight = true;
+              enable-command-block = true;
+              enforce-secure-profile = false;
+              snooper-enabled = false;
+              spawn-protection = 0;
+              level-type = "terra:overworld/overworld";
+              white-list = true;
+              view-distance = 32;
+            };
+            whitelist = {
+              UnderSunandSky = "b788f46e-50a2-4af3-a668-15ae393c59d8";
+              PianoBoyBenini = "042d6cef-6194-46b4-9bfc-87b3c4cdf94a";
+              oatmealine =     "241d7103-4c9d-4c45-9464-83b5365ce48e";
+              Starblazerz128 = "d45eb172-8360-42fd-a185-ab2197b71f9a";
+              Chevreau =       "b594ba84-f10c-42ff-83a6-8046f90ad0b8";
+              Yarn01 =         "40fee73f-d4b3-47c6-adf7-fe7c717a1f55";
+              "1C3doggo" =     "48c3a077-9e3b-47a6-b17b-4ed0b1bc33b2";
+              CosmicCats =     "32148b79-12a8-48f1-b158-3c97c45e39e5";
+              m3bo =           "6e33434c-1ec0-4c69-9dad-b32b1197496e";
+              SomewhatSyl =    "d8bac1ef-27d5-4c94-a9e7-e2d079edef22";
+              Nightmare_Tank = "92840daa-823e-4b8e-9741-be296147e823";
+              JDavisBro =      "e8529c4b-701e-46c5-a8d7-0dfb0e0b642d";
+              Ironic_queen =   "443fe20d-77e0-4a4a-8bb7-a4b9ad654550";
+              azurehaiku =     "fd7aba33-4307-4eba-aa63-70bc3e38a2d7";
+            };
+            package = pkgs.minecraftServers.fabric-1_19_2;
+            jvmOpts = "-Xmx2G";
+          };
         };
       };
 
