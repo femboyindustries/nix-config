@@ -174,7 +174,7 @@ in {
               azurehaiku =     "fd7aba33-4307-4eba-aa63-70bc3e38a2d7";
             };
             package = pkgs.minecraftServers.fabric-1_19_2;
-            jvmOpts = "-Xmx2G";
+            jvmOpts = "-Xmx4G";
           };
         };
       };
