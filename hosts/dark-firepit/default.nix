@@ -225,6 +225,7 @@ in {
         "tac.yugoslavia.best".dataDir = "/var/www/tac.yugoslavia.best/public";
         "tac.yugoslavia.best".php = true;
         "tac.yugoslavia.best".phpHandlePathing = true;
+        "pjsk.oat.zone".dataDir = "/var/www/pjsk.oat.zone";
       };
 
       nitter = {
