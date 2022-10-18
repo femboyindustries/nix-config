@@ -2,8 +2,8 @@
 
 with lib;
 let
-  peerKeys = import ./authorizedKeys.nix lib;
-  wgKeys = filter (hasAttr "wg") peerKeys.list;
+  peerKeys = import ./authorizedKeys.nix;
+  wgKeys = filter (hasAttr "wg") peerKeys;
 in {
   ips = [ "10.100.0.1/24" ];
 
@@ -11,7 +11,8 @@ in {
 
   listenPort = 51820;
 
-  peers = genList (n: let
+  peers = genList (n:
+  let
     keychain = elemAt wgKeys n;
     ip = "10.100.0.${toString (n+2)}/32";
   in {
@@ -19,4 +20,3 @@ in {
     allowedIPs = [ ip ];
   }) (length wgKeys);
 }
-

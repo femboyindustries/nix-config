@@ -1,7 +1,9 @@
 { pkgs, inputs, lib, ... }:
 
 let
-  keys = import ./authorizedKeys.nix lib;
+  keys = import ./authorizedKeys.nix;
+  fetchSSH = (host: lib._.getSSH host keys);
+  fetchSSHKeys = map fetchSSH;
 in {
   imports = [
     ./hardware-configuration.nix
@@ -31,7 +33,9 @@ in {
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
-        openssh.authorizedKeys.keys = [ keys.set."aether@subsurface".ssh ];
+        openssh.authorizedKeys.keys = fetchSSHKeys [
+          "aether@subsurface"
+        ];
       };
 
       homeConf.home = {
@@ -49,7 +53,10 @@ in {
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
-        openssh.authorizedKeys.keys = [ keys.set."oatmealine@void-defragmented".ssh keys.set."oatmealine@beppy-phone".ssh ];
+        openssh.authorizedKeys.keys = fetchSSHKeys [
+          "oatmealine@void-defragmented"
+          "oatmealine@beppy-phone"
+        ];
       };
 
       homeConf.home = {
@@ -66,7 +73,9 @@ in {
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
-        openssh.authorizedKeys.keys = [ keys.set."mayflower@BMW-M550d-xDrive".ssh ];
+        openssh.authorizedKeys.keys = fetchSSHKeys [
+          "mayflower@BMW-M550d-xDrive"
+        ];
       };
 
       homeConf.home = {
@@ -95,8 +104,8 @@ in {
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRI9sGl0EmOkNNnh8SgRq197gkEy3XEwKZjLIr27V9PfaVOLIAcZiGcOa5q7rc5FjcCtkQ9+/twE24bZpxkK0ygrRJBEdT+HGAUmpY/kRPEn/tqjmwNu43vQqOhNSYmAAzdjJ4AuRPK5st8QQyOzKv5Pnghwy8xPAjOM3o4n9ULMLjVvAu0eTmCJMKxEvz5FUEIVZtEid/ng46k/bJ/njSh8vyGBQV4fJei6M9Ovw0HPqqzWyV/e0c3hTClG4dfLCK3Qv3hLhXQ+8I9iaL7D2wZdr3F2lbg0vS/QctPZc28f1gpkFEzVflEzAk4aFwJMMflY04IG1Dr44IfM1gJbpj rsa-key-20220423"
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCL75/Pg5bP7LaXE6uPyyv8QDRivWJC6YcH6oJJztkjqL6g+0xPPiN6I54q/bNF4nHA2BHVUktKUU9bGDEOpYIRq7kegp2/K/+FNTM1Kz6rJSrSc8e0Ogxg8vhD6maxqLU8q+D1OMhBu0UiWUB+GxXmeYfBtXPjpcE+AaJ80BPs7vwiulHPGn7UAcRuP36Z+3JJiN2BQnU2aizXWsgyU575Uy3DVvAt7eHon+SoJiTCs2//5KexJ42U6ZiE6f/oTFdiud70lpxhGgiiFvj6M9RZ0aLoxspiskW45jKLXIMJ+mO6husg9GfvCchbps3YkmH0hZ24Ii1EiFhi5HZMY0Lt mayflower"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrlqH2OShvXdzq1sV5IDuWQzeC9OHBVvwj0+Y0XXwi7 mayflower-thinkpad"
-        keys.set."oatmealine@void-defragmented".ssh
-        keys.set."oatmealine@beppy-phone".ssh
+        #fetchSSH "oatmealine@void-defragmented"
+        #fetchSSH "oatmealine@beppy-phone"
       ];
       packages = with pkgs; [ tmux micro ];
       shell = pkgs.unstable.fish;
