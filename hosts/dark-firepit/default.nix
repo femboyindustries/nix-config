@@ -172,7 +172,7 @@ in {
               spawn-protection = 0;
               level-type = "terra:overworld/overworld";
               white-list = true;
-              view-distance = 64;
+              view-distance = 32;
             };
             whitelist = {
               UnderSunandSky = "b788f46e-50a2-4af3-a668-15ae393c59d8";
