@@ -59,6 +59,23 @@ in {
         };
       };
     };
+
+    mayflower = {
+      conf = {
+        packages = with pkgs; [  ];
+        shell = pkgs.unstable.fish;
+        extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
+        initialHashedPassword = "!";
+        openssh.authorizedKeys.keys = [ keys."mayflower@BMW-M550d-xDrive".ssh ];
+      };
+
+      homeConf.home = {
+        sessionsVariables = {
+          EDITOR = "nvim";
+          NIX_REMOTE = "daemon";
+        };
+      };
+    };
   };
 
   keyboard = {
