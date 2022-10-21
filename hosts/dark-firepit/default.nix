@@ -120,8 +120,8 @@ in {
       postgres.enable = true;
 
       nextcloud = {
-        enable = true;
-        domain = "cloud.aether.gay";
+        enable = false;
+        domain = "cloud.dark-firepit.dev";
       };
 
       gitea = {
@@ -242,7 +242,8 @@ in {
 
       staticSites = {
         "aether.gay".dataDir = "/var/www/aether.gay";
-        "dark-firepit.oat.zone".dataDir = "/var/www/dark-firepit.oat.zone";
+        "dark-firepit.dev".dataDir = "/var/www/dark-firepit.dev";
+        #"dark-firepit.oat.zone".dataDir = "/var/www/dark-firepit.oat.zone";
         "va11halla.oat.zone".dataDir = "/var/www/va11halla.oat.zone";
         "giger.yugoslavia.fishing".dataDir = "/var/www/giger.yugoslavia.fishing";
         "modfiles.oat.zone".dataDir = "/var/www/modfiles.oat.zone";
@@ -309,6 +310,16 @@ in {
   services.nginx.virtualHosts."oat.zone" = {
     locations."/f/".extraConfig = ''
       add_header Access-Control-Allow-Origin "*";
+    '';
+  };
+
+  # https://www.edwinwenink.xyz/posts/47-tilde_server/
+  services.nginx.virtualHosts."dark-firepit.dev" = {
+    locations."~ ^/~([^/\\s]+?)(/[^\\s]*)?$".extraConfig = ''
+      add_header X-debug-message "/home/$1/www$2" always;
+      alias /home/$1/www$2;
+      index index.html index.htm;
+      autoindex on;
     '';
   };
 
