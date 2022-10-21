@@ -50,6 +50,7 @@ in {
         # thanks nginx
         #locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port};";
         locations."/".extraConfig = ''
+          client_max_body_size 600M;
           proxy_pass http://127.0.0.1:${toString cfg.port};
         '';
       };

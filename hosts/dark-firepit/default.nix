@@ -27,6 +27,7 @@ in {
   users.groups.yugoslavia = {};
 
   normalUsers = {
+    # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
       conf = {
         packages = with pkgs; [ bat duf broot nftables tmux ];
@@ -132,6 +133,15 @@ in {
       matrix.conduit = {
         enable = false;
         domain = "matrix.aether.gay";
+      };
+
+      srb2k = with lib; with builtins; let
+        addonDir = "/var/lib/srb2k/firepit/";
+        fileNames = attrNames (readDir (/. + addonDir));
+        addonFileNames = filter (n: hasSuffix ".lua" n || hasSuffix ".kart" n || hasSuffix ".pk3" n || hasSuffix ".wad" n) fileNames;        
+      in {
+        enable = true;
+        addons = map (n: "${addonDir}${n}") addonFileNames;
       };
 
       minecraft = {
