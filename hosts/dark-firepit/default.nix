@@ -141,6 +141,7 @@ in {
         addonFileNames = filter (n: hasSuffix ".lua" n || hasSuffix ".kart" n || hasSuffix ".pk3" n || hasSuffix ".wad" n) fileNames;        
       in {
         enable = true;
+        advertise = false;
         addons = map (n: "${addonDir}${n}") addonFileNames;
       };
 
@@ -355,6 +356,10 @@ in {
       { address = "2001:41d0:0700:3308::";
         prefixLength = 64;
       }
+
+      { address = "2001:41d0:0700:33ff::";
+        prefixLength = 64;
+      }
     ];
 
     defaultGateway6 = {
@@ -363,17 +368,6 @@ in {
 #      address = "2001::1";
       interface = "eno1";
     };
-
-/*
-    dhcpcd.persistent = true;
-    dhcpcd.extraConfig = ''
-      clientid d0:50:99:d4:04:68:d0:50:99:d4:04:68
-      noipv6rs
-      interface eno1
-      ia_pd 1/2001:41d0:700:3308::/56 eno1
-      static ip6_address=2001:41d0:700:3308::1/56
-    '';
-*/
 
     firewall.allowPing = true;
     # minecraft proximity voice chat

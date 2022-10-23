@@ -3,12 +3,16 @@
 with lib;
 let
   cfg = config.modules.services.srb2k;
+  # https://wiki.srb2.org/wiki/Command_line_parameters
   flags = [
     "-dedicated"
-    "+advertise 1"
+    # todo: once declarative config is done,
+    # move this over to commands that are ran
+    # on startup, will you?
+    "+advertise ${toString (if cfg.advertise then 1 else 0)}"
     "-port ${toString cfg.port}"
     "-serverport ${toString cfg.port}"
-  ];
+  ] ++ cfg.flags;
 in {
   options.modules.services.srb2k = {
     enable = mkOption {
@@ -38,6 +42,30 @@ in {
       default = [];
       description = "Locations of srb2k addons and also fungus spore tasty in your body they grow happy you grow happy";
     };
+
+    advertise = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to advertise this server on the SRB2Kart Master Server (https://ms.kartkrew.org/).";
+    };
+
+    flags = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "Additional flags to pass to the SRB2K executable. See https://wiki.srb2.org/wiki/Command_line_parameters";
+    };
+
+    autoStart = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Automatically start the server on boot.";
+    };
+
+    openFirewall = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Automatically open ports in the firewall.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -49,32 +77,53 @@ in {
     };
     users.groups.srb2k = {};
 
-    systemd.services.srb2k = {
+    systemd.services.srb2k = let
+      tmux = "${getBin pkgs.tmux}/bin/tmux";
+      tmuxSock = "${cfg.dataDir}/srb2k.sock";
+
+      startScript = pkgs.writeScript "srb2k-start" ''
+        #!${pkgs.runtimeShell}
+
+        umask u=rwx,g=rwx,o=rx
+        cd ${cfg.dataDir}
+        ${tmux} -S ${tmuxSock} new -d ${cfg.package}/bin/srb2kart ${concatStringsSep " " flags} -file ${concatStringsSep " " (map (path: "\"${path}\"") cfg.addons)}
+      '';
+
+      stopScript = pkgs.writeScript "srb2k-stop" ''
+        #!${pkgs.runtimeShell}
+        
+        if ! [ -d "/proc/$1" ]; then
+          exit 0
+        fi
+
+        ${tmux} -S ${tmuxSock} send-keys quit Enter
+      '';
+    in {
       description = "srb2k server =)";
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = mkIf cfg.autoStart [ "multi-user.target" ];
       after = [ "network.target" ];
 
       serviceConfig = {
-        User = "srb2k";
+        ExecStart = "${startScript}";
+        ExecStop = "${stopScript} $MAINPID";
         Restart = "always";
-        WorkingDirectory = cfg.dataDir;
-
-        ExecStart = #''
-#          ${getBin pkgs.tmux}/bin/tmux -S ${cfg.dataDir}/srb2k.sock new -d \
-        ''
-          ${cfg.package}/bin/srb2kart ${concatStringsSep " " flags} -file \
-          ${concatStringsSep " " (map (path: "\"${path}\"") cfg.addons)}
-        '';
+        User = "srb2k";
+        Type = "forking";
+        GuessMainPID = true;
+        RuntimeDirectory = "srb2k";
       };
 
+      preStart = ''
+        ${pkgs.coreutils}/bin/chown srb2k:srb2k ${cfg.dataDir}
+        ${pkgs.coreutils}/bin/chmod -R 775 ${cfg.dataDir}
+      '';
+
       postStart = ''
-        ${pkgs.coreutils}/bin/chmod 775 -R ${cfg.dataDir}
-        ${pkgs.coreutils}/bin/chmod 660 ${cfg.dataDir}/srb2k.sock
-        ${pkgs.coreutils}/bin/chgrp srb2k ${cfg.dataDir}/srb2k.sock
+        ${pkgs.coreutils}/bin/chmod 660 ${tmuxSock}
       '';
     };
 
-    networking.firewall = {
+    networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = [ cfg.port ];
       allowedUDPPorts = [ cfg.port ];
     };
