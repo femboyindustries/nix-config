@@ -18,4 +18,8 @@
     hostname = "mayflower@BMW-M550d-xDrive"; # car 5
     ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIeoFll8XBRwu6vbQHUj4LNbvRvLMTdqUP1su9hGxow8olGKIZf/nINkt+/B5w4UumLFnOOROIWVhSH/04oxGVCWdk29ibPo3yYJIAoQrqOXYWCrGpMDd0z2n/0CwyXRAqmQ4rubnUZtnlabYCLh0eWMu9ZRSsSrQ+MiaUHES/vv1MxlLWHoEGfhLzoq7SyIsK88Mirgu9lSeHd/+2JybkQ9kNEWTxnzUPKwOMT0zLGo7vNLmfPhJ1WilQoV4F8skDbbgFNRuLO13ZDn6W2jqZ+zjf3H9khzPivG+oaKfHLMDD/zCwHM3rm3JyJzX7GF9EV73AqbNkzzsf54vKhYRT";
   }
+  {
+    hostname = "aether@phone";
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP5LPWVgsFAH9XErXGZB+lzwb/+7EiEb6eatNWoJag5i JuiceSSH";
+  }
 ]

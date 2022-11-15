@@ -14,19 +14,46 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # agenix - age-encrypted secrets
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware = {
+      url = "github:nixos/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     jillo.url = "/home/oatmealine/jillo";
     watch-party.url = "/home/oatmealine/watch-party";
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nix-minecraft, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
     let
       system = "x86_64-linux";
 
@@ -53,5 +80,3 @@
       devShell."${system}" = import ./shell.nix { inherit pkgs; };
     };
 }
-
-

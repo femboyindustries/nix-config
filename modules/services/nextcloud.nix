@@ -10,13 +10,18 @@ in {
       default = false;
     };
 
+    package = mkOption {
+      type = types.package;
+      default = pkgs.nextcloud24;
+    };
+
     domain = mkOption {
       type = types.str;
       default = null;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (trace "the balls" {
     assertions = [
       { assertion = cfg.domain != null;
         description = "Nextcloud requires a domain.";
@@ -25,9 +30,42 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud24;
+      package = cfg.package;
       hostName = cfg.domain;
-      config.adminpassFile = "/etc/nextcloudpass";
+      config = {
+        dbtype = "pgsql";
+        dbuser = "nextcloud";
+        dbhost = "/run/postgresql";
+        dbname = "nextcloud";
+        adminpassFile = "/etc/nextcloudpass";
+        adminuser = "root";
+#        "log_type" = "systemd";
+#        "syslog_tag" = "Nextcloud";
+#        loglevel = "3";
+      };
     };
-  };
+
+    services.nginx.virtualHosts.${cfg.domain} = {
+      forceSSL = true;
+      enableACME = true;
+      locations."^~ /.well-known" = {};
+    };
+
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "nextcloud" ];
+      ensureUsers = [
+        { name = "nextcloud";
+          ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        }
+      ];
+    };
+
+    systemd.services."nextcloud-setup" = {
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
+    };
+
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
+  });
 }
