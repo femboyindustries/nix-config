@@ -30,12 +30,13 @@ in {
     # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
       conf = {
-        packages = with pkgs; [ bat duf broot nftables tmux ];
+        packages = with pkgs; [ bat duf broot nftables tmux bottom ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [
           "aether@subsurface"
+          "aether@phone"
         ];
       };
 
@@ -50,7 +51,7 @@ in {
     # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
-        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep ];
+        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep _.glitch-soc ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
@@ -120,8 +121,8 @@ in {
       postgres.enable = true;
 
       nextcloud = {
-        enable = false;
-        domain = "cloud.dark-firepit.dev";
+        enable = true;
+        domain = "nextcloud.dark-firepit.cloud";
       };
 
       gitea = {
@@ -132,7 +133,7 @@ in {
 
       matrix.conduit = {
         enable = false;
-        domain = "matrix.aether.gay";
+        domain = "matrix.dark-firepit.cloud";
       };
 
       srb2k = with lib; with builtins; let
@@ -196,7 +197,7 @@ in {
           kmp_battleaccel on
           maxsend max
           fr_enabled off
-          khaosenable off
+          khaos enable off
 
           wait 1
 
@@ -248,8 +249,8 @@ in {
         enable = true;
         servers = {
           "dark-firepit" = {
-            enable = true;
-            autoStart = true;
+            enable = false;
+            #autoStart = false;
             openFirewall = true;
             serverProperties = {
               server-port = 25565;
@@ -315,6 +316,11 @@ in {
         };
       };
 
+      glitch-soc = {
+        enable = true;
+        domain = "feditest.oat.zone";
+      };
+
       wireguard = {
         enable = true;
         server = true;
@@ -363,6 +369,9 @@ in {
         "tac.yugoslavia.best".php = true;
         "tac.yugoslavia.best".phpHandlePathing = true;
         "pjsk.oat.zone".dataDir = "/var/www/pjsk.oat.zone";
+        "mayf.pink".dataDir = "/var/www/mayf.pink/public";
+        "mayf.pink".php = true;
+        "mayf.pink".phpHandlePathing = true;
       };
 
       nitter = {
@@ -420,6 +429,14 @@ in {
       alias /home/$1/www$2;
       index index.html index.htm;
       autoindex on;
+    '';
+  };
+
+  services.nginx.virtualHosts."nitter.oat.zone" = {
+    locations."/".extraConfig = ''
+      if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
+        return 302 $scheme://fxtwitter.com$request_uri;
+      }
     '';
   };
 
