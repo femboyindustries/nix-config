@@ -12,9 +12,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.hyprland = {
-      enable = true;
-    };
+    #programs.hyprland = {
+    #  enable = true;
+    #};
+    # this was failing to build so i removed it. sorry!!!!!!
+    # -oat
 
     home._.wayland.windowManager.hyprland = {
       enable = true;

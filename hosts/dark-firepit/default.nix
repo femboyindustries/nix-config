@@ -321,6 +321,10 @@ in {
         domain = "feditest.oat.zone";
       };
 
+      mosh = {
+        enable = true;
+      };
+
       wireguard = {
         enable = true;
         server = true;
@@ -348,7 +352,7 @@ in {
 
       staticSites = {
         "aether.gay".dataDir = "/var/www/aether.gay";
-        "dark-firepit.dev".dataDir = "/var/www/dark-firepit.dev";
+        "dark-firepit.cloud".dataDir = "/var/www/dark-firepit.cloud";
         #"dark-firepit.oat.zone".dataDir = "/var/www/dark-firepit.oat.zone";
         "va11halla.oat.zone".dataDir = "/var/www/va11halla.oat.zone";
         "giger.yugoslavia.fishing".dataDir = "/var/www/giger.yugoslavia.fishing";
