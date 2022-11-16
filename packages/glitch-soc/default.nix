@@ -48,7 +48,7 @@ stdenv.mkDerivation rec {
 
     yarnOfflineCache = fetchYarnDeps {
       yarnLock = "${src}/yarn.lock";
-      sha256 = "sha256-RQwtybEMwwAoW2DBqX42Q1gmvr12sFWzT2M32TGkOWY=";
+      sha256 = "sha256-Y1KFts3/3BmLIOuXahe6hn+va1ObMkWRNGB0rudRRGs=";
     };
 
     nativeBuildInputs = [ fixup_yarn_lock nodejs-slim yarn mastodon-gems mastodon-gems.wrappedRuby ];
