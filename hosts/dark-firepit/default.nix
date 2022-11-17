@@ -87,6 +87,18 @@ in {
         };
       };
     };
+
+    winter = {
+      conf = {
+        packages = with pkgs; [ micro ];
+        shell = pkgs.unstable.fish;
+        extraGroups = [ "wheel" "nix-users" "dotfiles" ];
+        initialHashedPassword = "!";
+        openssh.authorizedKeys.keys = fetchSSHKeys [
+          "lilith@bms-cab"
+        ];
+      };
+    };
   };
 
   keyboard = {
@@ -376,6 +388,7 @@ in {
         "mayf.pink".dataDir = "/var/www/mayf.pink/public";
         "mayf.pink".php = true;
         "mayf.pink".phpHandlePathing = true;
+        "wint0r.zone".dataDir = "/var/www/wint0r.zone";
       };
 
       nitter = {

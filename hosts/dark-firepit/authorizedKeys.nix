@@ -22,4 +22,8 @@
     hostname = "aether@phone";
     ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP5LPWVgsFAH9XErXGZB+lzwb/+7EiEb6eatNWoJag5i JuiceSSH";
   }
+  {
+    hostname = "lilith@bms-cab";
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFb9uVy1x4XaO1uFOQBuERy6xw8cf7Dh24UT0jJs7g3z lilith@bms-cab";
+  }
 ]
