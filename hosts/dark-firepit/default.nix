@@ -440,7 +440,7 @@ in {
   };
 
   # https://www.edwinwenink.xyz/posts/47-tilde_server/
-  services.nginx.virtualHosts."dark-firepit.dev" = {
+  services.nginx.virtualHosts."dark-firepit.cloud" = {
     locations."~ ^/~([^/\\s]+?)(/[^\\s]*)?$".extraConfig = ''
       add_header X-debug-message "/home/$1/www$2" always;
       alias /home/$1/www$2;
