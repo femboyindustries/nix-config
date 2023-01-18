@@ -26,4 +26,8 @@
     hostname = "lilith@bms-cab";
     ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFb9uVy1x4XaO1uFOQBuERy6xw8cf7Dh24UT0jJs7g3z lilith@bms-cab";
   }
+  {
+    hostname = "swag@BMW-M550d-xDrive"; # mayflower 2
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1fJn2ZY9fhBr4E1Gc91uRWS5r+EZ4OHy3RmuAjx7kr swag@BMW-M550d-xDrive";
+  }
 ]

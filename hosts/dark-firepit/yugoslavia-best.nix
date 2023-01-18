@@ -9,6 +9,7 @@ in {
     modules.services.staticSites.${domain} = {
       dataDir = root;
       php = true;
+      forceSSL = false;
     };
   
     services = {
@@ -16,6 +17,12 @@ in {
         locations."/" = {
           extraConfig = ''
             error_page 404 /error.php;
+          '';
+        };
+
+        locations."= /brackets2.html" = {
+          extraConfig = ''
+            return 451;
           '';
         };
 

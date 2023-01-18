@@ -1,17 +1,16 @@
 { lib, stdenv, nodejs-slim, mkYarnPackage, fetchFromGitHub, bundlerEnv, nixosTests, pkgs
 , yarn, callPackage, imagemagick, ffmpeg, file, ruby_3_0, writeShellScript
-, fetchYarnDeps, fixup_yarn_lock
+, fetchYarnDeps, fixup_yarn_lock, fetchgit
 
   # Allow building a fork or custom version of Mastodon:
 , pname ? "glitch-soc"
 , version ? import ./version.nix
-, srcOverride ? #pkgs.fetchFromGitHub {
-		#owner = "glitch-soc";
-		#repo = "mastodon";
-		#rev = "3f15326a05a926e9f001800a48ac2addbd3aa833";
-		#sha256 = "1m1agij9i2byiml02yq0h9w6f64jvy2y2ayjm880pg5xm638nqmk";
-	#}
-  /home/oatmealine/mastodon
+, srcOverride ? fetchgit {
+		url = "https://git.oat.zone/dark-firepit/mastodon";
+		rev = "7cb3b3f2df99e7df6b3a94bb90e4b4bee632a103";
+		sha256 = "sha256-6Y+nDS/Gh/v6ixOa4utqNy+ETw7AdYDTAEFjpQrkunU=";
+	}
+  #/home/oatmealine/mastodon
 , dependenciesDir ? ./.  # Should contain gemset.nix, yarn.nix and package.json.
 }:
 
@@ -60,7 +59,7 @@ stdenv.mkDerivation rec {
       export HOME=$PWD
       # This option is needed for openssl-3 compatibility
       # Otherwise we encounter this upstream issue: https://github.com/mastodon/mastodon/issues/17924
-      #export NODE_OPTIONS=--openssl-legacy-provider
+      export NODE_OPTIONS=--openssl-legacy-provider
       fixup_yarn_lock ~/yarn.lock
       yarn config --offline set yarn-offline-mirror $yarnOfflineCache
       yarn install --offline --frozen-lockfile --ignore-engines --ignore-scripts --no-progress

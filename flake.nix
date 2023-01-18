@@ -2,7 +2,9 @@
   description = "Frosted Flakes";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    # temporary gitea workaround
+    #nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -75,7 +77,9 @@
         master = mkPkgs nixpkgs-master [];
       };
       overlays = mapModules ./overlays import;
-      nixosModules = mapModulesRec ./modules import;
+      nixosModules = (mapModulesRec ./modules import) ++ [
+        hyprland.nixosModules.default
+      ];
       nixosConfigurations = mapModules ./hosts (host: mkHost host { inherit system; });
       devShell."${system}" = import ./shell.nix { inherit pkgs; };
     };

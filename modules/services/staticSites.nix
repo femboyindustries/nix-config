@@ -45,6 +45,12 @@ let
       description = "Disables access to paths starting with a . (except well-known) to prevent leaking potentially sensitive data";
       default = true;
     };
+
+    forceSSL = mkOption {
+      type = types.bool;
+      description = "Redirects HTTP requests to HTTPS.";
+      default = true;
+    };
   };
 in {
   options.modules.services.staticSites = mkOption {
@@ -110,7 +116,8 @@ in {
             }
           )
         ];
-        forceSSL = true;
+        forceSSL = site.forceSSL;
+        addSSL = !site.forceSSL;
         enableACME = true;
         root = site.dataDir;
       };
@@ -134,6 +141,9 @@ in {
           "pm.min_spare_servers" = 1;
           "pm.max_spare_servers" = 25;
         };
+        phpOptions = ''
+          display_errors = on;
+        '';
         phpEnv."PATH" = lib.makeBinPath [ pkgs.unstable.php ];
         phpPackage = pkgs.unstable.php;
       };

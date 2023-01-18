@@ -30,7 +30,7 @@ in {
     # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
       conf = {
-        packages = with pkgs; [ bat duf broot nftables tmux bottom ];
+        packages = with pkgs; [ bat duf broot nftables tmux bottom writefreely ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
@@ -77,6 +77,7 @@ in {
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [
           "mayflower@BMW-M550d-xDrive"
+          "swag@BMW-M550d-xDrive"
         ];
       };
 
@@ -132,10 +133,17 @@ in {
 
       postgres.enable = true;
 
-      nextcloud = {
-        enable = true;
-        domain = "nextcloud.dark-firepit.cloud";
-      };
+      #nextcloud = {
+      #  enable = true;
+      #  domain = "nextcloud.dark-firepit.cloud";
+      #  settings.app.federation = true;
+      #};
+
+      #writefreely = {
+      #  enable = true;
+      #  name = "Corruption Biome";
+      #  domain = "blog.dark-firepit.cloud";
+      #};
 
       gitea = {
         enable = true;
@@ -288,6 +296,30 @@ in {
             package = pkgs.minecraftServers.fabric-1_19_2;
             jvmOpts = "-Xmx6G";
           };
+          "n3ko-test" = {
+            enable = true;
+            autoStart = true;
+            openFirewall = true;
+            serverProperties = {
+              server-port = 25595;
+              gamemode = 1;
+              motd = "N3KO SMP Testing server";
+              white-list = true;
+              max-players = 8;
+              allow-flight = true;
+              enable-command-block = true;
+              enforce-secure-profile = false;
+              #level-type = "terra:overworld/overworld";
+              snooper-enabled = false;
+              spawn-protection = 0;
+            };
+            whitelist = {
+              oatmealine  = "241d7103-4c9d-4c45-9464-83b5365ce48e";
+              Cardboxneko = "3d406152-008c-4ec9-bf49-44c883baca6d";
+            };
+            package = pkgs.fabricServers.fabric-1_18_2;
+            jvmOpts = "-Xmx4G";
+          };
           "gbj" = {
             enable = true;
             autoStart = true;
@@ -321,6 +353,8 @@ in {
               JDavisBro =      "e8529c4b-701e-46c5-a8d7-0dfb0e0b642d";
               Ironic_queen =   "443fe20d-77e0-4a4a-8bb7-a4b9ad654550";
               azurehaiku =     "fd7aba33-4307-4eba-aa63-70bc3e38a2d7";
+              TryHardGamerTV = "8273b84d-a687-49fb-98de-a3e626e26c3b";
+              "_AtlasFox_" =   "0ce1bbe0-ea57-463c-8df3-4c046dc6eff2";
             };
             package = pkgs.minecraftServers.fabric-1_19_2;
             jvmOpts = "-Xmx4G";
@@ -389,6 +423,7 @@ in {
         "mayf.pink".php = true;
         "mayf.pink".phpHandlePathing = true;
         "wint0r.zone".dataDir = "/var/www/wint0r.zone";
+        "puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";
       };
 
       nitter = {
@@ -439,6 +474,26 @@ in {
     '';
   };
 
+  services.nginx.virtualHosts."gdpstest.oat.zone" = {
+    enableACME = true;
+    forceSSL = false;
+    addSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:1982/";
+    };
+    extraConfig = ''
+      client_max_body_size 500M;
+    '';
+  };
+
+  services.nginx.virtualHosts."gdicon.oat.zone" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:3436/";
+    };
+  };
+
   # https://www.edwinwenink.xyz/posts/47-tilde_server/
   services.nginx.virtualHosts."dark-firepit.cloud" = {
     locations."~ ^/~([^/\\s]+?)(/[^\\s]*)?$".extraConfig = ''
@@ -456,6 +511,20 @@ in {
       }
     '';
   };
+
+  # temporary
+  #services.nginx.virtualHosts."git.oat.zone" = {
+  #  forceSSL = true;
+  #  enableACME = true;
+  #  root = "/var/www/temporarily-down";
+  #  extraConfig = ''
+  #    error_page 503 /index.html;
+  #  '';
+  #  locations."/".extraConfig = ''
+  #    return 503;
+  #    try_files /index.html =404;
+  #  '';
+  #};
 
   security.doas = {
     extraRules = [

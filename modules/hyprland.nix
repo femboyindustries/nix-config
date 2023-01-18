@@ -17,6 +17,19 @@ in {
     #};
     # this was failing to build so i removed it. sorry!!!!!!
     # -oat
+    # look outside your window!!!
+    # -aether
+    # ok done              (i removed it again)
+    # -oat
+
+    user.packages = with pkgs; [
+      grim
+      slurp
+      wl-clipboard
+      brightnessctl
+      gammastep
+      wdisplays
+    ];
 
     home._.wayland.windowManager.hyprland = {
       enable = true;
