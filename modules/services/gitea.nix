@@ -23,7 +23,7 @@ in {
     services = {
       gitea = {
         enable = true;
-        package = pkgs.master.gitea;
+        package = pkgs.unstable.gitea;
         disableRegistration = true;
         domain = cfg.domain;
         httpPort = cfg.port;

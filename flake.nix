@@ -9,9 +9,6 @@
     # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    # WARNING: The master branch of nixpkgs is unsafe to use and software may break or contain various security vulnerabilities. Use at your own discretion.
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
-
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -55,7 +52,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
     let
       system = "x86_64-linux";
 
@@ -74,7 +71,6 @@
       overlay = final: prev: {
         _ = self.packages."${system}";
         unstable = mkPkgs nixpkgs-unstable [];
-        master = mkPkgs nixpkgs-master [];
       };
       overlays = mapModules ./overlays import;
       nixosModules = (mapModulesRec ./modules import) ++ [
