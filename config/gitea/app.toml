@@ -24,6 +24,7 @@ DEFAULT_KEEP_EMAIL_PRIVATE        = true
 DEFAULT_ALLOW_CREATE_ORGANIZATION = true
 DEFAULT_ENABLE_TIMETRACKING       = true
 NO_REPLY_ADDRESS                  = "noreply.oat.zone"
+DISABLE_REGISTRATION              = true
 
 [picture]
 DISABLE_GRAVATAR        = false
@@ -34,7 +35,8 @@ ENABLE_OPENID_SIGNIN = false
 ENABLE_OPENID_SIGNUP = false
 
 [session]
-PROVIDER = "file"
+PROVIDER      = "file"
+COOKIE_SECURE = true
 
 [other]
 SHOW_FOOTER_BRANDING = true

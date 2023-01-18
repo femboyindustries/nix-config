@@ -24,12 +24,10 @@ in {
       gitea = {
         enable = true;
         package = pkgs.unstable.gitea;
-        disableRegistration = true;
         domain = cfg.domain;
         httpPort = cfg.port;
         rootUrl = "https://${cfg.domain}/";
         stateDir = "/var/lib/${cfg.domain}";
-        cookieSecure = true;
         appName = "Gitea: dark-firepit hosted Git";
         database = {
           type = "postgres";
