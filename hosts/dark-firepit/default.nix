@@ -456,6 +456,12 @@ in {
         enable = true;
         port = 1995;
       };
+
+      code-server = {
+        enable = true;
+        domain = "dev-firepit.oat.zone";
+        port = 4444;
+      };
     };
   };
 
