@@ -11,7 +11,7 @@ in {
       php = true;
       forceSSL = false;
     };
-  
+
     services = {
       nginx.virtualHosts.${domain} = {
         locations."/" = {
@@ -111,7 +111,7 @@ in {
               return 418;
             }
           '';
-        };       
+        };
 
         extraConfig = ''
           types {

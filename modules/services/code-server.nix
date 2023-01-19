@@ -29,7 +29,7 @@ in {
         # temporary; be sure to remove trailing newline
         hashedPassword = builtins.readFile /etc/code-server-password;
 
-        extraPackages = with pkgs; [ git nix ];
+        extraPackages = with pkgs; [ git nix nixpkgs-fmt ];
       };
 
       nginx.virtualHosts."${cfg.domain}" = {
@@ -52,7 +52,7 @@ in {
         };
       };
     };
-    
+
     users.users.code-server = {
       extraGroups = [ "nix-users" "dotfiles" ];
       shell = pkgs.unstable.fish;
