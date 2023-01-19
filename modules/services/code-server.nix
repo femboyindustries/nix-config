@@ -29,7 +29,7 @@ in {
         # temporary; be sure to remove trailing newline
         hashedPassword = builtins.readFile /etc/code-server-password;
 
-        extraPackages = with pkgs; [ git ];
+        extraPackages = with pkgs; [ git nix ];
       };
 
       nginx.virtualHosts."${cfg.domain}" = {
