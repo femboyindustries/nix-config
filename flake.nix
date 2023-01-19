@@ -50,9 +50,11 @@
       url = "github:hyprwm/hyprpicker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
     let
       system = "x86_64-linux";
 
@@ -75,6 +77,7 @@
       overlays = mapModules ./overlays import;
       nixosModules = (mapModulesRec ./modules import) ++ [
         hyprland.nixosModules.default
+        vscode-server.nixosModule
       ];
       nixosConfigurations = mapModules ./hosts (host: mkHost host { inherit system; });
       devShell."${system}" = import ./shell.nix { inherit pkgs; };

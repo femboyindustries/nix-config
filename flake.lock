@@ -358,6 +358,20 @@
     },
     "nixpkgs_4": {
       "locked": {
+        "lastModified": 1655361562,
+        "narHash": "sha256-chPaIIhmdL6jdZWpf/K6yQCsuBNOYuMqbJsNpLfrdTE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0b59d075675dc28bf9ebab466033280096c8d4fe",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
         "lastModified": 1659219666,
         "narHash": "sha256-pzYr5fokQPHv7CmUXioOhhzDy/XyWOIXP4LZvv/T7Mk=",
         "owner": "NixOS",
@@ -371,7 +385,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1659102345,
         "narHash": "sha256-Vbzlz254EMZvn28BhpN8JOi5EuKqnHZ3ujFYgFcSGvk=",
@@ -434,13 +448,14 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "vscode-server": "vscode-server",
         "watch-party": "watch-party"
       }
     },
     "rust-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1659179790,
@@ -456,10 +471,28 @@
         "type": "github"
       }
     },
+    "vscode-server": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1662442857,
+        "narHash": "sha256-e2ex4mO4q6UBoJvPSRdYBX1vIvpulqs6SNxvdSsL6uE=",
+        "owner": "msteen",
+        "repo": "nixos-vscode-server",
+        "rev": "c54b714db58ad05d064f394d6603751ee6bd04f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msteen",
+        "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    },
     "watch-party": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "rust-overlay": "rust-overlay"
       },
       "locked": {

@@ -110,6 +110,8 @@ in {
     variant = "qwerty";
   };
 
+  services.vscode-server.enable = true;
+
   modules = {
     shell.fish.enable = true;
     security.isLocalMachine = false;
