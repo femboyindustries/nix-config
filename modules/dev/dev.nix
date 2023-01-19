@@ -5,7 +5,7 @@ with lib;
   config = {
     environment.systemPackages = with pkgs; [
       valgrind
-      nix-linter
+#      nix-linter
     ];
   };
 }

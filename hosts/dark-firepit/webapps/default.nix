@@ -29,11 +29,6 @@ in {
           domain = "matrix.dark-firepit.cloud";
         };
 
-        glitch-soc = {
-          enable = true;
-          domain = "feditest.oat.zone";
-        };
-
         vaultwarden = {
           enable = true;
           domain = "vault.aether.gay";

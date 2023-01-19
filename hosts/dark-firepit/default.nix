@@ -33,7 +33,7 @@ in {
     # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
       conf = {
-        packages = with pkgs; [ bat duf broot nftables tmux bottom writefreely ];
+        packages = with pkgs; [ bat duf broot nftables tmux bottom writefreely helix ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
@@ -54,7 +54,7 @@ in {
     # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
-        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep _.glitch-soc ];
+        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
