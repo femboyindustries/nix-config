@@ -11,6 +11,7 @@ in {
       type = types.bool;
       default = false;
     };
+    package = pkgs.unstable.nitter;
     domain = mkOption {
       type = types.str;
       default = "nitter.oat.zone";
