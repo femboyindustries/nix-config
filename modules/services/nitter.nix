@@ -11,7 +11,6 @@ in {
       type = types.bool;
       default = false;
     };
-    package = pkgs.unstable.nitter;
     domain = mkOption {
       type = types.str;
       default = "nitter.oat.zone";
@@ -34,6 +33,7 @@ in {
     services = {
       nitter = {
         enable = true;
+        package = pkgs.unstable.nitter;
         server = {
           address = "127.0.0.1";
           port = cfg.port;
