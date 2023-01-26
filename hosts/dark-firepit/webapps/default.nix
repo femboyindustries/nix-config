@@ -89,7 +89,7 @@ in {
         };
 
         isso = {
-          enable = true;
+          enable = false;
           port = 1995;
         };
 
