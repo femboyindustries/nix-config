@@ -22,6 +22,15 @@
   nix.settings.cores = 3;
   nix.settings.max-jobs = 6;
 
+  # disabling this is what's considered a "Bad Idea"
+  # however it is required by packages/ghost.nix, which
+  # is borrowed from https://notes.abhinavsarkar.net/2022/ghost-on-nixos
+  #
+  # i don't know of a cleaner way to do this, and i
+  # don't want to deal with ghost any longer than i
+  # already have, so This Will Do
+  nix.settings.sandbox = false;
+
   modules.hardware.fs = {
     enable = true;
     ssd.enable = true;

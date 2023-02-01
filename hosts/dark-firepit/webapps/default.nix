@@ -98,6 +98,12 @@ in {
           domain = "dev-firepit.oat.zone";
           port = 4444;
         };
+
+        ghost = {
+          enable = true;
+          domain = "blog.oat.zone";
+          port = 1357;
+        };
       };
     };
 
