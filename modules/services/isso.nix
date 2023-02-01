@@ -13,9 +13,17 @@ in {
       type = types.str;
       default = "comments.oat.zone";
     };
+    target = mkOption {
+      type = types.str;
+      default = "blog.oat.zone";
+    };
     port = mkOption {
       type = types.port;
       default = 1550;
+    };
+    dataDir = mkOption {
+      type = types.str;
+      default = "/var/lib/isso";
     };
   };
 
@@ -25,13 +33,14 @@ in {
         enable = true;
         settings = {
           general = {
-            host = "https://blog.oat.zone/";
+            dbpath = "${cfg.dataDir}/comments.db";
+            host = "https://${cfg.target}";
             latest-enabled = true;
           };
           server = {
             listen = "http://localhost:${toString cfg.port}";
             samesite = "Lax";
-            public-endpoint = "https://comments.oat.zone";
+            public-endpoint = "https://${cfg.domain}";
           };
           guard = {
             enabled = true;
@@ -40,7 +49,7 @@ in {
           };
           admin = {
             enabled = true;
-            password = "a8UYAH7jQQC3LjnG";
+            password = removeSuffix "\n" (builtins.readFile /etc/isso_admin_pass);
           };
         };
       };
@@ -58,6 +67,16 @@ in {
           '';
         };
       };
+    };
+
+    systemd.services.isso.serviceConfig = {
+      preStart = ''
+        umask u=rwx,g=rwx,o=rx
+        mkdir -p ${cfg.dataDir}
+        cd ${cfg.dataDir}
+        ${pkgs.coreutils}/bin/chown -R isso:isso .
+        ${pkgs.coreutils}/bin/chmod -R 775 .
+      '';
     };
   };
 }

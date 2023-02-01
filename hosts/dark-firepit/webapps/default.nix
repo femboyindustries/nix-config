@@ -88,11 +88,6 @@ in {
           enable = true;
         };
 
-        isso = {
-          enable = false;
-          port = 1995;
-        };
-
         code-server = {
           enable = true;
           domain = "dev-firepit.oat.zone";
@@ -103,6 +98,13 @@ in {
           enable = true;
           domain = "blog.oat.zone";
           port = 1357;
+        };
+
+        isso = {
+          enable = true;
+          port = 1995;
+          domain = "comments.oat.zone";
+          target = "blog.oat.zone";
         };
       };
     };

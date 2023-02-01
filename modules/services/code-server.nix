@@ -26,8 +26,8 @@ in {
         port = cfg.port;
         # temporary
         auth = "password";
-        # temporary; be sure to remove trailing newline
-        hashedPassword = builtins.readFile /etc/code-server-password;
+        # temporary
+        hashedPassword = removeSuffix "\n" (builtins.readFile /etc/code-server-password);
 
         extraPackages = with pkgs; [ git nix nixpkgs-fmt ];
       };
