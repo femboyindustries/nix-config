@@ -71,7 +71,7 @@ in {
         };
       };
     };
-
+    # i yearn for the day this name ceases to mean
     mayflower = {
       conf = {
         packages = with pkgs; [ micro tmux ];
