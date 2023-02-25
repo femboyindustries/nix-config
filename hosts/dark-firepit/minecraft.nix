@@ -98,6 +98,58 @@ in {
           package = pkgs.minecraftServers.fabric-1_19_2;
           jvmOpts = "-Xmx4G";
         };
+        "wafflecraft" = let
+          packURL = "https://oat.zone/f/wafflecraft/pack.toml";
+
+          # https://git.sleeping.town/unascribed/unsup/releases
+          unsup = pkgs.fetchurl {
+            url = "https://git.sleeping.town/attachments/c521d178-8938-40a5-b21b-0333eef4099e";
+            sha256 = "c5bd49784392b651e4bc71fe57976f5b4fb14f09e0e23183ae5b94a821ae4756";
+          };
+          unsupIni = ''
+            version=1
+            preset=minecraft
+
+            source_format=packwiz
+            source=${packURL}
+
+            force_env=server
+            no_gui=true
+
+            [flavors]
+            shaders=no_shaders
+          '';
+        in {
+          enable = true;
+          autoStart = true;
+          openFirewall = true;
+          serverProperties = {
+            server-port = 25535;
+            gamemode = 1;
+            motd = "wafflecraft Real";
+            max-players = 32;
+            allow-flight = true;
+            enable-command-block = false;
+            enforce-secure-profile = false;
+            snooper-enabled = false;
+            spawn-protection = 0;
+            white-list = true;
+            view-distance = 16;
+          };
+          whitelist = {
+            oatmealine =     "241d7103-4c9d-4c45-9464-83b5365ce48e";
+          };
+          symlinks = {
+            "unsup.ini" = pkgs.writeTextFile {
+              name = "unsup.ini";
+              text = unsupIni;
+            };
+          };
+          # this is UGLY as FUCK; but unfortunately https://github.com/Infinidoge/nix-minecraft/issues/15
+          package = pkgs.jdk17;
+          jvmOpts = "-Xmx4G -javaagent:${unsup} "
+            + lib.replaceStrings ["\n"] [" "] (lib.readFile "/srv/minecraft/wafflecraft/libraries/net/minecraftforge/forge/1.18.2-40.2.1/unix_args.txt");
+        };
       };
     };
 
