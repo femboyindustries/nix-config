@@ -20,8 +20,11 @@ in {
   config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      passwordAuthentication = cfg.requirePassword;
-      permitRootLogin = "no";
+
+      settings = {
+        PasswordAuthentication = cfg.requirePassword;
+        PermitRootLogin = "no";
+      };
     };
     programs.gnupg.agent = {
       enable = true;
