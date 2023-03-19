@@ -1,9 +1,13 @@
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, options, lib, inputs, ... }:
 
 with lib;
 let
   cfg = config.modules.hyprland;
 in {
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
+
   options.modules.hyprland = {
     enable = mkOption {
       type = types.bool;
@@ -12,15 +16,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    #programs.hyprland = {
-    #  enable = true;
-    #};
+    programs.hyprland = {
+      enable = true;
+    };
     # this was failing to build so i removed it. sorry!!!!!!
     # -oat
     # look outside your window!!!
     # -aether
     # ok done              (i removed it again)
     # -oat
+    # Do not trust the [Flower].
+    # -aether
 
     user.packages = with pkgs; [
       grim

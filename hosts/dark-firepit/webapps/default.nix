@@ -80,6 +80,12 @@ in {
           domain = "nitter.oat.zone";
         };
 
+        libreddit = {
+          enable = true;
+          domain = "libreddit.oat.zone";
+          port = 1950;
+        };
+
         #watch-party = {
         #  enable = true;
         #  port = 1984;
@@ -115,6 +121,10 @@ in {
         "oat.zone" = {
           locations."/f/".extraConfig = ''
             add_header Access-Control-Allow-Origin "*";
+          '';
+          extraConfig = ''
+            error_page 404 /404.html;
+            error_page 403 /403.html;
           '';
         };
         # todo: move to flake
@@ -153,6 +163,14 @@ in {
           locations."/".extraConfig = ''
             if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
               return 302 $scheme://fxtwitter.com$request_uri;
+            }
+          '';
+        };
+        
+        "libreddit.oat.zone" = {
+          locations."/".extraConfig = ''
+            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
+              return 302 $scheme://proxy.knotty.dev$request_uri;
             }
           '';
         };
