@@ -40,6 +40,7 @@ in {
         openssh.authorizedKeys.keys = fetchSSHKeys [
           "aether@subsurface"
           "aether@phone"
+          "aether@Aethers-Mini.station"
         ];
       };
 
