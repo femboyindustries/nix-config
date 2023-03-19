@@ -17,7 +17,7 @@
 
 let
 
-releaseTag = "v1.5";
+releaseTag = "v1.6";
 
 assets = fetchurl {
   url = "https://github.com/STJr/Kart-Public/releases/download/${releaseTag}/AssetsLinuxOnly.zip";
@@ -26,14 +26,14 @@ assets = fetchurl {
 
 in stdenv.mkDerivation rec {
   pname = "srb2kart";
-  version = "1.5.0";
+  version = "1.6.0";
 
   src = fetchFromGitLab {
     owner = "KartKrew";
     repo = "Kart-Public";
     domain = "git.do.srb2.org";
-    rev = "a69b3b0260665b8b0acac950a808a68e5a40894c";
-    sha256 = "sha256-pWnCvBb+XkUjCVmlT3MgqPWICaERFO0POFAItIyA6Ns=";
+    rev = "024a140e8d8a1f86ccf16ef3dd93e3bccbe3bd73";
+    sha256 = "sha256-5sIHdeenWZjczyYM2q+F8Y1SyLqL+y77yxYDUM3dVA0=";
   };
 
   nativeBuildInputs = [
