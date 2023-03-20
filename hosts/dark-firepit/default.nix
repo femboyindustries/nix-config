@@ -164,6 +164,56 @@ in {
         autoCreatedWorldSize = "large";
         dataDir = "/var/lib/terraria";
       };
+
+      jmusicbot = let
+        baseOptions = {
+          owner = 276416332894044160;
+          game = "Listening to your heartbeat :heart";
+          status = "ONLINE";
+          songinstatus = true;
+
+          success = "<:observer:1004408859831586907>";
+          warning = "<:slugclose:1000202980403974144>";
+          error = "🚫!!!!! 🚫🚫🚫 >:((((";
+          loading = "<:handsl:966010145698086993><:handsr:966010145886830692>";
+          searching = "<:scripulous_fingore_point:1012777703323222087><:scripulous_fingore:1012777704455667754>";
+
+          npimages = true;
+          stayinchannel = true;
+
+          aliases = {
+            nowplaying = [ "np" "current" ];
+            play = [ "p" ];
+            queue = [ "list" "q" ];
+            remove = [ "delete" "d" ];
+            skip = [ "s" ];
+            forceskip = [ "fs" ];
+            movetrack = [ "move" "m" ];
+          };
+        };
+      in {
+        enable = true;
+        instances = {
+          "jomble" = {
+            enable = true;
+            package = pkgs.unstable.jmusicbot;
+
+            options = baseOptions // {
+              token = lib.removeSuffix "\n" (builtins.readFile /etc/jomble_token);
+              prefix = ";";
+            };
+          };
+          "jillo" = {
+            enable = true;
+            package = lib.trace "${pkgs.unstable.jmusicbot.version}" pkgs.unstable.jmusicbot;
+            
+            options = baseOptions // {
+              token = lib.removeSuffix "\n" (builtins.readFile /etc/jillo_token);
+              prefix = ":";
+            };
+          };
+        };
+      };
     };
   };
 
