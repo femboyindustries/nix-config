@@ -17,13 +17,17 @@ in {
       type = types.int;
       default = 3000;
     };
+    package = mkOption {
+      type = types.package;
+      default = pkgs.unstable.forgejo;
+    };
   };
 
   config = mkIf cfg.enable {
     services = {
       gitea = {
         enable = true;
-        package = pkgs.unstable.forgejo;
+        package = cfg.package;
         domain = cfg.domain;
         httpPort = cfg.port;
         rootUrl = "https://${cfg.domain}/";
