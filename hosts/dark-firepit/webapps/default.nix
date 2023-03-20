@@ -18,7 +18,7 @@ in {
         #  domain = "blog.dark-firepit.cloud";
         #};
 
-        gitea = {
+        forgejo = {
           enable = true;
           domain = "git.oat.zone";
           port = 3000;

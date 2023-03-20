@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.services.gitea;
+  cfg = config.modules.services.forgejo;
 in {
-  options.modules.services.gitea = {
+  options.modules.services.forgejo = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -23,17 +23,17 @@ in {
     services = {
       gitea = {
         enable = true;
-        package = pkgs.unstable.gitea;
+        package = pkgs.unstable.forgejo;
         domain = cfg.domain;
         httpPort = cfg.port;
         rootUrl = "https://${cfg.domain}/";
         stateDir = "/var/lib/${cfg.domain}";
-        appName = "Gitea: dark-firepit hosted Git";
+        appName = "Forgejo: dark-firepit hosted Git";
         database = {
           type = "postgres";
           name = "gitea";
         };
-        settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/gitea/app.toml")) {
+        settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/forgejo/app.toml")) {
           "ui.meta" = {
             AUTHOR = "aether & oat";
             DESCRIPTION = "dark-firepit's shared git instance";

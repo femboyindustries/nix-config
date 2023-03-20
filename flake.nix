@@ -2,7 +2,8 @@
   description = "Frosted Flakes";
 
   inputs = {
-    # temporary gitea workaround
+    # temporary forgejo workaround
+    # TODO: remove when https://github.com/NixOS/nixpkgs/pull/218269 gets pushed to stable
     #nixpkgs.url = "nixpkgs/nixos-22.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
