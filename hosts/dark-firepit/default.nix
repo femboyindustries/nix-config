@@ -150,11 +150,6 @@ in {
         interfaces."wg0" = import ./wireguardInterface.nix;
       };
 
-      jillo = {
-        enable = false;
-        dataDir = "/var/lib/jillo";
-      };
-
       terraria = {
         enable = false;
         port = 7777; # port-forwarded
@@ -205,7 +200,7 @@ in {
           };
           "jillo" = {
             enable = true;
-            package = lib.trace "${pkgs.unstable.jmusicbot.version}" pkgs.unstable.jmusicbot;
+            package = pkgs.unstable.jmusicbot;
             
             options = baseOptions // {
               token = lib.removeSuffix "\n" (builtins.readFile /etc/jillo_token);

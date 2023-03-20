@@ -39,7 +39,7 @@ in {
         #add_header Content-Security-Policy "script-src 'self'; object-src 'none'; base-uri 'none';" always;
 
         # Minimize information leaked to other domains
-        #add_header 'Referrer-Policy' 'origin-when-cross-origin';
+        add_header 'Referrer-Policy' 'origin-when-cross-origin';
 
         # Disable embedding as a frame
         #add_header X-Frame-Options DENY;
