@@ -4,10 +4,6 @@ with lib;
 let
   cfg = config.modules.hyprland;
 in {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
-
   options.modules.hyprland = {
     enable = mkOption {
       type = types.bool;
@@ -15,6 +11,7 @@ in {
     };
   };
 
+/*
   config = mkIf cfg.enable {
     programs.hyprland = {
       enable = true;
@@ -128,4 +125,5 @@ in {
       '';
     };
   };
+*/
 }

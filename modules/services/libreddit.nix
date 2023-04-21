@@ -19,6 +19,7 @@ in {
     };
   };
 
+/*
   config = mkIf cfg.enable {
     services = {
       libreddit = {
@@ -37,4 +38,5 @@ in {
       };
     };
   };
+*/
 }

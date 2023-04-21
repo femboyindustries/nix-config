@@ -11,6 +11,7 @@ in {
       default = false;
       description = "Provide system SSH support though OpenSSH.";
     };
+
     requirePassword = mkOption {
       type = types.bool;
       default = true;
@@ -21,10 +22,14 @@ in {
     services.openssh = {
       enable = true;
 
+      permitRootLogin = "no";
+      passwordAuthentication = cfg.requirePassword;
+/*
       settings = {
         PasswordAuthentication = cfg.requirePassword;
         PermitRootLogin = "no";
       };
+*/
     };
     programs.gnupg.agent = {
       enable = true;

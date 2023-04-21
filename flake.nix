@@ -4,13 +4,13 @@
   inputs = {
     # temporary forgejo workaround
     # TODO: remove when https://github.com/NixOS/nixpkgs/pull/218269 gets pushed to stable
-    #nixpkgs.url = "nixpkgs/nixos-22.05";
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-22.11";
+    #nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # agenix - age-encrypted secrets
@@ -52,7 +52,7 @@
     vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, hyprland, hyprpaper, hyprpicker, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, /* hyprland, hyprpaper, hyprpicker, */ ... }:
     let
       system = "x86_64-linux";
 
@@ -74,7 +74,7 @@
       };
       overlays = mapModules ./overlays import;
       nixosModules = (mapModulesRec ./modules import) ++ [
-        hyprland.nixosModules.default
+#        hyprland.nixosModules.default
         vscode-server.nixosModule
       ];
       nixosConfigurations = mapModules ./hosts (host: mkHost host { inherit system; });
