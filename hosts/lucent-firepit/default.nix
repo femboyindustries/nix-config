@@ -233,7 +233,7 @@ in {
     # https://nixos.org/manual/nixos/stable/options.html#opt-networking.enableB43Firmware
 
     # temporarily disabled
-    enableIPv6 = true;
+    enableIPv6 = false;
 
     usePredictableInterfaceNames = false;
     interfaces.eth0.ipv4.addresses = [

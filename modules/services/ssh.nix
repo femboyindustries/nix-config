@@ -22,15 +22,12 @@ in {
     services.openssh = {
       enable = true;
 
-      permitRootLogin = "no";
-      passwordAuthentication = cfg.requirePassword;
-/*
       settings = {
         PasswordAuthentication = cfg.requirePassword;
         PermitRootLogin = "no";
       };
-*/
     };
+
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
