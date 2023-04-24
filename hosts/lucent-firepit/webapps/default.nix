@@ -18,21 +18,21 @@ in {
         #  domain = "blog.dark-firepit.cloud";
         #};
 
-        /*forgejo = {
+        forgejo = {
           enable = true;
           domain = "git.oat.zone";
           port = 3000;
-        };*/
+        };
 
-        /*matrix.conduit = {
+        matrix.conduit = {
           enable = false;
           domain = "matrix.dark-firepit.cloud";
-        };*/
+        };
 
-        /*vaultwarden = {
+        vaultwarden = {
           enable = true;
           domain = "vault.aether.gay";
-        };*/
+        };
 
         # not entirely necessary but makes it so that invalid domains and/or direct ip access aborts connection
         # prevents other domains from "stealing" content by settings their dns to our ip
@@ -43,7 +43,7 @@ in {
         };
 
         staticSites = {
-          /*"aether.gay".dataDir = "/var/www/aether.gay";
+          "aether.gay".dataDir = "/var/www/aether.gay";
           "dark-firepit.cloud".dataDir = "/var/www/dark-firepit.cloud";
           #"dark-firepit.oat.zone".dataDir = "/var/www/dark-firepit.oat.zone";
           "va11halla.oat.zone".dataDir = "/var/www/va11halla.oat.zone";
@@ -51,10 +51,10 @@ in {
           "modfiles.oat.zone".dataDir = "/var/www/modfiles.oat.zone";
           "shop.yugoslavia.best".dataDir = "/var/www/shop.yugoslavia.best";
           "tesco-underground-dev.oat.zone".dataDir = "/var/www/tesco-underground-dev.oat.zone";
-          "tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };*/
+          "tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };
           "oat.zone".dataDir = "/var/www/oat.zone";
           "oat.zone".php = true;
-          /*"yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
+          "yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
           "yugoslavia.fishing".php = true;
           "educationmath.oat.zone".dataDir = "/var/www/proxy.oat.zone";
           "educationmath.oat.zone".php = true;
@@ -70,10 +70,10 @@ in {
           "mayf.pink".phpHandlePathing = true;
           "mayf.pink".forceSSL = false;
           "wint0r.zone".dataDir = "/var/www/wint0r.zone";
-          "puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";*/
+          "puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";
         };
 
-        /*nitter = {
+        nitter = {
           enable = true;
           lightweight = false; # enable if shit gets wild; check config for more info
           port = 3005;
@@ -84,14 +84,14 @@ in {
           enable = true;
           domain = "libreddit.oat.zone";
           port = 1950;
-        };*/
+        };
 
         #watch-party = {
         #  enable = true;
         #  port = 1984;
         #};
 
-        /*matomo = {
+        matomo = {
           enable = true;
         };
 
@@ -112,7 +112,7 @@ in {
           port = 1995;
           domain = "comments.oat.zone";
           target = "blog.oat.zone";
-        };*/
+        };
       };
     };
 
@@ -126,7 +126,7 @@ in {
             error_page 404 /404.html;
             error_page 403 /403.html;
           '';
-        };/*
+        };
         # todo: move to flake
         "gdpstest.oat.zone" = {
           enableACME = true;
@@ -173,7 +173,7 @@ in {
               return 302 $scheme://proxy.knotty.dev$request_uri;
             }
           '';
-        };*/
+        };
 
         #"git.oat.zone" = {
         #  forceSSL = true;

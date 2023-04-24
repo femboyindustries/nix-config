@@ -2,6 +2,17 @@
 
 with lib;
 let
+  darkFirepitWhitelist = {
+    oatmealine      = "241d7103-4c9d-4c45-9464-83b5365ce48e";
+    RustyMyHabibi   = "e20305fa-a44c-44c9-b62e-6918e7c779d6";
+    Dj_Afganistan   = "1f879917-1ad4-49c3-9908-90769ee73f85";
+    DumbDogDoodles  = "d33e5e3b-85ab-4c93-a61b-605e2673fbe8";
+    SuneFoxie       = "82e82ef9-ea17-4794-9051-928b5b8629c1";
+    FuzziestRedMoth = "21e1adf8-93f7-4173-a087-b3a9c02edec5";
+    hewoicvewse     = "98e715cf-b1a4-4d50-9ed0-7d20fbdf240e";
+    numpad_7        = "44e6e6d7-770d-4afc-96b1-9999b61ced1d";
+    _Zydra          = "0af7b31f-63a5-426d-8cee-6c54385856b6";
+  };
 in {
   config = {
     modules.services.minecraft = {
@@ -24,16 +35,53 @@ in {
             snooper-enabled = false;
             spawn-protection = 0;
           };
-          whitelist = {
-            oatmealine      = "241d7103-4c9d-4c45-9464-83b5365ce48e";
-            RustyMyHabibi   = "e20305fa-a44c-44c9-b62e-6918e7c779d6";
-            Dj_Afganistan   = "1f879917-1ad4-49c3-9908-90769ee73f85";
-            DumbDogDoodles  = "d33e5e3b-85ab-4c93-a61b-605e2673fbe8";
-            SuneFoxie       = "82e82ef9-ea17-4794-9051-928b5b8629c1";
-            FuzziestRedMoth = "21e1adf8-93f7-4173-a087-b3a9c02edec5";
-          };
+          whitelist = darkFirepitWhitelist;
           package = pkgs.minecraftServers.fabric-1_19_2;
           jvmOpts = "-Xmx6G";
+        };
+        "gayrats" = let
+          packURL = "https://oat.zone/f/gayrats/pack.toml";
+
+          # https://git.sleeping.town/unascribed/unsup/releases
+          unsup = pkgs.fetchurl {
+            url = "https://git.sleeping.town/attachments/c521d178-8938-40a5-b21b-0333eef4099e";
+            sha256 = "c5bd49784392b651e4bc71fe57976f5b4fb14f09e0e23183ae5b94a821ae4756";
+          };
+          unsupIni = ''
+            version=1
+            preset=minecraft
+
+            source_format=packwiz
+            source=${packURL}
+
+            force_env=server
+            no_gui=true
+          '';
+        in {
+          enable = true;
+          autoStart = true;
+          openFirewall = true;
+          serverProperties = {
+            server-port = 25565;
+            gamemode = 0;
+            motd = "dark-firepit, 1.19.2 Fabric";
+            white-list = true;
+            max-players = 8;
+            allow-flight = true;
+            enable-command-block = true;
+            enforce-secure-profile = false;
+            snooper-enabled = false;
+            spawn-protection = 0;
+          };
+          symlinks = {
+            "unsup.ini" = pkgs.writeTextFile {
+              name = "unsup.ini";
+              text = unsupIni;
+            };
+          };
+          whitelist = darkFirepitWhitelist;
+          package = pkgs.minecraftServers.fabric-1_19_2;
+          jvmOpts = "-Xmx6G -javaagent:${unsup}";
         };
         "n3ko-test" = {
           enable = true;
@@ -79,6 +127,8 @@ in {
 
             [flavors]
             shaders=no_shaders
+            minimap=no_minimap
+            barrel_roll=no_barrel_roll
           '';
         in {
           enable = true;
@@ -86,7 +136,7 @@ in {
           openFirewall = true;
           serverProperties = {
             server-port = 25535;
-            gamemode = 1;
+            gamemode = "survival";
             motd = "wafflecraft Real";
             max-players = 32;
             allow-flight = true;
@@ -106,7 +156,13 @@ in {
             Tetaes =         "4b149260-d56e-4835-b3f6-2dce173a92a5";
             sorae_ =         "9639d272-4c20-459d-adea-4aa89ee3cdc1";
             GelloISMello =   "a2883a99-fe5d-454d-98b9-d65e4cec7e7e";
-            triplej2000 =    "8441715c-6aef-497c-9a43-cbcfce887219";
+            Triplejy2k =     "dced0fad-3802-4544-aaad-64d8fd12b1e8";
+            RAKKIIsan =      "0706e583-82e3-478c-8769-1131fb9aef5d";
+            CyberBlue =      "151bea19-3d16-45eb-8ae3-3057cde8e8f4";
+            numpad_7 =       "44e6e6d7-770d-4afc-96b1-9999b61ced1d";
+            CERiNG =         "8dd710ce-fd30-45a5-9252-739d3c03df19";
+            electr1ca =      "c18dcc3b-6c11-42e9-b7d8-4b458ea7017d";
+            bigboyty69 =     "ed735421-c22b-467a-9eac-5c08437ea3e8";
           };
           symlinks = {
             "unsup.ini" = pkgs.writeTextFile {

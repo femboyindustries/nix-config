@@ -21,7 +21,7 @@ releaseTag = "v1.6";
 
 assets = fetchurl {
   url = "https://github.com/STJr/Kart-Public/releases/download/${releaseTag}/AssetsLinuxOnly.zip";
-  sha256 = "sha256-A4HkxnDGQICucsJyHXYc5GCRbMP0M4NjreohhFOQarA=";
+  sha256 = "sha256-ejhPuZ1C8M9B0S4+2HN1T5pbormT1eVL3nlivqOszdE=";
 };
 
 in stdenv.mkDerivation rec {
@@ -32,7 +32,7 @@ in stdenv.mkDerivation rec {
     owner = "KartKrew";
     repo = "Kart-Public";
     domain = "git.do.srb2.org";
-    rev = "024a140e8d8a1f86ccf16ef3dd93e3bccbe3bd73";
+    rev = "v1.6";
     sha256 = "sha256-5sIHdeenWZjczyYM2q+F8Y1SyLqL+y77yxYDUM3dVA0=";
   };
 

@@ -29,7 +29,7 @@
   # i don't know of a cleaner way to do this, and i
   # don't want to deal with ghost any longer than i
   # already have, so This Will Do
-  #nix.settings.sandbox = false;
+  nix.settings.sandbox = false;
 
   modules.hardware.fs = {
     enable = true;
