@@ -4,6 +4,12 @@ with lib;
 let
 in {
   config = {
+    services.cohost-blogger = {
+      enable = true;
+      domain = "blog.oat.zone";
+      port = 3500;
+    };
+  
     modules = {
       services = {
         #nextcloud = {
@@ -54,6 +60,7 @@ in {
           "tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };
           "oat.zone".dataDir = "/var/www/oat.zone";
           "oat.zone".php = true;
+          #"beta-blog.oat.zone".dataDir = "/var/www/beta.blog.oat.zone";
           "yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
           "yugoslavia.fishing".php = true;
           "educationmath.oat.zone".dataDir = "/var/www/proxy.oat.zone";
@@ -101,11 +108,13 @@ in {
           port = 4444;
         };
 
+        /*
         ghost = {
           enable = true;
           domain = "blog.oat.zone";
           port = 1357;
         };
+        */
 
         isso = {
           enable = true;
