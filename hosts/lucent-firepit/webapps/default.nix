@@ -168,22 +168,6 @@ in {
           '';
         };
 
-        "nitter.oat.zone" = {
-          locations."/".extraConfig = ''
-            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
-              return 302 $scheme://fxtwitter.com$request_uri;
-            }
-          '';
-        };
-        
-        "libreddit.oat.zone" = {
-          locations."/".extraConfig = ''
-            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
-              return 302 $scheme://proxy.knotty.dev$request_uri;
-            }
-          '';
-        };
-
         #"git.oat.zone" = {
         #  forceSSL = true;
         #  enableACME = true;

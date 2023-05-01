@@ -7,13 +7,14 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
-    ./minecraft.nix
+    ./minecraft
     ./srb2k.nix
     ./yugoslavia-best.nix
     ./webapps/default.nix
     inputs.nix-minecraft.nixosModules.minecraft-servers
     #inputs.watch-party.nixosModules.watch-party
     (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
+    inputs.cohost-blogger.nixosModules.cohost-blogger
   ];
 
 #  services.auto-fix-vscode-server.enable = true;
@@ -264,8 +265,8 @@ in {
 
     firewall.allowPing = true;
     # minecraft proximity voice chat
-    firewall.allowedTCPPorts = [ 24454 25567 4499 21025 ];
-    firewall.allowedUDPPorts = [ 24454 25567 4499 21025 ];
+    firewall.allowedTCPPorts = [ 24454 24464 25567 25577 4499 21025 ];
+    firewall.allowedUDPPorts = [ 24454 24464 25567 25577 4499 21025 ];
   };
 
 #  environment.etc."dhcpcd.duid".text = "d0:50:99:d4:04:68:d0:50:99:d4:04:68";

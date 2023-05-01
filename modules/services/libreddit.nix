@@ -19,7 +19,6 @@ in {
     };
   };
 
-/*
   config = mkIf cfg.enable {
     services = {
       libreddit = {
@@ -34,9 +33,13 @@ in {
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:${toString cfg.port}";
+          extraConfig = ''
+            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
+              return 302 $scheme://proxy.knotty.dev$request_uri;
+            }
+          '';
         };
       };
     };
   };
-*/
 }

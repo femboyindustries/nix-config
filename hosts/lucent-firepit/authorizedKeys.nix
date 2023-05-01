@@ -18,7 +18,7 @@
   }
   { hostname = "oatmealine@beppy-phone";
     ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUgEsAQ7EL5/3STLAk/0qWJddYqfBY71yS9RtRSWd3w JuiceSSH";
-    wg = "qT7gX8beM/kW9AYg5dV1e3cLzLDTLxMO2CmnbFpMVj4=";  
+    wg = "ubIo/l7llVx8HDIqcBPebPsneCBunZUM6cQS7SaXn2Y=";  
   }
   {	hostname = "oatmealine@dark-firepit";
   	ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKz3Zkhrht1EX32LIbkSvql1p15EXqxTy/4xQKlj0CUx oatmealine@disroot.org";

@@ -61,6 +61,10 @@ in {
             #add_header X-Content-Type-Options nosniff;
             #add_header X-Frame-Options DENY;
             #add_header X-XSS-Protection "1; mode=block";
+            
+            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
+              return 302 $scheme://fxtwitter.com$request_uri;
+            }
           '';
         };
         locations."= /robots.txt" = {

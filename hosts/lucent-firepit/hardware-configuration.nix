@@ -29,7 +29,10 @@
   # i don't know of a cleaner way to do this, and i
   # don't want to deal with ghost any longer than i
   # already have, so This Will Do
-  nix.settings.sandbox = false;
+  #
+  # edit: ghost is now dead! we're going back to true.
+  # rest in piss ghost, you will be forgotten
+  nix.settings.sandbox = true;
 
   modules.hardware.fs = {
     enable = true;
