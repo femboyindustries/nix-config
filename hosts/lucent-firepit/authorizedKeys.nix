@@ -36,4 +36,9 @@
   { hostname = "lilith@bms-cab";
     ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFb9uVy1x4XaO1uFOQBuERy6xw8cf7Dh24UT0jJs7g3z lilith@bms-cab";
   }
+
+  # marco
+  { hostname = "marco@the-flesh-portal";
+    wg = "mttUSatpYdEOmHqnzo7HdhuvTkMpz1Np8kMtsIz6nTY=";
+  }
 ]
