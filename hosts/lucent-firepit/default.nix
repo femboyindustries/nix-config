@@ -4,6 +4,8 @@ let
   keys = import ./authorizedKeys.nix;
   fetchSSH = (host: lib._.getSSH host keys);
   fetchSSHKeys = map fetchSSH;
+
+  agenixPkg = inputs.agenix.packages.${pkgs.system}.default;
 in {
   imports = [
     ./hardware-configuration.nix
@@ -56,7 +58,7 @@ in {
     # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
-        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep ];
+        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep agenixPkg ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
@@ -68,6 +70,7 @@ in {
 
       homeConf.home = {
         sessionVariables = {
+          #EDITOR = lib.trace (lib.readFile age.secrets.huge-furry-cock.path) "micro";
           EDITOR = "micro";
           NIX_REMOTE = "daemon";
         };

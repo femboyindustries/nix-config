@@ -8,17 +8,24 @@ let
   secretsDir = "${toString ../hosts}/${config.networking.hostName}/secrets";
   secretsFile = "${secretsDir}/secrets.nix";
 in {
-  imports = [ agenix.nixosModules.age ];
-  #environment.systemPackages = [ agenix.defaultPackage.x86_64-linux ];
+  imports = [ agenix.nixosModules.default ];
 
-  age = {
-    secrets = mkMerge (map (x: {"x".file = "${secretsDir}/${x}";}) (attrNames (import secretsFile)));
-    identityPaths = options.age.identityPaths.default ++ (foldr (l: r: l ++ r) [] (map (user:
+  age = let
+    # ugly, lazy, but works
+    users = map (user: "/home/${user}/.ssh") (attrNames (readDir "/home/"));
+
+    usersWithKeys = filter (path: pathExists path) users;
+
+    userIdentityPaths = concatLists (map (keysPath:
       let
-        d = "/home/${user}/.ssh";
-        fs = map (f: d + "/" + f)
-          (filter (f: (f != "known_hosts") && (f != "*.old"))
-            (attrNames (readDir d)));
-      in fs) (attrNames config.defaultUsers)));
+        # find all files that are id_* and not *.pub
+        # todo: maybe make a startsWith / endsWith?
+        files = map (f: keysPath + "/" + f)
+          (filter (f: (substring 0 3 f == "id_") && (substring (stringLength f - 4) 4 f != ".pub"))
+            (attrNames (readDir keysPath)));
+      in files) usersWithKeys);
+  in {
+    secrets = mkMerge (map (x: {"${x}".file = "${secretsDir}/${x}";}) (attrNames (import secretsFile)));
+    identityPaths = options.age.identityPaths.default ++ userIdentityPaths;
   };
 }
