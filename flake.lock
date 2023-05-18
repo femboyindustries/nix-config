@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1682879948,
-        "narHash": "sha256-NgBopIk1VmUzanIPSjuxLKE/aypv+c3Un3LXA9Br4R8=",
+        "lastModified": 1684380187,
+        "narHash": "sha256-/nwpAHkr5ZOny15TE8LSJsfRZMO6b6ca/RjKoQ7vLjA=",
         "ref": "refs/heads/main",
-        "rev": "f14813c88fcf33258def997d35476be87c89be7f",
-        "revCount": 4,
+        "rev": "9ebfff450e5694eafa3a32a9f1d261b3a878b7bf",
+        "revCount": 15,
         "type": "git",
         "url": "https://git.oat.zone/oat/cohost-blogger"
       },
