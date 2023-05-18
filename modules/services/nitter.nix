@@ -33,7 +33,7 @@ in {
     services = {
       nitter = {
         enable = true;
-        package = pkgs.unstable.nitter;
+        package = pkgs.nitter;
         server = {
           address = "127.0.0.1";
           port = cfg.port;
