@@ -1,23 +1,23 @@
 # Frosted Flakes
 
-Nix Flake dotfiles shared across a [few hosts](./hosts/). Most development here will go into the [`dark-firepit`](https://dark-firepit.cloud/) host, however.
+Nix Flake dotfiles shared across a [few hosts](./hosts/). Most development here will go into the [`lucent-firepit`](https://dark-firepit.cloud/) host, however.
 
 ## Development
 
-_Commands here will use `dark-firepit`-based paths and names as an example_
+_Commands here will use `lucent-firepit`-based paths and names as an example_
 
 - To build the system (doesn't apply changes):
     ```sh
-    nixos-rebuild build --upgrade --impure --flake /etc/dotfiles#dark-firepit
+    nixos-rebuild build --upgrade --impure --flake /etc/dotfiles#lucent-firepit
     ```
 - To build & switch to a new system (applies changes):
     ```sh
-    doas nixos-rebuild switch --impure --upgrade --flake /etc/dotfiles#dark-firepit
+    doas nixos-rebuild switch --impure --upgrade --flake /etc/dotfiles#lucent-firepit
     ```
 
-### `dark-firepit`
+### `lucent-firepit`
 
-Things here mostly only apply to the [`dark-firepit`](https://dark-firepit.cloud/) host.
+Things here mostly only apply to the [`lucent-firepit`](https://dark-firepit.cloud/) host.
 
 #### Adding modules
 
@@ -26,7 +26,7 @@ Generally when adding modules (even those pulled from `nixpkgs`) you'd want to:
 1. Create a new module under `modules/services/`; `gitea.nix` and `nitter.nix` are pretty okay examples of what to do
 2. **`git add .`** or else Nix will act clueless about everything you've just done
 3. Set it to enabled, set port, domain, etc. in `hosts/.../default.nix` or wherever else is more appropriate
-  - For webapps, follow what's done in `hosts/dark-firepit/webapps/default.nix`; if you're doing something bigger, it may be worth abstracting into a seperate file
+  - For webapps, follow what's done in `hosts/lucent-firepit/webapps/default.nix`; if you're doing something bigger, it may be worth abstracting into a seperate file
 4. Rebuild/switch to the new system (as described [above](#development))
 
 #### `yugoslavia-best.nix`
