@@ -29,6 +29,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    crystal-gauntlet = {
+      url = "git+https://git.oat.zone/oat/crystal-gauntlet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     cohost-blogger = {
       url = "git+https://git.oat.zone/oat/cohost-blogger";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,7 +62,7 @@
     vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, cohost-blogger, /* hyprland, hyprpaper, hyprpicker, */ ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, /* hyprland, hyprpaper, hyprpicker, */ ... }:
     let
       system = "x86_64-linux";
 

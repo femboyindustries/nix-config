@@ -9,6 +9,12 @@ in {
       domain = "blog.oat.zone";
       port = 3500;
     };
+
+    services.crystal-gauntlet = {
+      enable = true;
+      domain = "gdpstest.oat.zone";
+      port = 1982;
+    };
   
     modules = {
       services = {

@@ -17,6 +17,7 @@ in {
     #inputs.watch-party.nixosModules.watch-party
     (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
     inputs.cohost-blogger.nixosModules.cohost-blogger
+    inputs.crystal-gauntlet.nixosModules.crystal-gauntlet
   ];
 
 #  services.auto-fix-vscode-server.enable = true;
