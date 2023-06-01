@@ -28,9 +28,6 @@ in {
       gitea = {
         enable = true;
         package = cfg.package;
-        domain = cfg.domain;
-        httpPort = cfg.port;
-        rootUrl = "https://${cfg.domain}/";
         stateDir = "/var/lib/${cfg.domain}";
         appName = "Forgejo: dark-firepit hosted Git";
         database = {
@@ -41,6 +38,11 @@ in {
           "ui.meta" = {
             AUTHOR = "aether & oat";
             DESCRIPTION = "dark-firepit's shared git instance";
+          };
+          "server" = {
+            DOMAIN = cfg.domain;
+            HTTP_PORT = cfg.port;
+            ROOT_URL = "https://${cfg.domain}/";
           };
         }];
       };

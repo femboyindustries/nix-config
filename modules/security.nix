@@ -35,8 +35,8 @@ in {
       }
     ];
 
-    boot.tmpOnTmpfs = lib.mkDefault true;
-    boot.cleanTmpDir = lib.mkDefault (!config.boot.tmpOnTmpfs);
+    boot.tmp.useTmpfs = lib.mkDefault true;
+    boot.tmp.cleanOnBoot = lib.mkDefault (!config.boot.tmp.useTmpfs);
 
     security.rtkit.enable = true;
 
