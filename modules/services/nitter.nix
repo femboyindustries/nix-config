@@ -34,6 +34,9 @@ in {
       nitter = {
         enable = true;
         package = pkgs.nitter;
+        config = {
+          proxy = ""; # https://github.com/NixOS/nixpkgs/issues/235359
+        };
         server = {
           address = "127.0.0.1";
           port = cfg.port;

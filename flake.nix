@@ -2,62 +2,59 @@
   description = "Frosted Flakes";
 
   inputs = {
-    # temporary forgejo workaround
-    # TODO: remove when https://github.com/NixOS/nixpkgs/pull/218269 gets pushed to stable
-    #nixpkgs.url = "nixpkgs/nixos-22.05";
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-23.05";
 
     # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # agenix - age-encrypted secrets
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     cohost-blogger = {
       url = "git+https://git.oat.zone/oat/cohost-blogger";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpicker = {
       url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-server.url = "github:msteen/nixos-vscode-server";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, vscode-server, nix-minecraft, cohost-blogger, /* hyprland, hyprpaper, hyprpicker, */ ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-minecraft, cohost-blogger, /* hyprland, hyprpaper, hyprpicker, */ ... }:
     let
       system = "x86_64-linux";
 
@@ -80,7 +77,6 @@
       overlays = mapModules ./overlays import;
       nixosModules = (mapModulesRec ./modules import) ++ [
         #hyprland.nixosModules.default
-        vscode-server.nixosModule
       ];
       nixosConfigurations = mapModules ./hosts (host: mkHost host { inherit system; });
       devShell."${system}" = import ./shell.nix { inherit pkgs; };
