@@ -15,12 +15,11 @@ in {
     ./webapps/default.nix
     inputs.nix-minecraft.nixosModules.minecraft-servers
     #inputs.watch-party.nixosModules.watch-party
-    (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
     inputs.cohost-blogger.nixosModules.cohost-blogger
+    inputs.vscode-server.nixosModules.default
   ];
 
-#  services.auto-fix-vscode-server.enable = true;
-#  services.vscode-server.enable = true;
+  services.vscode-server.enable = true;
 
   user = {
     packages = with pkgs; [
@@ -119,8 +118,6 @@ in {
     locale = "en_US.UTF-8";
     variant = "qwerty";
   };
-
-  services.vscode-server.enable = true;
 
   modules = {
     shell.fish.enable = true;
