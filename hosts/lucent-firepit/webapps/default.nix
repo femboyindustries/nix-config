@@ -28,6 +28,7 @@ in {
           enable = true;
           domain = "git.oat.zone";
           port = 3000;
+          enableActions = true;
         };
 
         matrix.conduit = {

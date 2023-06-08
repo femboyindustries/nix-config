@@ -21,9 +21,15 @@ in {
       type = types.package;
       default = pkgs.unstable.forgejo;
     };
+    enableActions = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable {
+    virtualisation.docker.enable = cfg.enableActions;
+  
     services = {
       gitea = {
         enable = true;
@@ -44,7 +50,20 @@ in {
             HTTP_PORT = cfg.port;
             ROOT_URL = "https://${cfg.domain}/";
           };
+          "actions" = {
+            ENABLED = cfg.enableActions;
+          };
         }];
+      };
+
+      gitea-actions-runner = mkIf cfg.enableActions {
+        instances."#{config.networking.hostName}" = {
+          enable = true;
+          name = "ci";
+          url = "https://${cfg.domain}/";
+          labels = []; # use the packaged instance list
+          token = removeSuffix "\n" (builtins.readFile "/etc/forgejo-runner-token");
+        };
       };
 
       nginx.virtualHosts."${cfg.domain}" = {
