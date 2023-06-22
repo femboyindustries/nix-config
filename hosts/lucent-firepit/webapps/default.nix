@@ -69,9 +69,9 @@ in {
           "educationmath.oat.zone".auth = { twh = builtins.readFile /etc/proxy_twh; };
           "rivervalleychocolate.com".dataDir = "/var/www/rivervalleychocolate.com";
           "rivervalleychocolate.com".php = true;
-          "tac.yugoslavia.best".dataDir = "/var/www/tac.yugoslavia.best/public";
-          "tac.yugoslavia.best".php = true;
-          "tac.yugoslavia.best".phpHandlePathing = true;
+          #"tac.yugoslavia.best".dataDir = "/var/www/tac.yugoslavia.best/public";
+          #"tac.yugoslavia.best".php = true;
+          #"tac.yugoslavia.best".phpHandlePathing = true;
           "pjsk.oat.zone".dataDir = "/var/www/pjsk.oat.zone";
           "mayf.pink".dataDir = "/var/www/mayf.pink";
           "mayf.pink".php = true;
