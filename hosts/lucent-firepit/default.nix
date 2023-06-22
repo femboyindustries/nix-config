@@ -192,13 +192,15 @@ in {
             forceskip = [ "fs" ];
             movetrack = [ "move" "m" ];
           };
+          
+          queuetype = "REGULAR";
         };
       in {
         enable = true;
         instances = {
           "jomble" = {
             enable = true;
-            package = pkgs.unstable.jmusicbot;
+            package = pkgs._.gmusicbot;
 
             options = baseOptions // {
               token = lib.removeSuffix "\n" (builtins.readFile /etc/jomble_token);
@@ -207,7 +209,7 @@ in {
           };
           "jillo" = {
             enable = true;
-            package = pkgs.unstable.jmusicbot;
+            package = pkgs._.gmusicbot;
             
             options = baseOptions // {
               token = lib.removeSuffix "\n" (builtins.readFile /etc/jillo_token);

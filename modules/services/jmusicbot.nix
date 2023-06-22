@@ -270,6 +270,16 @@ in {
                   };
                 };
 
+                queuetype = mkOption {
+                  type = types.enum ["FAIR" "REGULAR"];
+                  description = ''
+                    Sets the queue type
+                    FAIR: Each user gets a fair chance at the queue by rearranging it such that no user can fill it up entirely
+                    REGULAR: Queue works as first-come, first-served
+                  '';
+                  default = "FAIR";
+                };
+
                 eval = mkOption {
                   type = types.bool;
                   description = ''
