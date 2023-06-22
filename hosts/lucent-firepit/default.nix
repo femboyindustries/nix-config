@@ -101,17 +101,17 @@ in {
       };
     };
 
-    winter = {
-      conf = {
-        packages = with pkgs; [ micro ];
-        shell = pkgs.unstable.fish;
-        extraGroups = [ "wheel" "nix-users" "dotfiles" ];
-        initialHashedPassword = "!";
-        openssh.authorizedKeys.keys = fetchSSHKeys [
-          "lilith@bms-cab"
-        ];
-      };
-    };
+    #winter = {
+    #  conf = {
+    #    packages = with pkgs; [ micro ];
+    #    shell = pkgs.unstable.fish;
+    #    extraGroups = [ "wheel" "nix-users" "dotfiles" ];
+    #    initialHashedPassword = "!";
+    #    openssh.authorizedKeys.keys = fetchSSHKeys [
+    #      "lilith@bms-cab"
+    #    ];
+    #  };
+    #};
   };
 
   keyboard = {
