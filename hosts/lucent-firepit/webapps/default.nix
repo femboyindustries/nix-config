@@ -76,9 +76,9 @@ in {
           "mayf.pink".dataDir = "/var/www/mayf.pink";
           "mayf.pink".php = true;
           "mayf.pink".phpHandlePathing = true;
-          "mayf.pink".forceSSL = false;
           #"wint0r.zone".dataDir = "/var/www/wint0r.zone";
           #"puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";
+          "femboy.industries".dataDir = "/var/www/femboy.industries";
         };
 
         nitter = {
