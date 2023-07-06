@@ -242,34 +242,32 @@ in {
     # https://nixos.org/manual/nixos/stable/options.html#opt-networking.enableB43Firmware
 
     # temporarily disabled
-    enableIPv6 = false;
+#    enableIPv6 = true;
 
     usePredictableInterfaceNames = false;
-    interfaces.eth0.ipv4.addresses = [
-      { address = "46.4.96.113";
+    interfaces.eth0 = {
+      ipv4.addresses = [{
+        address = "46.4.96.113";
+#        prefixLength = 27;
         prefixLength = 24;
-      }
-    ];
+      }];
+
+/*
+      ipv6.addresses = [{
+        address =  "2a01:4f8:140::1";
+        prefixLength = 64;
+      }];
+*/
+    };
 
     defaultGateway = "46.4.96.97";
+/*
+    defaultGateway6 = {
+      address = "fe80::1";
+      interface = "eth0";
+    };
+*/
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
-
-    #interfaces.eno1.ipv6.addresses = [
-    #  { address = "2001:41d0:0700:3308::";
-    #    prefixLength = 64;
-    #  }
-    #
-    #  { address = "2001:41d0:0700:33ff::";
-    #    prefixLength = 64;
-    #  }
-    #];
-
-    #defaultGateway6 = {
-    #  address = "2001:41d0:0700:33ff:00ff:00ff:00ff:00ff";
-    #  address = "33ff::1";
-    #  address = "2001::1";
-    #  interface = "eno1";
-    #};
 
     firewall.allowPing = true;
     # minecraft proximity voice chat
