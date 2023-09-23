@@ -158,6 +158,11 @@ in {
         interfaces."wg0" = import ./wireguardInterface.nix;
       };
 
+      dendrite = {
+        enable = true;
+        hostDomain = "dark-firepit.cloud";
+      };
+
       terraria = {
         enable = false;
         port = 7777; # port-forwarded
