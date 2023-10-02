@@ -23,6 +23,10 @@
   {	hostname = "oatmealine@dark-firepit";
   	ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKz3Zkhrht1EX32LIbkSvql1p15EXqxTy/4xQKlj0CUx oatmealine@disroot.org";
   }
+  { hostname = "oatmealine@boykisser";
+    ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDhgwhNQuM+iozuHk4OH+s5xS7U93W6hVtkpgF6arKPsWM6CUIUCyOwpNnGGH/HpBlFwYf4jN+NapVZ3bL8YHLUDayNO6uTfLLNvtaGeE65U/S0xGXhTyE0+bn7KWBFUlbO8CdjuBGGym0JVa0SMH4ppFBNJVR4HCe9fC83fD0T7gDZc5koApgxZfCyCu3bE03ulhRc5P8cKnTZAG0pVqK0doOIO7ociCbh4HhjTC83xRbfI9tlf52Y3xo14odpQhfXsPNNqxP0FzkC3zAOyT7iyrpQk1bgSLx/GzWh0KkljjJYGdMiiY6cVBxVYxjgrG7vDh/h3xMwBEhue4L9jmD4K4Eb5RZTxMyK83eHcomqZYigZjFKJ75TKdL17HbKgFGmfs9P0VhZUDUMp5Xm1yTVJqm6cQEhot1mT0F8FRYDiEadjw6vFZqz5dPzh2FRXsectNf60AiPRqF5HbitntgYvsLKZWAViOojbBc9gdQutu2AyuivteTEVG6Uq/LwE70= oatmealine@boykisser";
+    wg = "MPZLxzy+rvDvgZiaCwWjb+5hhhvWC3PH6cWLDv1Ga0U=";
+  }
 
   # mayflower
   { hostname = "mayflower@BMW-M550d-xDrive";

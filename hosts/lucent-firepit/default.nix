@@ -69,6 +69,7 @@ in {
         openssh.authorizedKeys.keys = fetchSSHKeys [
           "oatmealine@void-defragmented"
           "oatmealine@beppy-phone"
+          "oatmealine@boykisser"
         ];
       };
 
