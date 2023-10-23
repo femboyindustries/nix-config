@@ -79,7 +79,10 @@ in {
           #"wint0r.zone".dataDir = "/var/www/wint0r.zone";
           #"puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";
           "femboy.industries".dataDir = "/var/www/femboy.industries";
-        };
+        } // (listToAttrs (map (value: {
+          name = "${value}.femboy.industries";
+          value = { dataDir = "/var/www/femboy.industries/_subdomains/${value}/"; };
+        }) ["sage"]));
 
         nitter = {
           enable = true;
@@ -135,6 +138,12 @@ in {
           extraConfig = ''
             error_page 404 /404.html;
             error_page 403 /403.html;
+          '';
+        };
+        "femboy.industries" = {
+          locations."/_subdomains".extraConfig = ''
+            deny all;
+            return 404;
           '';
         };
         # todo: move to flake
