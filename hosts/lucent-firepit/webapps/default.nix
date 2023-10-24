@@ -111,21 +111,6 @@ in {
         #  domain = "dev-firepit.oat.zone";
         #  port = 4444;
         #};
-
-        /*
-        ghost = {
-          enable = true;
-          domain = "blog.oat.zone";
-          port = 1357;
-        };
-        */
-
-        isso = {
-          enable = true;
-          port = 1995;
-          domain = "comments.oat.zone";
-          target = "blog.oat.zone";
-        };
       };
     };
 
