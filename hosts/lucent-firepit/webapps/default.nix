@@ -167,17 +167,6 @@ in {
           };
         };
 
-        # https://www.edwinwenink.xyz/posts/47-tilde_server/
-        # todo: fix this
-        "dark-firepit.cloud" = {
-          locations."~ ^/~([^/\\s]+?)(/[^\\s]*)?$".extraConfig = ''
-            add_header X-debug-message "/home/$1/www$2" always;
-            alias /home/$1/www$2;
-            index index.html index.htm;
-            autoindex on;
-          '';
-        };
-
         #"git.oat.zone" = {
         #  forceSSL = true;
         #  enableACME = true;
