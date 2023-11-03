@@ -277,8 +277,8 @@ in {
 
     firewall.allowPing = true;
     # minecraft proximity voice chat
-    firewall.allowedTCPPorts = [ 24454 24464 25567 25577 4499 21025 ];
-    firewall.allowedUDPPorts = [ 24454 24464 25567 25577 4499 21025 ];
+    firewall.allowedTCPPorts = [ 24454 24464 25567 25577 4499 21025 21027 ];
+    firewall.allowedUDPPorts = [ 24454 24464 25567 25577 4499 21025 21027 ];
   };
 
 #  environment.etc."dhcpcd.duid".text = "d0:50:99:d4:04:68:d0:50:99:d4:04:68";
