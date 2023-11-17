@@ -189,6 +189,7 @@ in {
 
           npimages = true;
           stayinchannel = true;
+          updatealerts = false;
 
           aliases = {
             nowplaying = [ "np" "current" ];
