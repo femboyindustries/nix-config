@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.nextcloud24;
+      default = pkgs.nextcloud27;
     };
 
     domain = mkOption {
@@ -28,10 +28,16 @@ in {
       }
     ];
 
+    # vomit inducing
+    # nixpkgs.config.permittedInsecurePackages = [
+    #   "openssl-1.1.1w"
+    # ];
+
     services.nextcloud = {
       enable = true;
       package = cfg.package;
       hostName = cfg.domain;
+      enableBrokenCiphersForSSE = false;
       config = {
         dbtype = "pgsql";
         dbuser = "nextcloud";

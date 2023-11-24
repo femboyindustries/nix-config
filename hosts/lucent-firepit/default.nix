@@ -174,6 +174,11 @@ in {
         dataDir = "/var/lib/terraria";
       };
 
+      nextcloud = {
+        enable = true;
+        domain = "nextcloud.dark-firepit.cloud";
+      };
+
       jmusicbot = let
         baseOptions = {
           owner = 276416332894044160;
