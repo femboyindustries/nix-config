@@ -42,7 +42,7 @@ in {
         };
         settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/forgejo/app.toml")) {
           "ui.meta" = {
-            AUTHOR = "aether & oat";
+            AUTHOR = "dark-firepit.cloud";
             DESCRIPTION = "dark-firepit's shared git instance";
           };
           "server" = {
@@ -57,7 +57,7 @@ in {
       };
 
       gitea-actions-runner = mkIf cfg.enableActions {
-        instances."#{config.networking.hostName}" = {
+        instances."${config.networking.hostName}" = {
           enable = true;
           name = "ci";
           url = "https://${cfg.domain}/";

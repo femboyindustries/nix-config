@@ -106,12 +106,6 @@ in {
         matomo = {
           enable = true;
         };
-
-        #code-server = {
-        #  enable = true;
-        #  domain = "dev-firepit.oat.zone";
-        #  port = 4444;
-        #};
       };
     };
 

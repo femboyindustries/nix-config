@@ -31,11 +31,6 @@ in {
   users.groups.dotfiles = {};
   users.groups.yugoslavia = {};
 
-  # TODO: temporary fix; please find root cause. i'm begging you
-  nixpkgs.config.permittedInsecurePackages = [
-    "nodejs-16.20.0"
-  ];
-
   normalUsers = {
     # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
