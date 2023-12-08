@@ -7,7 +7,7 @@ in {
   options.modules.services.nextcloud = {
     enable = mkOption {
       type = types.bool;
-      default = false;
+      default = mkForce false;
     };
 
     package = mkOption {
@@ -38,11 +38,12 @@ in {
       package = cfg.package;
       hostName = cfg.domain;
       enableBrokenCiphersForSSE = false;
+      database.createLocally = true;
       config = {
         dbtype = "pgsql";
-        dbuser = "nextcloud";
+        dbuser = "nextcloud3";
         dbhost = "/run/postgresql";
-        dbname = "nextcloud";
+        dbname = "nextcloud3";
         adminpassFile = "/etc/nextcloudpass";
         adminuser = "root";
 #        "log_type" = "systemd";
@@ -59,10 +60,10 @@ in {
 
     services.postgresql = {
       enable = true;
-      ensureDatabases = [ "nextcloud" ];
+      ensureDatabases = [ "nextcloud3" ];
       ensureUsers = [
-        { name = "nextcloud";
-          ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        { name = "nextcloud3";
+          ensurePermissions."DATABASE nextcloud3" = "ALL PRIVILEGES";
         }
       ];
     };

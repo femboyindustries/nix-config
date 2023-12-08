@@ -175,7 +175,7 @@ in {
       };
 
       nextcloud = {
-        enable = true;
+        enable = false;
         domain = "nextcloud.dark-firepit.cloud";
       };
 
