@@ -89,6 +89,44 @@ in {
           '';
         };
       };
+
+      "modfest-build" = let
+        modpack = (pkgs.fetchPackwizModpack rec {
+          url = "https://raw.githubusercontent.com/ModFest/modfest-skyandsea/main/pack/pack.toml";
+          packHash = "sha256-I+Pqs3q4lI7Qzuot/9RejZhDgaltBxqMfwWsNfLkEVQ=";
+          manifestHash = "sha256:0w4b3y95s0jqhjfbzagbilw6fv6zlgzbqnl15kmsgcgb7kxzrzyy";
+        });
+
+        mcVersion = "${modpack.manifest.versions.minecraft}";
+        serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}-0_15_1";
+      in {
+        enable = true;
+        package = pkgs.fabricServers.${serverVersion};
+        jvmOpts = (import ./aikar-flags.nix) "4G";
+        
+        openFirewall = true;
+        
+        serverProperties = {
+          server-port = 25525;
+          gamemode = 1;
+          motd = "test server ignore";
+          white-list = true;
+          max-players = 128;
+          allow-flight = true;
+          enable-command-block = true;
+          enforce-secure-profile = false;
+          snooper-enabled = false;
+          spawn-protection = 0;
+        };
+
+        whitelist = {
+          oatmealine = "241d7103-4c9d-4c45-9464-83b5365ce48e";
+        };
+        
+        symlinks = {
+          "mods" = "${modpack}/mods";
+        };
+      };
     };
 
     systemd.services.minecraft-server-dark-firepit.serviceConfig = {
