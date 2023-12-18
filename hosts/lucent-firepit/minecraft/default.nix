@@ -93,7 +93,7 @@ in {
       "modfest-build" = let
         modpack = (pkgs.fetchPackwizModpack rec {
           url = "https://raw.githubusercontent.com/ModFest/modfest-skyandsea/main/pack/pack.toml";
-          packHash = "sha256-I+Pqs3q4lI7Qzuot/9RejZhDgaltBxqMfwWsNfLkEVQ=";
+          packHash = "sha256:7c9nTOZ8ZFQIvgZPWiRvF1N1nP0E6zTAZbPllRAaFTs=";
           manifestHash = "sha256:0w4b3y95s0jqhjfbzagbilw6fv6zlgzbqnl15kmsgcgb7kxzrzyy";
         });
 
@@ -102,7 +102,7 @@ in {
       in {
         enable = true;
         package = pkgs.fabricServers.${serverVersion};
-        jvmOpts = (import ./aikar-flags.nix) "4G";
+        jvmOpts = (import ./mc-flags.nix) "4G";
         
         openFirewall = true;
         
@@ -117,10 +117,6 @@ in {
           enforce-secure-profile = false;
           snooper-enabled = false;
           spawn-protection = 0;
-        };
-
-        whitelist = {
-          oatmealine = "241d7103-4c9d-4c45-9464-83b5365ce48e";
         };
         
         symlinks = {
