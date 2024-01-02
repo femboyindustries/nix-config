@@ -4,8 +4,8 @@ with lib;
 let
   # https://git.sleeping.town/unascribed/unsup/releases
   unsup = pkgs.fetchurl {
-    url = "https://git.sleeping.town/attachments/c521d178-8938-40a5-b21b-0333eef4099e";
-    sha256 = "c5bd49784392b651e4bc71fe57976f5b4fb14f09e0e23183ae5b94a821ae4756";
+    url = "https://git.sleeping.town/unascribed/unsup/releases/download/v0.2.3/unsup-0.2.3.jar";
+    hash = "sha256-DBMxiZwfUUiLqXYOMD8EUz4HubAZIEjAPmk32T0NYtA=";
   };
 
   mkUnsupINI = { url, extraConfig ? "" }: pkgs.writeTextFile {
@@ -43,7 +43,7 @@ in {
       "gayrats" = import ./gayrats.nix {
         inherit pkgs;
 
-        enable = true;
+        enable = false;
         server-port = 25565;
 
         inherit unsup;
@@ -67,7 +67,7 @@ in {
       "n3ko-test" = import ./n3ko-test.nix {
         inherit pkgs;
 
-        enable = true;
+        enable = false;
         server-port = 25595;
       };
 
@@ -75,7 +75,7 @@ in {
         inherit pkgs;
         inherit lib;
 
-        enable = true;
+        enable = false;
         server-port = 25535;
 
         inherit unsup;
@@ -91,25 +91,20 @@ in {
       };
 
       "modfest-build" = let
-        modpack = (pkgs.fetchPackwizModpack rec {
-          url = "https://raw.githubusercontent.com/ModFest/modfest-skyandsea/main/pack/pack.toml";
-          packHash = "sha256:7c9nTOZ8ZFQIvgZPWiRvF1N1nP0E6zTAZbPllRAaFTs=";
-          manifestHash = "sha256:0w4b3y95s0jqhjfbzagbilw6fv6zlgzbqnl15kmsgcgb7kxzrzyy";
-        });
-
-        mcVersion = "${modpack.manifest.versions.minecraft}";
-        serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}-0_15_1";
+        unsupINI = mkUnsupINI {
+          url = "https://raw.githack.com/ModFest/modfest-1-20/main/pack/pack.toml";
+        };
       in {
         enable = true;
-        package = pkgs.fabricServers.${serverVersion};
-        jvmOpts = (import ./mc-flags.nix) "4G";
+        package = pkgs.fabricServers."fabric-1_20_4".override { loaderVersion = "0.15.3"; };
+        jvmOpts = ((import ./mc-flags.nix) "4G") + " -javaagent:${unsup}";
         
         openFirewall = true;
         
         serverProperties = {
           server-port = 25525;
           gamemode = 1;
-          motd = "test server ignore";
+          motd = "modfest build server !";
           white-list = true;
           max-players = 128;
           allow-flight = true;
@@ -120,7 +115,7 @@ in {
         };
         
         symlinks = {
-          "mods" = "${modpack}/mods";
+          "unsup.ini" = unsupINI;
         };
       };
     };

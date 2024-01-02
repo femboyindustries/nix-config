@@ -21,6 +21,7 @@
 
   symlinks = { "unsup.ini" = unsupINI; };
 
-  package = pkgs.minecraftServers.fabric-1_19_2;
+  package = pkgs.fabricServers."fabric-1_19_2".override { loaderVersion = "0.14.17"; };
+
   jvmOpts = "-Xmx6G -javaagent:${unsup}";
 }
