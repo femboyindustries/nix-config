@@ -68,7 +68,7 @@ in {
           "oatmealine@void-defragmented"
           "oatmealine@beppy-phone"
           "oatmealine@boykisser"
-          "oatmealine@goop-drive"
+          "oatmealine@seven-red-suns"
         ];
       };
 
