@@ -16,6 +16,7 @@ in {
     inputs.nix-minecraft.nixosModules.minecraft-servers
     #inputs.watch-party.nixosModules.watch-party
     inputs.cohost-blogger.nixosModules.cohost-blogger
+    inputs.nlw-api.nixosModules.nlw-api
     inputs.vscode-server.nixosModules.default
   ];
 
@@ -28,6 +29,8 @@ in {
     ];
   };
 
+  services.logrotate.checkConfig = false;
+
   users.groups.dotfiles = {};
   users.groups.yugoslavia = {};
 
@@ -35,7 +38,7 @@ in {
     # aether??? is that... reference.../.??? aether https://www.curseforge.com/minecraft/mc-mods/aether mod  Curseforge minecraft Forge Patreon Chat twitter code license Assets license All rights reserved categories Last Updated apr 17 2021 Game Version 1.12.2 aether
     aether = {
       conf = {
-        packages = with pkgs; [ bat duf broot helix nil ];
+        packages = with pkgs; [ bat duf broot helix nil packwiz ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
@@ -65,6 +68,7 @@ in {
           "oatmealine@void-defragmented"
           "oatmealine@beppy-phone"
           "oatmealine@boykisser"
+          "oatmealine@goop-drive"
         ];
       };
 
@@ -235,6 +239,7 @@ in {
     extraRules = [
       { users = [ "aether" ]; noPass = false; persist = true; keepEnv = true; }
       { users = [ "oatmealine" ]; noPass = true; persist = false; keepEnv = true; }
+      { users = [ "remote" ]; noPass = true; persist = false; keepEnv = true; }
     ];
   };
 

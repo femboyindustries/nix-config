@@ -9,6 +9,12 @@ in {
       domain = "blog.oat.zone";
       port = 3500;
     };
+    services.nlw-api = {
+      enable = true;
+      domain = "nlw.oat.zone";
+      apiKey = builtins.readFile /etc/sheets-api-key;
+      port = 1995;
+    };
   
     modules = {
       services = {
@@ -38,7 +44,7 @@ in {
 
         vaultwarden = {
           enable = true;
-          domain = "vault.aether.gay";
+          domain = "vault.dark-firepit.cloud";
         };
 
         # not entirely necessary but makes it so that invalid domains and/or direct ip access aborts connection
@@ -105,6 +111,12 @@ in {
 
         matomo = {
           enable = true;
+        };
+
+        metrics = {
+          enable = true;
+          domain = "grafana.dark-firepit.cloud";
+          port = 2342;
         };
       };
     };
