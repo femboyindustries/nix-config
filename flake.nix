@@ -31,6 +31,8 @@
       #inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nlw-api.url = "git+https://git.oat.zone/oat/nlw-api";
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       #inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +56,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-minecraft, cohost-blogger, /* hyprland, hyprpaper, hyprpicker, */ ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, nix-minecraft, /* hyprland, hyprpaper, hyprpicker, */ ... }:
     let
       system = "x86_64-linux";
 
