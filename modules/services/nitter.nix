@@ -1,4 +1,4 @@
-{ config, lib, pkgs, options, ... }:
+{ config, lib, pkgs, options, inputs, ... }:
 
 # heavily references https://github.com/erdnaxe/nixos-modules/blob/master/services/nitter.nix
 
@@ -29,11 +29,21 @@ in {
     };
   };
 
+  # force unstable
+  disabledModules = [ "services/misc/nitter.nix" ];
+  imports = [
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/nitter.nix"
+  ];
+
   config = mkIf cfg.enable {
     services = {
       nitter = {
         enable = true;
-        package = pkgs.nitter;
+        package = pkgs.unstable.nitter.overrideAttrs (old: {
+          patches = old.patches ++ [
+            ./nitter-age-check.patch
+          ];
+        });
         config = {
           proxy = ""; # https://github.com/NixOS/nixpkgs/issues/235359
         };
