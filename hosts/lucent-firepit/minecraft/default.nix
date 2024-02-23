@@ -55,13 +55,25 @@ in {
       "gayrats-creative" = import ./gayrats-creative.nix {
         inherit pkgs;
 
-        enable = true;
+        enable = false;
         server-port = 25575;
 
         inherit unsup;
         inherit (gayrats) whitelist;
 
         unsupINI = mkUnsupINI { url = "https://oat.zone/f/gayrats-creative/pack.toml"; };
+      };
+
+      "gay-capybaras" = import ./gay-capybaras.nix {
+        inherit pkgs;
+
+        enable = true;
+        server-port = 25505;
+
+        inherit unsup;
+        inherit (gayrats) whitelist;
+
+        unsupINI = mkUnsupINI { url = "https://aether.gay/f/gay-capybaras/pack.toml"; };
       };
 
       "n3ko-test" = import ./n3ko-test.nix {
@@ -95,7 +107,7 @@ in {
           url = "https://raw.githack.com/ModFest/modfest-1-20/main/pack/pack.toml";
         };
       in {
-        enable = true;
+        enable = false;
         package = pkgs.fabricServers."fabric-1_20_4".override { loaderVersion = "0.15.3"; };
         jvmOpts = ((import ./mc-flags.nix) "4G") + " -javaagent:${unsup}";
         
