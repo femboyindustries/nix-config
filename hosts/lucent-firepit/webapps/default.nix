@@ -13,7 +13,17 @@ in {
       enable = true;
       domain = "nlw.oat.zone";
       apiKey = builtins.readFile /etc/sheets-api-key;
+      #apiKey = "";
       port = 1995;
+    };
+    services.cardgen = {
+      enable = true;
+      port = 25290;
+    };
+    services.gd-icon-renderer-web = {
+      enable = true;
+      port = 3435;
+      domain = "gdicon.oat.zone";
     };
   
     modules = {
@@ -63,6 +73,7 @@ in {
           "giger.yugoslavia.fishing".dataDir = "/var/www/giger.yugoslavia.fishing";
           "modfiles.oat.zone".dataDir = "/var/www/modfiles.oat.zone";
           "shop.yugoslavia.best".dataDir = "/var/www/shop.yugoslavia.best";
+          "shop.yugoslavia.best".forceSSL = false;
           "tesco-underground-dev.oat.zone".dataDir = "/var/www/tesco-underground-dev.oat.zone";
           "tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };
           "oat.zone".dataDir = "/var/www/oat.zone";
@@ -82,7 +93,11 @@ in {
           "mayf.pink".dataDir = "/var/www/mayf.pink";
           "mayf.pink".php = true;
           "mayf.pink".phpHandlePathing = true;
+          "promotion.yugoslavia.best".dataDir = "/var/www/promotion.yugoslavia.best/public"
+          "promotion.yugoslavia.best".php = true;
+          "promotion.yugoslavia.best".phpHandlePathing = true;
           "star.yugoslavia.best".dataDir = "/var/www/star.yugoslavia.best";
+          "star.yugoslavia.best".forceSSL = false;
           #"wint0r.zone".dataDir = "/var/www/wint0r.zone";
           #"puzzle.wint0r.zone".dataDir = "/var/www/puzzle.wint0r.zone";
           "femboy.industries".dataDir = "/var/www/femboy.industries";
@@ -127,6 +142,11 @@ in {
           locations."/f/".extraConfig = ''
             add_header Access-Control-Allow-Origin "*";
           '';
+          locations."/f/cards/gen".extraConfig = ''
+            rewrite /f/cards/gen/(.*) /$1 break;
+            proxy_pass http://127.0.0.1:25290;
+            proxy_redirect off;
+          '';
           extraConfig = ''
             error_page 404 /404.html;
             error_page 403 /403.html;
@@ -149,14 +169,6 @@ in {
           extraConfig = ''
             client_max_body_size 500M;
           '';
-        };
-        # todo: move to flake
-        "gdicon.oat.zone" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:3436/";
-          };
         };
         # todo: move to flake
         "jillo.oat.zone" = {
