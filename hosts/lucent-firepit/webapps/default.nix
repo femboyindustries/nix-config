@@ -93,7 +93,7 @@ in {
           "mayf.pink".dataDir = "/var/www/mayf.pink";
           "mayf.pink".php = true;
           "mayf.pink".phpHandlePathing = true;
-          "promotion.yugoslavia.best".dataDir = "/var/www/promotion.yugoslavia.best/public"
+          "promotion.yugoslavia.best".dataDir = "/var/www/promotion.yugoslavia.best/public";
           "promotion.yugoslavia.best".php = true;
           "promotion.yugoslavia.best".phpHandlePathing = true;
           "star.yugoslavia.best".dataDir = "/var/www/star.yugoslavia.best";
