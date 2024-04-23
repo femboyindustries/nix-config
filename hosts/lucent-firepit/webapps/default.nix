@@ -96,6 +96,7 @@ in {
           "promotion.yugoslavia.best".dataDir = "/var/www/promotion.yugoslavia.best/public";
           "promotion.yugoslavia.best".php = true;
           "promotion.yugoslavia.best".phpHandlePathing = true;
+          "promotion.yugoslavia.best".forceSSL = false;
           "star.yugoslavia.best".dataDir = "/var/www/star.yugoslavia.best";
           "star.yugoslavia.best".forceSSL = false;
           #"wint0r.zone".dataDir = "/var/www/wint0r.zone";
