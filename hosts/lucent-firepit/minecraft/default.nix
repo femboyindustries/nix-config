@@ -40,6 +40,15 @@ in {
   config = {
     modules.services.minecraft.enable = true;
     modules.services.minecraft.servers = {
+      "lockout" = import ./lockout.nix {
+        inherit pkgs;
+
+        enable = true;
+        server-port = 25959;
+
+        inherit (gayrats) whitelist;
+      };
+    
       "gayrats" = import ./gayrats.nix {
         inherit pkgs;
 
@@ -100,6 +109,14 @@ in {
             barrel_roll=no_barrel_roll
           '';
         };
+      };
+
+      "minehattan" = import ./minehattan.nix {
+        inherit pkgs;
+        inherit lib;
+
+        enable = true;
+        server-port = 25984;
       };
 
       "modfest-build" = let

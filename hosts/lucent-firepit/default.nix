@@ -17,6 +17,8 @@ in {
     #inputs.watch-party.nixosModules.watch-party
     inputs.cohost-blogger.nixosModules.cohost-blogger
     inputs.nlw-api.nixosModules.nlw-api
+    inputs.cardgen.nixosModules.cardgen
+    inputs.gd-icon-renderer-web.nixosModules.default
     inputs.vscode-server.nixosModules.default
   ];
 
@@ -60,7 +62,7 @@ in {
     # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
-        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep agenixPkg ];
+        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep agenixPkg htop unzip zip ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
@@ -81,6 +83,7 @@ in {
       };
     };
     # i yearn for the day this name ceases to mean
+    # boy what the FUCK were you cooking with this
     mayflower = {
       conf = {
         packages = with pkgs; [ micro tmux ];
@@ -145,11 +148,13 @@ in {
         requirePassword = false;
       };
 
+      update-idl.enable = true;
+
       postgres.enable = true;
 
-      mosh = {
-        enable = true;
-      };
+      mosh.enable = true;
+
+      mpd.enable = true;
 
       wireguard = {
         enable = true;
@@ -199,20 +204,23 @@ in {
             nowplaying = [ "np" "current" ];
             play = [ "p" ];
             queue = [ "list" "q" ];
-            remove = [ "delete" "d" ];
+            remove = [ "delete" ];
             skip = [ "s" ];
             forceskip = [ "fs" ];
             movetrack = [ "move" "m" ];
+            stop = [ "leave" "disconnect" "dc" ];
           };
           
           queuetype = "REGULAR";
         };
       in {
         enable = true;
-        instances = {
+        instances = let
+          pkg = pkgs.jmusicbot;
+        in {
           "jomble" = {
             enable = true;
-            package = pkgs._.gmusicbot;
+            package = pkg;
 
             options = baseOptions // {
               token = lib.removeSuffix "\n" (builtins.readFile /etc/jomble_token);
@@ -221,11 +229,11 @@ in {
           };
           "jillo" = {
             enable = true;
-            package = pkgs._.gmusicbot;
+            package = pkg;
             
             options = baseOptions // {
               token = lib.removeSuffix "\n" (builtins.readFile /etc/jillo_token);
-              prefix = ":";
+              prefix = "+";
             };
           };
         };

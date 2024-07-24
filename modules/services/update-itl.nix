@@ -23,7 +23,7 @@ in {
     
     systemd.services."update-itl" = {
       script = ''
-        ${pkgs.curl} -X POST https://mayf.pink/itl/update -H "Connection: Spiritual"
+        ${pkgs.curl}/bin/curl -X POST https://mayf.pink/itl/update -H "X-Connection: Spiritual"
       '';
       serviceConfig = {
         Type = "oneshot";

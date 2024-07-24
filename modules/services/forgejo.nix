@@ -31,14 +31,14 @@ in {
     virtualisation.docker.enable = cfg.enableActions;
   
     services = {
-      gitea = {
+      forgejo = {
         enable = true;
         package = cfg.package;
         stateDir = "/var/lib/${cfg.domain}";
         appName = "Forgejo: dark-firepit hosted Git";
         database = {
           type = "postgres";
-          name = "gitea";
+          # leaving this blank intentionally
         };
         settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/forgejo/app.toml")) {
           "ui.meta" = {
@@ -56,6 +56,7 @@ in {
         }];
       };
 
+      # todo: why is this failing?
       gitea-actions-runner = mkIf cfg.enableActions {
         instances."${config.networking.hostName}" = {
           enable = true;

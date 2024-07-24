@@ -48,5 +48,6 @@
   # marco
   { hostname = "marco@the-flesh-portal";
     wg = "mttUSatpYdEOmHqnzo7HdhuvTkMpz1Np8kMtsIz6nTY=";
+    ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCAI5AdCZ2IrlR3F9vOnG8AEsLXQFx42L4vQNwQ3hiU3cbf5cVxkARCHOqs7eWgpX2RsToilBz6zP7RHaGMLsSP+VkKQlPAvZhH8J6rDXp8Bavzp9Tigpfhvhjhngedb3CuztUdNKggoWs49aeYUO+47EFYQI5n7qAiGf2mOh9OtD6YsItz4nfN5BVXclE1KLXGWjsMyst4Hi8wnBVHcoT4uTwwmuKuPc4PouueaPiFuG9NysaG5qv3bC1pRZChJWJhEUp97WGRdL4t1b7/n44kAdNzh6LZEyWnVeOpfJvAtsayCJVAd3EXRs9QD5BnQQxtVFVg2ST8mNpT5QZY+xrt";
   }
 ]

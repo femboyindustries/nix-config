@@ -112,6 +112,8 @@ in {
           lightweight = false; # enable if shit gets wild; check config for more info
           port = 3005;
           domain = "nitter.oat.zone";
+          # i don't care a huge amount about having this plaintext, so.. here goes
+          password = "awawa";
         };
 
         libreddit = {

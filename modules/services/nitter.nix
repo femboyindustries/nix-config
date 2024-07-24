@@ -27,6 +27,11 @@ in {
         Some functionality gets removed (videos are not proxied, etc) in exchange for less RAM usage and CPU usage
       '';
     };
+    password = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Password locks the site";
+    };
   };
 
   # force unstable
@@ -39,11 +44,12 @@ in {
     services = {
       nitter = {
         enable = true;
-        package = pkgs.unstable.nitter.overrideAttrs (old: {
-          patches = old.patches ++ [
-            ./nitter-age-check.patch
-          ];
-        });
+        #package = pkgs.unstable.nitter.overrideAttrs (old: {
+        #  patches = old.patches ++ [
+        #    ./nitter-age-check.patch
+        #  ];
+        #});
+        package = pkgs.unstable.nitter;
         config = {
           proxy = ""; # https://github.com/NixOS/nixpkgs/issues/235359
         };
@@ -63,37 +69,54 @@ in {
       };
 
       # https://github.com/zedeus/nitter/wiki/Nginx
-      nginx.virtualHosts."${cfg.domain}" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          extraConfig = ''
-            #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-            #add_header Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline'; img-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; media-src 'self' blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; connect-src 'self' https://*.twimg.com; manifest-src 'self'";
-            #add_header X-Content-Type-Options nosniff;
-            #add_header X-Frame-Options DENY;
-            #add_header X-XSS-Protection "1; mode=block";
-            
-            if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
-              return 302 $scheme://fxtwitter.com$request_uri;
-            }
-          '';
-        };
-        locations."= /robots.txt" = {
-          extraConfig = ''
-            # re-defining
-            #add_header Strict-Transport-Security $hsts_header;
-            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-            add_header Referrer-Policy origin-when-cross-origin;
-            add_header X-Content-Type-Options nosniff;
-            add_header X-XSS-Protection "1; mode=block";
+      nginx.virtualHosts."${cfg.domain}" = mkMerge [
+        {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString cfg.port}";
+            extraConfig = ''
+              #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+              #add_header Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline'; img-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; media-src 'self' blob:; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; connect-src 'self' https://*.twimg.com; manifest-src 'self'";
+              #add_header X-Content-Type-Options nosniff;
+              #add_header X-Frame-Options DENY;
+              #add_header X-XSS-Protection "1; mode=block";
+              
+              if ($http_user_agent = 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)') {
+                return 302 $scheme://fxtwitter.com$request_uri;
+              }
+            '';
+          };
+          locations."= /robots.txt" = {
+            extraConfig = ''
+              # re-defining
+              #add_header Strict-Transport-Security $hsts_header;
+              add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+              add_header Referrer-Policy origin-when-cross-origin;
+              add_header X-Content-Type-Options nosniff;
+              add_header X-XSS-Protection "1; mode=block";
 
-            add_header Content-Type text/plain;
-            return 200 "User-agent: *\nDisallow: /\n";
+              add_header Content-Type text/plain;
+              return 200 "User-agent: *\nDisallow: /\n";
+            '';
+          };
+        }
+        (mkIf (cfg.password != null) {
+          extraConfig = let
+            mkHtpasswd = name: authDef: pkgs.writeText "${name}.htpasswd" (
+              concatStringsSep "\n" (mapAttrsToList (user: password: ''
+                ${user}:{PLAIN}${password}
+              '') authDef)
+            );
+            authFile = mkHtpasswd "nitter" ({
+              nitter = cfg.password;
+            });
+          in ''
+            auth_basic "contact me at oat.zone for access";
+            auth_basic_user_file ${authFile};
           '';
-        };
-      };
+        })
+      ];
     };
 
     # fix for a dumb error

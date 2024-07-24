@@ -32,6 +32,8 @@
     };
 
     nlw-api.url = "git+https://git.oat.zone/oat/nlw-api";
+    cardgen.url = "git+https://git.oat.zone/oat/cardgen";
+    gd-icon-renderer-web.url = "github:oatmealine/gd-icon-renderer-web";
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
