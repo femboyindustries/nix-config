@@ -45,7 +45,7 @@ in {
       fileNames = attrNames (readDir (/. + addonDir));
       addonFileNames = filter (n: hasSuffix ".lua" n || hasSuffix ".kart" n || hasSuffix ".pk3" n || hasSuffix ".wad" n) fileNames;
     in {
-      enable = true;
+      enable = false;
       advertise = true;
       addons = map (n: "${addonDir}${n}") addonFileNames;
       config = {
