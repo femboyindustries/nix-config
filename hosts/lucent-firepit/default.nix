@@ -148,7 +148,7 @@ in {
         requirePassword = false;
       };
 
-      update-idl.enable = true;
+      update-idl.enable = false;
 
       postgres.enable = true;
 
