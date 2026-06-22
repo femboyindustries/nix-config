@@ -4,7 +4,7 @@ lib.extend (self: super:
   let
     inherit (lib) attrValues foldr;
     inherit (modules) mapModules;
-    inherit (helpers) getSSH getWG;
+    inherit (helpers) getSSH;
 
     modules = import ./modules.nix { inherit lib; };
     helpers = import ./helpers.nix { inherit lib; };

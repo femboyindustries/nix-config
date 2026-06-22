@@ -1,5 +1,5 @@
 [DEFAULT]
-APP_NAME = "Forgejo: dark-firepit hosted Git"
+APP_NAME = "Forgejo: femboy.industries hosted Git"
 
 [security]
 INSTALL_LOCK       = true
@@ -12,7 +12,7 @@ DEFAULT_BRANCH = "main"
 [ui]
 DEFAULT_THEME = "forgejo-auto"
 #THEMES="forgejo-auto,forgejo-light,forgejo-dark"
-CUSTOM_EMOJIS = "blurry_eyes,horny,acab,tastymilk,gluttony,soul_of_fright,soul_of_night,soul_of_blight,bottom,spongesad,Tainted_John_F_Kennedy,John_F_Kennedy_Tainted,John_F_Kennedy,plumspin,despair,ihaveyourip,peeeh,penis,twister,speed,deadchat,housj,dothejej,b_,trollgecommence,nervous,coffee,dilf,closer,slugclose,pls,x3,observer,zamiel_approves,i_see_pizza,cutely_blushes,babytime,sleeby,zonkerdoodle,whenyoubigshit,the_cowboy,stupib,soul_of_might,scripulous_fingore_point,scripulous_fingore,rusty50,pickle,orang,oralpleasure,ohgod,michael,i_see_chicory,he,hapykity,handsr,handsl,slugloafspin,gamer_boi,feddynite,cock,feddy_glamcock,face,entropy,elonmusk,eeeeeeeeee,child,ancapistanian,aiki,gloopy,lamb,YOU,slightYOU,citat,ionn,eede,ed,blank,michael,BABAXD,BABA,EyesPepe,spamdance,pickledance,BABA_IS_OO,wieldr,wieldl,cinnamon,jillo,she,hydrogenperoxide,ObedientCitizen,misinformation,maenod,Snowsgiving22_AnimatedEmojis_mal"
+#CUSTOM_EMOJIS = "blurry_eyes,horny,acab,tastymilk,gluttony,soul_of_fright,soul_of_night,soul_of_blight,bottom,spongesad,Tainted_John_F_Kennedy,John_F_Kennedy_Tainted,John_F_Kennedy,plumspin,despair,ihaveyourip,peeeh,penis,twister,speed,deadchat,housj,dothejej,b_,trollgecommence,nervous,coffee,dilf,closer,slugclose,pls,x3,observer,zamiel_approves,i_see_pizza,cutely_blushes,babytime,sleeby,zonkerdoodle,whenyoubigshit,the_cowboy,stupib,soul_of_might,scripulous_fingore_point,scripulous_fingore,rusty50,pickle,orang,oralpleasure,ohgod,michael,i_see_chicory,he,hapykity,handsr,handsl,slugloafspin,gamer_boi,feddynite,cock,feddy_glamcock,face,entropy,elonmusk,eeeeeeeeee,child,ancapistanian,aiki,gloopy,lamb,YOU,slightYOU,citat,ionn,eede,ed,blank,michael,BABAXD,BABA,EyesPepe,spamdance,pickledance,BABA_IS_OO,wieldr,wieldl,cinnamon,jillo,she,hydrogenperoxide,ObedientCitizen,misinformation,maenod,Snowsgiving22_AnimatedEmojis_mal"
 
 [mailer]
 ENABLED = false

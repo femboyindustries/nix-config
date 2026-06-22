@@ -25,35 +25,13 @@ in {
       port = 3435;
       domain = "gdicon.oat.zone";
     };
-  
+
     modules.services = {
-      #nextcloud = {
-      #  enable = true;
-      #  domain = "nextcloud.dark-firepit.cloud";
-      #  settings.app.federation = true;
-      #};
-
-      writefreely = {
-        enable = true;
-        name = "Corruption Biome";
-        host = "dark-firepit.cloud";
-      };
-
       forgejo = {
         enable = true;
         domain = "git.oat.zone";
         port = 3000;
         enableActions = true;
-      };
-
-      # matrix.conduit = {
-      #   enable = false;
-      #   domain = "matrix.dark-firepit.cloud";
-      # };
-
-      vaultwarden = {
-        enable = true;
-        domain = "vault.dark-firepit.cloud";
       };
 
       # not entirely necessary but makes it so that invalid domains and/or direct ip access aborts connection
@@ -65,9 +43,6 @@ in {
       };
 
       staticSites = {
-        "aether.gay".dataDir = "/var/www/aether.gay";
-        "dark-firepit.cloud".dataDir = "/var/www/dark-firepit.cloud";
-        #"dark-firepit.oat.zone".dataDir = "/var/www/dark-firepit.oat.zone";
         "va11halla.oat.zone".dataDir = "/var/www/va11halla.oat.zone";
         "giger.yugoslavia.fishing".dataDir = "/var/www/giger.yugoslavia.fishing";
         "modfiles.oat.zone".dataDir = "/var/www/modfiles.oat.zone";
@@ -104,28 +79,8 @@ in {
         value = { dataDir = "/var/www/femboy.industries/_subdomains/${value}/"; };
       }) ["sage"]));
 
-      nitter = {
-        enable = true;
-        lightweight = false; # enable if shit gets wild; check config for more info
-        port = 3005;
-        domain = "nitter.oat.zone";
-        # i don't care a huge amount about having this plaintext, so.. here goes
-        password = "awawa";
-      };
-
-      #watch-party = {
-      #  enable = true;
-      #  port = 1984;
-      #};
-
       matomo = {
         enable = true;
-      };
-
-      metrics = {
-        enable = true;
-        domain = "grafana.dark-firepit.cloud";
-        port = 2342;
       };
     };
 
@@ -182,19 +137,6 @@ in {
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:15385/";
-          };
-        };
-        "drawdog.oat.zone" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:33363/";
-            extraConfig = ''
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "Upgrade";
-              proxy_set_header Host $host;
-            '';
           };
         };
         "radio.oat.zone" = {

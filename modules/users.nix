@@ -42,8 +42,6 @@ in {
   };
 
   config = {
-    home-manager.useUserPackages = true;
-
     user = {
       packages = with pkgs; [ wget ];
       extraGroups = [ ];
@@ -67,7 +65,7 @@ in {
     };
 
     users.groups = mapAttrs (_: _: {}) config.normalUsers;
-    
+
     users.users = mapAttrs (username: user: (mkMerge [
       (mkAliasDefinitions options.user)
       user.conf
@@ -77,6 +75,6 @@ in {
       }
     ])) config.normalUsers;
 
-    home-manager.users = mapAttrs (username: user: (mkMerge [(mkAliasDefinitions options.home._) user.homeConf])) config.normalUsers;
+    #home-manager.users = mapAttrs (username: user: (mkMerge [(mkAliasDefinitions options.home._) user.homeConf])) config.normalUsers;
   };
 }

@@ -29,7 +29,7 @@ in {
 
   config = mkIf cfg.enable {
     virtualisation.docker.enable = cfg.enableActions;
-  
+
     services = {
       forgejo = {
         enable = true;
@@ -39,10 +39,10 @@ in {
           type = "postgres";
           # leaving this blank intentionally
         };
-        settings = mkMerge [ (builtins.fromTOML (builtins.readFile "/etc/dotfiles/config/forgejo/app.toml")) {
+        settings = mkMerge [ (builtins.fromTOML (builtins.readFile ../../config/forgejo/app.toml)) {
           "ui.meta" = {
-            AUTHOR = "dark-firepit.cloud";
-            DESCRIPTION = "dark-firepit's shared git instance";
+            AUTHOR = "femboy.industries";
+            DESCRIPTION = "femboy.industries's shared git instance";
           };
           "server" = {
             DOMAIN = cfg.domain;
@@ -62,7 +62,7 @@ in {
           name = "ci";
           url = "https://${cfg.domain}/";
           labels = []; # use the packaged instance list
-          token = removeSuffix "\n" (builtins.readFile "/etc/forgejo-runner-token");
+          tokenFile = "/etc/forgejo-runner-token";
         };
       };
 

@@ -19,29 +19,6 @@
     };
   };
 
-  nix.settings.cores = 3;
-  nix.settings.max-jobs = 6;
-
-  # disabling this is what's considered a "Bad Idea"
-  # however it is required by packages/ghost.nix, which
-  # is borrowed from https://notes.abhinavsarkar.net/2022/ghost-on-nixos
-  #
-  # i don't know of a cleaner way to do this, and i
-  # don't want to deal with ghost any longer than i
-  # already have, so This Will Do
-  #
-  # edit: ghost is now dead! we're going back to true.
-  # rest in piss ghost, you will be forgotten
-  #
-  # edit: services.writefreely.enable = true
-  nix.settings.sandbox = true;
-
-  modules.hardware.fs = {
-    enable = true;
-    ssd.enable = true;
-    xfs.enable = true;
-  };
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/2fb43a32-d7c2-4ed1-97c6-4588d731a132";

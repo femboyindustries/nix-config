@@ -4,8 +4,7 @@ let
   inherit (lib) filterAttrs _;
 in {
   imports =
-    [ inputs.home-manager.nixosModules.home-manager ]
-    ++ _.mapModulesRec' ./modules import;
+    _.mapModulesRec' ./modules import;
 
   # ‹nix flake check› bypasses, can be changed in the actual hosts
   # config, useful for testing
@@ -22,16 +21,16 @@ in {
     settings = {
       auto-optimise-store = true;
       experimental-features = "nix-command flakes";
-      substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+      #substituters = [ "https://nix-community.cachix.org" ];
+      #trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
     };
   };
 
   environment.systemPackages = with pkgs; [
-    curl git wget neovim
+    unrar unzip micro curl wget git
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
-  
+
   system.stateVersion = lib.mkDefault "21.05";
 }

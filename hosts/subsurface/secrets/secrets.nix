@@ -1,6 +1,0 @@
-let
-  firepitAccess = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4lh7dN9Ohh2/WoGiZ4WlpVb01YPNto/9ungOAk6TH+65wkxMjY4a+1OsO8Znguj46tXVErn8xv2ZVX0K7ql0hzypPkP2Dvvim99tz6FKSf9Nwj6RRtIKPoYkJjtGYAqLJl8JPy50HkFXkDVQ/z4d4iwpneSODIJdkUFSzZR91jz9FX+4t2h+2xtuuRDI43+gHRqvwPP8XaE0srtMzZoQDUBKhwOynoo2vZnyd3O7kkpD9T+jzYEeLKppHdaoYN5UxZ4L0xnig0WFZiBH36/YGXA8gT56FHRw5GKhwWwfSvliEw63/6IxiVZBuM1Mj7syg2Ndhhmmay05QqvyTrdHA9veyzJG5l0HlnCmXe7ss9lVQnxxPfbHbnDZUhH1ax01sQUeTK3Bs3AvbsTLyXBbd4NCY5ovz85MqzM/Q84B1zX1i8KbFEBh0xkumNsPAXzY8ar+tq5rFa23bY9qF4s6CMv++JEXSJJufcf3BS2dBlw0lTGBn7UEO9FHHsU3xKCc= aether@aether";
-in {
-  "firepitAccess.age".publicKeys = [ firepitAccess ];
-  "firepitAccess.age".owner = "aether";
-}

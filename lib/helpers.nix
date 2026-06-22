@@ -7,7 +7,7 @@ rec {
     if h.${origin} == name && hasAttr item h
     then h.${item}
     else t)
-  (error ''
+  (throw ''
     No item at the origin point ${origin} with element ${name} found.
     Please make sure that the item with that origin exists, and,
     failing that, that it also has the requested item defined.
@@ -15,5 +15,4 @@ rec {
   list;
 
   getSSH = name: keys: indexFrom "hostname" name "ssh" keys;
-  getWG = name: keys: indexFrom "hostname" name "wg" keys;
 }
