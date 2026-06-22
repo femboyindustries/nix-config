@@ -20,7 +20,7 @@ in {
       matomo = {
         enable = true;
 
-        package = pkgs.unstable.matomo-beta;
+        package = pkgs.unstable.matomo;
         periodicArchiveProcessing = true;
         hostname = cfg.domain;
         nginx = {

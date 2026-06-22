@@ -2,22 +2,26 @@
 
 with lib;
 let
-  cfg = config.modules.services.matrix.conduit;
+  cfg = config.modules.services.conduit;
+  fullDomain = "${cfg.subdomain}.${cfg.hostDomain}";
+  coturnRealm = "turn.${cfg.hostDomain}";
+  minPort = 49000;
+  maxPort = 50000;
 in {
-  options.modules.services.matrix.conduit = {
+  options.modules.services.conduit = {
     enable = mkOption {
       type = types.bool;
       default = false;
     };
 
-    package = mkOption {
-      type = types.package;
-      default = pkgs._.matrix-conduit;
+    hostDomain = mkOption {
+      type = types.str;
+      default = null;
     };
 
-    domain = mkOption {
+    subdomain = mkOption {
       type = types.str;
-      default = "localhost";
+      default = "matrix";
     };
 
     user = mkOption {
@@ -31,12 +35,7 @@ in {
       default = "/var/lib/conduit";
     };
 
-    httpAddress = mkOption {
-      type = types.str;
-      default = "127.0.0.1";
-    };
-
-    httpPort = mkOption {
+    port = mkOption {
       type = types.port;
       default = 6167;
     };
@@ -48,83 +47,138 @@ in {
 
     disableFederation = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
     };
 
-    settings = mkOption {
-      type = types.submodule {
-        freeFormType = format.type;
+    maxRequestMegabytes = mkOption {
+      type = types.int;
+      default = 500;
+    };
 
-        options = {
-          server_name = mkOption {
-            type = types.str;
-            example = "matrix.aether.gay";
-            default = config.networking.hostName;
-            description = "The domain used to be used by the conduit instance for nginx.";
-          };
-
-          database_path = mkOption {
-            type = types.str;
-            default = "/var/lib/conduit";
-          };
-
-          database_backend = mkOption {
-            type = types.str;
-            default = "postgresql";
-            example = "rocksdb";
-          };
-
-          port = mkOption {
-            type = types.int;
-            default = 6167;
-          };
-
-          max_request_size = mkOption {
-            type = types.int;
-            default = 52428800; # 50MiB
-          };
-
-          allow_registration = mkOption {
-            type = types.bool;
-            default = false;
-          };
-
-          allow_federation = mkOption {
-            type = types.bool;
-            default = true;
-          };
-
-          max_concurrent_requests = mkOption {
-            type = types.int;
-            default = 64;
-          };
-
-          trusted_servers = mkOption {
-            type = types.listOf types.str;
-            default = [ "matrix.org" ];
-          };
-
-          address = mkOption {
-            type = types.str;
-            default = "127.0.0.1";
-            description = "The address used to access the Conduit instance. Setting this to 127.0.0.1 ensures that it is only possible to reach the server via nginx.";
-          };
-        };
-      };
-      default = {};
+    trustedServers = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "matrix.org" ];
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+    assertions = [
+      { assertion = cfg.hostDomain != null;
+        description = "@config.modules.services.dendrite.hostDomain@ must not equal null";
+      }
+    ];
 
-    modules.services.matrix.conduit.settings = {
-      server_name = cfg.domain;
+    services.matrix-conduit.enable = true;
+    services.matrix-conduit.settings.global = {
+      server_name = cfg.hostDomain;
+      address = "127.0.0.1";
       database_dir = cfg.dataDir;
-      port = cfg.httpPort;
+      port = cfg.port;
+      enable_lightning_bolt = false;
       enable_registration = !cfg.disableRegistration;
+      max_concurrent_requests = 64;
+      conduit_cleanup = 300;
       enable_federation = !cfg.disableFederation;
+      max_request_size = cfg.maxRequestMegabytes * 1048576;
+      trusted_servers = cfg.trustedServers;
+      turn_uris = ["turn:${coturnRealm}?transport=udp" "turn:${coturnRealm}?transport=tcp"];
+      turn_secret = "9Wbdn5W57uKKnELLCIbnVLF9plGUSDRQ";
     };
 
+    services.nginx.virtualHosts."${fullDomain}" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations."/_matrix".proxyPass = "http://127.0.0.1:${toString cfg.port}";
+      #locations."/_matrix".proxyPass = "https://localhost:${toString cfg.port}";
+
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-RealIP $remote_addr;
+        proxy_read_timeout 600;
+        client_max_body_size ${toString cfg.maxRequestMegabytes}M;
+      '';
+    };
+
+    services.nginx.virtualHosts."${cfg.hostDomain}" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations."/.well-known/matrix/server".return = "200 '{ \"m.server\": \"${fullDomain}:443\"}'";
+
+	    # locations."/.well-known/matrix/client".return = "200 '{ \"m.homserver\": { \"base_url\": \"https://${cfg.hostDomain}\"} }'";
+      locations."/.well-known/matrix/client".extraConfig = ''
+        return 200 '{ \"m.homeserver\": { \"base_url\": \"https://${fullDomain}\"} }';
+        add_header Access-Control-Allow-Origin '*';
+      '';
+    };
+
+    services.coturn = {
+      enable = true;
+      no-cli = true;
+      no-tcp-relay = true;
+      min-port = minPort;
+      max-port = maxPort;
+      use-auth-secret = true;
+      static-auth-secret = "9Wbdn5W57uKKnELLCIbnVLF9plGUSDRQ";
+      realm = coturnRealm;
+      cert = "${config.security.acme.certs.${coturnRealm}.directory}/full.pem";
+      pkey = "${config.security.acme.certs.${coturnRealm}.directory}/key.pem";
+      extraConfig = ''
+        # for debugging
+        verbose
+        # ban private IP ranges
+        no-multicast-peers
+        denied-peer-ip=0.0.0.0-0.255.255.255
+        denied-peer-ip=10.0.0.0-10.255.255.255
+        denied-peer-ip=100.64.0.0-100.127.255.255
+        denied-peer-ip=127.0.0.0-127.255.255.255
+        denied-peer-ip=169.254.0.0-169.254.255.255
+        denied-peer-ip=172.16.0.0-172.31.255.255
+        denied-peer-ip=192.0.0.0-192.0.0.255
+        denied-peer-ip=192.0.2.0-192.0.2.255
+        denied-peer-ip=192.88.99.0-192.88.99.255
+        denied-peer-ip=192.168.0.0-192.168.255.255
+        denied-peer-ip=198.18.0.0-198.19.255.255
+        denied-peer-ip=198.51.100.0-198.51.100.255
+        denied-peer-ip=203.0.113.0-203.0.113.255
+        denied-peer-ip=240.0.0.0-255.255.255.255
+        denied-peer-ip=::1
+        denied-peer-ip=64:ff9b::-64:ff9b::ffff:ffff
+        denied-peer-ip=::ffff:0.0.0.0-::ffff:255.255.255.255
+        denied-peer-ip=100::-100::ffff:ffff:ffff:ffff
+        denied-peer-ip=2001::-2001:1ff:ffff:ffff:ffff:ffff:ffff:ffff
+        denied-peer-ip=2002::-2002:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+        denied-peer-ip=fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+        denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+      '';
+    };
+
+/*
+    security.acme.certs.${coturnRealm} = {
+      # insert here the right configuration to obtain a certificate
+      postRun = "systemctl restart coturn.service";
+      group = "turnserver";
+
+      dnsProvider = "porkbun";
+    };
+*/
+    services.nginx.virtualHosts."${coturnRealm}" = {
+      forceSSL = true;
+      enableACME = true;
+
+      # locations."/.well-known/matrix/server".return = "200 '{ \"m.server\": \"${fullDomain}:443\"}'";
+
+	    # locations."/.well-known/matrix/client".return = "200 '{ \"m.homserver\": { \"base_url\": \"https://${cfg.hostDomain}\"} }'";
+      # locations."/.well-known/matrix/client".extraConfig = ''
+      #   return 200 '{ \"m.homeserver\": { \"base_url\": \"https://${fullDomain}\"} }';
+      #   add_header Access-Control-Allow-Origin '*';
+      # '';
+    };
+
+    networking.firewall.allowedTCPPorts = [ 80 443 3478 5349 ];
+    networking.firewall.allowedUDPPorts = [ 80 443 3478 5349 ];
+    networking.firewall.allowedUDPPortRanges = [ { from = minPort; to = maxPort; } ];
   };
 }

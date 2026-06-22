@@ -32,6 +32,8 @@
   #
   # edit: ghost is now dead! we're going back to true.
   # rest in piss ghost, you will be forgotten
+  #
+  # edit: services.writefreely.enable = true
   nix.settings.sandbox = true;
 
   modules.hardware.fs = {

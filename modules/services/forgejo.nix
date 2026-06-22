@@ -35,7 +35,6 @@ in {
         enable = true;
         package = cfg.package;
         stateDir = "/var/lib/${cfg.domain}";
-        appName = "Forgejo: dark-firepit hosted Git";
         database = {
           type = "postgres";
           # leaving this blank intentionally
@@ -70,13 +69,12 @@ in {
       nginx.virtualHosts."${cfg.domain}" = {
         forceSSL = true;
         enableACME = true;
-        # using manual extraconfig because else    nginx spits out a runtime error????
-        # thanks nginx
-        #locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port};";
-        locations."/".extraConfig = ''
-          client_max_body_size 600M;
-          proxy_pass http://127.0.0.1:${toString cfg.port};
-        '';
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString cfg.port}";
+          extraConfig = ''
+            client_max_body_size 600M;
+          '';
+        };
       };
     };
   };

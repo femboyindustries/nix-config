@@ -78,7 +78,7 @@ in {
     };
 
     user = {
-      initialPassword = "nixos";
+      #initialPassword = "nixos";
     };
 
     users.users.root = {

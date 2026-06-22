@@ -1,3 +1,6 @@
+[DEFAULT]
+APP_NAME = "Forgejo: dark-firepit hosted Git"
+
 [security]
 INSTALL_LOCK       = true
 PASSWORD_HASH_ALGO = "argon2"

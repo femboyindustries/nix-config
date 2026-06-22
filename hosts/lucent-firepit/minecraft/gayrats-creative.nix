@@ -9,7 +9,7 @@
   serverProperties = {
     inherit server-port;
     gamemode = 1;
-    motd = "dark-firepit, 1.19.2 Fabric";
+    motd = "dark-firepit, 1.21.1 NeoForge";
     white-list = true;
     max-players = 8;
     allow-flight = true;
@@ -21,7 +21,7 @@
 
   symlinks = { "unsup.ini" = unsupINI; };
 
-  package = pkgs.fabricServers."fabric-1_19_2".override { loaderVersion = "0.14.17"; };
+  package = pkgs.neoforgeServers."neoforge-1_21_1".override { loaderVersion = "0.14.17"; };
 
   jvmOpts = "-Xmx6G -javaagent:${unsup}";
 }

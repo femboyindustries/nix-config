@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.nextcloud27;
+      default = pkgs.nextcloud30;
     };
 
     domain = mkOption {
@@ -41,9 +41,9 @@ in {
       database.createLocally = true;
       config = {
         dbtype = "pgsql";
-        dbuser = "nextcloud3";
+        dbuser = "nextcloud";
         dbhost = "/run/postgresql";
-        dbname = "nextcloud3";
+        dbname = "nextcloud";
         adminpassFile = "/etc/nextcloudpass";
         adminuser = "root";
 #        "log_type" = "systemd";
@@ -60,9 +60,9 @@ in {
 
     services.postgresql = {
       enable = true;
-      ensureDatabases = [ "nextcloud3" ];
+      ensureDatabases = [ "nextcloud" ];
       ensureUsers = [
-        { name = "nextcloud3";
+        { name = "nextcloud";
           ensurePermissions."DATABASE nextcloud3" = "ALL PRIVILEGES";
         }
       ];

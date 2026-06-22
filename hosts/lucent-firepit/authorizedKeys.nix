@@ -18,7 +18,7 @@
   }
   { hostname = "oatmealine@beppy-phone";
     ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUgEsAQ7EL5/3STLAk/0qWJddYqfBY71yS9RtRSWd3w JuiceSSH";
-    wg = "ubIo/l7llVx8HDIqcBPebPsneCBunZUM6cQS7SaXn2Y=";  
+    wg = "ubIo/l7llVx8HDIqcBPebPsneCBunZUM6cQS7SaXn2Y=";
   }
   {	hostname = "oatmealine@dark-firepit";
   	ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKz3Zkhrht1EX32LIbkSvql1p15EXqxTy/4xQKlj0CUx oatmealine@disroot.org";
@@ -27,27 +27,35 @@
     ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDhgwhNQuM+iozuHk4OH+s5xS7U93W6hVtkpgF6arKPsWM6CUIUCyOwpNnGGH/HpBlFwYf4jN+NapVZ3bL8YHLUDayNO6uTfLLNvtaGeE65U/S0xGXhTyE0+bn7KWBFUlbO8CdjuBGGym0JVa0SMH4ppFBNJVR4HCe9fC83fD0T7gDZc5koApgxZfCyCu3bE03ulhRc5P8cKnTZAG0pVqK0doOIO7ociCbh4HhjTC83xRbfI9tlf52Y3xo14odpQhfXsPNNqxP0FzkC3zAOyT7iyrpQk1bgSLx/GzWh0KkljjJYGdMiiY6cVBxVYxjgrG7vDh/h3xMwBEhue4L9jmD4K4Eb5RZTxMyK83eHcomqZYigZjFKJ75TKdL17HbKgFGmfs9P0VhZUDUMp5Xm1yTVJqm6cQEhot1mT0F8FRYDiEadjw6vFZqz5dPzh2FRXsectNf60AiPRqF5HbitntgYvsLKZWAViOojbBc9gdQutu2AyuivteTEVG6Uq/LwE70= oatmealine@boykisser";
     wg = "MPZLxzy+rvDvgZiaCwWjb+5hhhvWC3PH6cWLDv1Ga0U=";
   }
-  { hostname = "oatmealine@seven-red-suns";
-    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOVBLBD/JrGFMvPNiiX/QFixSWXyGjDT6vDHVWg9cE5D oatmealine@seven-red-suns";
-    wg = "HQfsS+DUdgmDvliIv7yNnf4T9Q3YIN9ObSXhrNuQUi8=";
+  {
+    hostname = "oatmealine@seven-red-suns.local";
+    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPsBvdaXRX7JycU84WaC20Tb7AR6CIyxaWv8zk3WwUvp oatmealine@seven-red-suns.local";
   }
 
   # mayflower
-  { hostname = "mayflower@BMW-M550d-xDrive";
-    ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIeoFll8XBRwu6vbQHUj4LNbvRvLMTdqUP1su9hGxow8olGKIZf/nINkt+/B5w4UumLFnOOROIWVhSH/04oxGVCWdk29ibPo3yYJIAoQrqOXYWCrGpMDd0z2n/0CwyXRAqmQ4rubnUZtnlabYCLh0eWMu9ZRSsSrQ+MiaUHES/vv1MxlLWHoEGfhLzoq7SyIsK88Mirgu9lSeHd/+2JybkQ9kNEWTxnzUPKwOMT0zLGo7vNLmfPhJ1WilQoV4F8skDbbgFNRuLO13ZDn6W2jqZ+zjf3H9khzPivG+oaKfHLMDD/zCwHM3rm3JyJzX7GF9EV73AqbNkzzsf54vKhYRT";
-  }
-  { hostname = "swag@BMW-M550d-xDrive";
-    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1fJn2ZY9fhBr4E1Gc91uRWS5r+EZ4OHy3RmuAjx7kr swag@BMW-M550d-xDrive";
-  }
+  # { hostname = "mayflower@BMW-M550d-xDrive";
+  #   ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIeoFll8XBRwu6vbQHUj4LNbvRvLMTdqUP1su9hGxow8olGKIZf/nINkt+/B5w4UumLFnOOROIWVhSH/04oxGVCWdk29ibPo3yYJIAoQrqOXYWCrGpMDd0z2n/0CwyXRAqmQ4rubnUZtnlabYCLh0eWMu9ZRSsSrQ+MiaUHES/vv1MxlLWHoEGfhLzoq7SyIsK88Mirgu9lSeHd/+2JybkQ9kNEWTxnzUPKwOMT0zLGo7vNLmfPhJ1WilQoV4F8skDbbgFNRuLO13ZDn6W2jqZ+zjf3H9khzPivG+oaKfHLMDD/zCwHM3rm3JyJzX7GF9EV73AqbNkzzsf54vKhYRT";
+  # }
+  # { hostname = "swag@BMW-M550d-xDrive";
+  #   ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1fJn2ZY9fhBr4E1Gc91uRWS5r+EZ4OHy3RmuAjx7kr swag@BMW-M550d-xDrive";
+  # }
 
-  # winter
-  { hostname = "lilith@bms-cab";
-    ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFb9uVy1x4XaO1uFOQBuERy6xw8cf7Dh24UT0jJs7g3z lilith@bms-cab";
-  }
+  # # winter
+  # { hostname = "lilith@bms-cab";
+  #   ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFb9uVy1x4XaO1uFOQBuERy6xw8cf7Dh24UT0jJs7g3z lilith@bms-cab";
+  # }
 
   # marco
   { hostname = "marco@the-flesh-portal";
     wg = "mttUSatpYdEOmHqnzo7HdhuvTkMpz1Np8kMtsIz6nTY=";
     ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCAI5AdCZ2IrlR3F9vOnG8AEsLXQFx42L4vQNwQ3hiU3cbf5cVxkARCHOqs7eWgpX2RsToilBz6zP7RHaGMLsSP+VkKQlPAvZhH8J6rDXp8Bavzp9Tigpfhvhjhngedb3CuztUdNKggoWs49aeYUO+47EFYQI5n7qAiGf2mOh9OtD6YsItz4nfN5BVXclE1KLXGWjsMyst4Hi8wnBVHcoT4uTwwmuKuPc4PouueaPiFuG9NysaG5qv3bC1pRZChJWJhEUp97WGRdL4t1b7/n44kAdNzh6LZEyWnVeOpfJvAtsayCJVAd3EXRs9QD5BnQQxtVFVg2ST8mNpT5QZY+xrt";
   }
+
+  # you know me    (A) Confirm
+  # { hostname = "zydra@thedragon";
+  #   ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA57ju8Js2lhf1S+LBBJPjWtIIbssEBnsH7oi9fjZjP4";
+  # }
+  # { hostname = "zydra@overlord";
+  #   ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIHNiUAmIdeg6RfI4F2Q4f13o6R6klUsWDAiGxxQL9fh zydra@overlord";
+  # }
 ]

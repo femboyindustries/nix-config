@@ -17,16 +17,14 @@ in {
   nix = let
     registry = lib.mapAttrs (name: value: { flake = value; }) (filterAttrs (name: value: name != "attrs") inputs);
   in {
-    package = pkgs.nixFlakes;
+    # package = pkgs.nixFlakes;
     registry = registry // { dotfiles.flake = inputs.self; };
-    settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes"];
-    settings.substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    settings.trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = "nix-command flakes";
+      substituters = [ "https://nix-community.cachix.org" ];
+      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+    };
   };
 
   environment.systemPackages = with pkgs; [

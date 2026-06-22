@@ -3,6 +3,7 @@
 with lib;
 let
   cfg = config.modules.services.writefreely;
+  domain = "${cfg.subdomain}.${cfg.host}";
   configFile = pkgs.writeText "config.ini" ''
     ${generators.toINI {} cfg.settings}
   '';
@@ -11,6 +12,11 @@ in {
     enable = mkOption {
       type = types.bool;
       default = false;
+    };
+
+    stateDir = mkOption {
+      type = types.either types.path types.string;
+      default = "/var/lib/writefreely";
     };
 
     package = mkOption {
@@ -28,9 +34,14 @@ in {
       default = "";
     };
 
-    domain = mkOption {
+    host = mkOption {
       type = types.str;
       default = null;
+    };
+
+    subdomain = mkOption {
+      type = types.str;
+      default = "blog";
     };
 
     port = mkOption {
@@ -43,10 +54,10 @@ in {
       default = false;
     };
 
-    settings = mkOption {
-      type = types.attrsOf types.attrs;
-      default = {};
-    };
+    # settings = mkOption {
+    #   type = types.attrsOf types.attrs;
+    #   default = {};
+    # };
   };
 
   config = mkIf cfg.enable {
@@ -55,44 +66,38 @@ in {
         description = "Writefreely instance name unset";
       }
 
-      { assertion = cfg.domain != null;
-        description = "Writefreely domain unset";
+      { assertion = cfg.host != null;
+        description = "Writefreely host unset";
       }
     ];
 
-    environment.systemPackages = with pkgs; [ tmux ];
+    # environment.systemPackages = with pkgs; [ tmux ];
 
-    users.users.writefreely = {
-      home = cfg.dataDir;
-      createHome = true;
-      isSystemUser = true;
-      group = "writefreely";
-    };
+    services.writefreely = {
+      enable = true;
+      package = cfg.package;
+      stateDir = cfg.stateDir;
 
-    users.groups.writefreely = {};
+      host = domain;
 
-    modules.services.writefreely.settings = {
-      server = {
+      # nginx.enable = true;
+      # nginx.forceSSL = true;
+
+      database.type = "sqlite3";
+      database.name = "writefreely.db";
+      settings.database.filename = "writefreely";
+
+      settings.server = {
         port = cfg.port;
         bind = "localhost";
         autocert = mkDefault false;
         gopher_port = mkDefault 0;
       };
 
-      database = {
-        type = "postgresql";
-        username = "writefreely";
-#        password = "";
-        database = "writefreely";
-        host = "localhost";
-        port = 3306;
-        tls = mkDefault false;
-      };
-
-      app = {
+      settings.app = {
         site_name = cfg.name;
         site_description = cfg.description;
-        host = "https://${cfg.domain}:${cfg.port}";
+        # host = "https://${domain}:${toString(cfg.port)}";
         theme = mkDefault "write";
         disable_js = mkDefault false;
         webfonts = mkDefault true;
@@ -116,24 +121,24 @@ in {
         disable_password_auth = mkDefault false;
       };
 
-      "oath.generic".allow_disconnect = mkDefault false;
+      # "oath.generic".allow_disconnect = mkDefault false;
+
+      admin.name = "aether";
     };
 
-    services.postgresql = {
-      enable = true;
-      ensureDatabases = [ "writefreely" ];
-      ensureUsers = [
-        { name = "writefreely";
-          ensurePermissions."DATABASE writefreely" = "ALL PRIVELAGES";
-        }
-      ];
-    };
-
-    services.nginx.virtualHosts.${cfg.domain} = {
+    services.nginx.virtualHosts.${domain} = {
       forceSSL = true;
       enableACME = true;
 
-      location."/".extraConfig = ''
+      locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";
+    };
+
+    /*
+    services.nginx.virtualHosts.${domain} = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations."/".extraConfig = ''
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $remote_addr;
@@ -153,33 +158,55 @@ in {
         root /var/www/example.com/static;
       '';
     };
+    */
 
+    /*
     systemd.services.writefreely = {
-      wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
       path = [ cfg.package ];
 
-      preStart = ''
-        cp -f ${configFile} ${cfg.dataDir}
+      serviceConfig = {
+        Type = "simple";
+        User = cfg.user;
+        Group = cfg.group;
+        WorkingDirectory = cfg.stateDir;
+        Restart = "always";
+        RestartSec = 20;
+        ExecStart =
+          "${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' serve";
+        # ExecStart = "${getBin pkgs.tmux}/bin/tmux -S ${cfg.stateDir}/writefreely.sock new -d ${cfg.package}/bin/writefreely";
+        AmbientCapabilities =
+          optionalString (settings.server.port < 1024) "cap_net_bind_service";
+      };
 
-        if [ ! -s ${cfg.dataDir}/keys ];
-          ${cfg.package}/bin/writefreely keys generate
-          cp -f ./keys ${cfg.dataDir}
+      # preStart = ''
+      #   cp -f ${configFile} ${cfg.stateDir}
+
+      #   if [ ! -s ${cfg.stateDir}/keys ];
+      #     ${cfg.package}/bin/writefreely keys generate
+      #     cp -f ./keys ${cfg.stateDir}
+      #   fi
+      # '';
+
+      preStart = ''
+        if ! test -d "${cfg.stateDir}/keys"; then
+          mkdir -p ${cfg.stateDir}/keys
+
+          # Key files end up with the wrong permissions by default.
+          # We need to correct them so that Writefreely can read them.
+          chmod -R 750 "${cfg.stateDir}/keys"
+
+          ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' keys generate
         fi
       '';
 
-      serviceConfig = {
-        User = "writefreely";
-        Type = "forking";
-        GuessMainPID = true;
-        ExecStart = "${getBin pkgs.tmux}/bin/tmux -S ${cfg.dataDir}/writefreely.sock new -d ${cfg.package}/bin/writefreely";
-      };
-
-      postStart = ''
-        ${pkgs.coreutils}/bin/chmod 660 ${cfg.dataDir}/writefreely.sock
-        ${pkgs.coreutils}/bin/chgrp writefreely ${cfg.dataDir}/writefreely.sock
-      '';
+      # postStart = ''
+      #   ${pkgs.coreutils}/bin/chmod 660 ${cfg.stateDir}/writefreely.sock
+      #   ${pkgs.coreutils}/bin/chgrp writefreely ${cfg.stateDir}/writefreely.sock
+      # '';
     };
+    */
 
     networking.firewall = {
       allowedTCPPorts = [ cfg.port ];

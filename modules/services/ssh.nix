@@ -27,6 +27,7 @@ in {
       settings = {
         PasswordAuthentication = cfg.requirePassword;
         PermitRootLogin = "no";
+        GatewayPorts = "yes";
       };
     };
 

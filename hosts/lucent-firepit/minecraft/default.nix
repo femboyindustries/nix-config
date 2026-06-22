@@ -4,8 +4,8 @@ with lib;
 let
   # https://git.sleeping.town/unascribed/unsup/releases
   unsup = pkgs.fetchurl {
-    url = "https://git.sleeping.town/unascribed/unsup/releases/download/v0.2.3/unsup-0.2.3.jar";
-    hash = "sha256-DBMxiZwfUUiLqXYOMD8EUz4HubAZIEjAPmk32T0NYtA=";
+    url = "https://git.sleeping.town/unascribed/unsup/releases/download/v1.0/unsup-1.0.jar";
+    hash = "sha256-3dmos+eUPqpEYN9jXyKUuB80jvEZ3alAF/U+tprZO8U=";
   };
 
   mkUnsupINI = { url, extraConfig ? "" }: pkgs.writeTextFile {
@@ -33,6 +33,9 @@ let
       hewoicvewse     = "98e715cf-b1a4-4d50-9ed0-7d20fbdf240e";
       numpad_7        = "44e6e6d7-770d-4afc-96b1-9999b61ced1d";
       _Zydra          = "0af7b31f-63a5-426d-8cee-6c54385856b6";
+      Arthur_the_AI   = "65332e35-744e-4570-82e5-ab935f68564e";
+      DevillishLizzie = "8e884d2e-c22d-43a3-8019-06701434f7a0";
+      SqueaksDCorgeh  = "d6d47b60-b1e0-4424-9f57-569a775d62be";
     };
     unsupINI = mkUnsupINI { url = "https://oat.zone/f/gayrats/pack.toml"; };
   };
@@ -45,15 +48,14 @@ in {
 
         enable = true;
         server-port = 25959;
-
-        inherit (gayrats) whitelist;
       };
-    
+
       "gayrats" = import ./gayrats.nix {
         inherit pkgs;
 
         enable = false;
-        server-port = 25565;
+        #server-port = 25565; # used by yugoslavia
+        server-port = 0;
 
         inherit unsup;
         inherit (gayrats) whitelist;
@@ -76,13 +78,88 @@ in {
       "gay-capybaras" = import ./gay-capybaras.nix {
         inherit pkgs;
 
-        enable = true;
+        enable = false;
         server-port = 25505;
 
         inherit unsup;
         inherit (gayrats) whitelist;
 
         unsupINI = mkUnsupINI { url = "https://aether.gay/f/gay-capybaras/pack.toml"; };
+      };
+
+      "yugoslavia" = {
+        enable = false; # never again
+        package = pkgs.fabricServers.fabric-1_20_1;
+        jvmOpts = ((import ./mc-flags.nix) "8G") + " -javaagent:${unsup}";
+
+        openFirewall = true;
+
+        serverProperties = {
+          server-port = 25565;
+          gamemode = 0;
+          motd = "§bhome of bar";
+          white-list = true;
+          max-players = 16;
+          allow-flight = true;
+          simulation-distance = 8;
+          entity-broadcast-range-percentage = 50;
+          enable-command-block = false;
+          enforce-secure-profile = false;
+          snooper-enabled = false;
+          spawn-protection = 0;
+          level-seed = "penis";
+          initial-enabled-packs = "bundle";
+        };
+
+        symlinks = {
+          "unsup.ini" = mkUnsupINI {
+            url = "https://yugoslavia.best/packwiz/pack.toml";
+          };
+        };
+      };
+
+      "jaidenaether" = {
+        enable = true;
+        package = pkgs.fabricServers.fabric-1_21_5;
+        jvmOpts = ((import ./mc-flags.nix) "8G") + " -javaagent:${unsup}";
+
+        openFirewall = true;
+
+        serverProperties = {
+          server-port = 25645;
+          gamemode = 0;
+          white-list = true;
+          max-players = 2;
+          allow-flight = true;
+          simulation-distance = 8;
+          enable-command-block = false;
+          enforce-secure-profile = false;
+          snooper-enabled = false;
+          spawn-protection = 0;
+          level-seed = "4357816";
+        };
+      };
+
+      # PLEASE FIX WHATEVER THE *FUCK* IS GOING ON WITH THE PERMISSIONS LATER
+      "gay-squirrels" = import ./gay-squirrels.nix {
+        inherit pkgs lib unsup;
+        inherit (gayrats) whitelist;
+
+        enable = false;
+        # enable = false; # I BEG
+        server-port = 25969;
+        unsupINI = mkUnsupINI { url = "https://aether.gay/f/gay-squirrels/pack.toml"; };
+      };
+
+      "smr" = import ./smr.nix {
+        inherit pkgs;
+        inherit lib;
+
+        enable = false;
+        server-port = 25511;
+
+        inherit unsup;
+        unsupINI = mkUnsupINI { url = "https://oat.zone/f/smrpack/pack.toml"; };
       };
 
       "n3ko-test" = import ./n3ko-test.nix {
@@ -115,37 +192,17 @@ in {
         inherit pkgs;
         inherit lib;
 
-        enable = true;
+        enable = false;
         server-port = 25984;
       };
 
-      "modfest-build" = let
-        unsupINI = mkUnsupINI {
-          url = "https://raw.githack.com/ModFest/modfest-1-20/main/pack/pack.toml";
-        };
-      in {
+      "upsilon" = import ./upsilon.nix {
+        inherit pkgs;
+        inherit lib;
+        inherit unsup;
+
         enable = false;
-        package = pkgs.fabricServers."fabric-1_20_4".override { loaderVersion = "0.15.3"; };
-        jvmOpts = ((import ./mc-flags.nix) "4G") + " -javaagent:${unsup}";
-        
-        openFirewall = true;
-        
-        serverProperties = {
-          server-port = 25525;
-          gamemode = 1;
-          motd = "modfest build server !";
-          white-list = true;
-          max-players = 128;
-          allow-flight = true;
-          enable-command-block = true;
-          enforce-secure-profile = false;
-          snooper-enabled = false;
-          spawn-protection = 0;
-        };
-        
-        symlinks = {
-          "unsup.ini" = unsupINI;
-        };
+        server-port = 25525;
       };
     };
 

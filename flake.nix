@@ -2,12 +2,12 @@
   description = "Frosted Flakes";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-25.05";
 
     # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # agenix - age-encrypted secrets
@@ -23,11 +23,13 @@
 
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
+      # url = "git+https://git.faeranne.com/faeranne/nix-minecraft";
+      # url = "git+file:/home/aether/src/nix-minecraft?shallow=1";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    cohost-blogger = {
-      url = "git+https://git.oat.zone/oat/cohost-blogger";
+    post-cohost-blogger = {
+      url = "git+https://git.oat.zone/oat/post-cohost-blogger";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
 

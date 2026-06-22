@@ -10,6 +10,7 @@ let
 in {
   imports = [ agenix.nixosModules.default ];
 
+/*
   age = let
     # ugly, lazy, but works
     users = map (user: "/home/${user}/.ssh") (attrNames (readDir "/home/"));
@@ -28,4 +29,5 @@ in {
     secrets = mkMerge (map (x: {"${x}".file = "${secretsDir}/${x}";}) (attrNames (import secretsFile)));
     identityPaths = options.age.identityPaths.default ++ userIdentityPaths;
   };
+  */
 }
