@@ -54,6 +54,8 @@ in {
       extraRules = if cfg.isLocalMachine then [{ users = builtins.attrNames config.defaultUsers; keepEnv = true; noPass = true; }] else [];
     };
 
+    environment.systemPackages = [ pkgs.doas-sudo-shim ];
+
     boot.kernel.sysctl = {
       "kernel.sysrq" = 0;
 
