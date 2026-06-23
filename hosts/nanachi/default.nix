@@ -32,9 +32,9 @@ in {
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [
           "oatmealine@five-pebbles"
-          "oatmealine@looks-to-the-moon"
           "oatmealine@boykisser"
           "oatmealine@seven-red-suns"
+          "oatmealine@gazing-stars"
         ];
       };
 
