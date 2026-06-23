@@ -17,7 +17,7 @@ source, build locally and then deploy it:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --target-host nanachi --use-remote-sudo switch --flake .#nanachi --impure
+   nixos-rebuild --target-host nanachi --use-remote-sudo --ask-sudo-password switch --flake .#nanachi --impure
    ```
 
 2. **on a nix-capable system (remote build)**
@@ -27,7 +27,7 @@ use a local source, build remotely and deploy from there:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --build-host nanachi --target-host nanachi --use-remote-sudo switch --flake .#nanachi --impure
+   nixos-rebuild --build-host nanachi --target-host nanachi --use-remote-sudo --ask-sudo-password switch --flake .#nanachi --impure
    ```
 
 3. **on any system (full remote)**
@@ -55,7 +55,7 @@ Generally when adding modules (even those pulled from `nixpkgs`) you'd want to:
    done
 3. Set it to enabled, set port, domain, etc. in `hosts/.../default.nix` or
    wherever else is more appropriate
-   - For webapps, follow what's done in
-     `hosts/lucent-firepit/webapps/default.nix`; if you're doing something
-     bigger, it may be worth abstracting into a seperate file
+   - For webapps, follow what's done in `hosts/nanachi/webapps/default.nix`; if
+     you're doing something bigger, it may be worth abstracting into a seperate
+     file
 4. Rebuild/switch to the new system (as described [above](#dev--deploy))

@@ -12,17 +12,15 @@
 
 let
   yarn-berry = yarn-berry_4;
-in
-
-stdenv.mkDerivation rec {
+in stdenv.mkDerivation rec {
   pname = "ozone";
-  version = "0.1.98";
+  version = "0.1.104";
 
   src = fetchFromGitHub {
     owner = "bluesky-social";
     repo = "ozone";
     tag = "v${version}";
-    hash = "sha256-mN77o97t87l1+fj8frK8icayOxk3gCstAF+yw8Jgw3c=";
+    hash = "sha256-ibAgi6OLuEf1prCWc+Pe/NTiWXxYd1Zjtne1QLhRs5A=";
   };
 
   sourceRoot = "${src.name}/service";
@@ -40,24 +38,24 @@ stdenv.mkDerivation rec {
     missingHashes = ./missing-hashes.json;
     offlineCache = yarn-berry.fetchYarnBerryDeps {
       inherit src missingHashes;
-      hash = "sha256-WyF/+NVg1FXeqgpP0KVLZ6GYcOOMit83ajOFRm56zuQ=";
+      hash = "sha256-F0gu6hdqXCx7Fok8ngRm0aLKRXMSoEgZNLmihLw6uvw=";
     };
-    
+
     CYPRESS_INSTALL_BINARY = 0;
-    
+
     buildPhase = ''
       runHook preBuild
 
       ${nodejs}/bin/npm run build
-  
+
       runHook postBuild
     '';
-  
+
     installPhase = ''
       runHook preInstall
-  
+
       mv .next $out
-  
+
       runHook postInstall
     '';
   };
@@ -67,14 +65,14 @@ stdenv.mkDerivation rec {
     makeBinaryWrapper
     nodejs
   ];
-  
+
   missingHashes = ./missing-hashes-service.json;
   offlineCache = yarn-berry.fetchYarnBerryDeps {
     inherit missingHashes;
     yarnLock = "${src}/service/yarn.lock";
-    hash = "sha256-c4oYXaYNyJpfvdOWnJ5hWp+3SHLQIlL4SVLVEioNKWw=";
+    hash = "";
   };
-  
+
   buildPhase = ''
     runHook preBuild
 

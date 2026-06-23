@@ -19,7 +19,7 @@ in {
     };
     package = mkOption {
       type = types.package;
-      default = pkgs.unstable.forgejo;
+      default = pkgs.forgejo;
     };
     enableActions = mkOption {
       type = types.bool;

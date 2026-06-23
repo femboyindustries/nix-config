@@ -26,7 +26,7 @@ in {
     # oatmealine ?? is that a reference to jill oatmealine monoids from the beloved videogame franchise "oateamelin jill monoids???" .oat. zone??? from va11hall-a??? video game???? woman????? minecraft???????
     oatmealine = {
       conf = {
-        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep htop unzip zip _.ozone ];
+        packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep htop unzip zip ];
         shell = pkgs.unstable.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
@@ -127,7 +127,7 @@ in {
       };
 
       ozone = {
-        enable = true;
+        #enable = true; # off for now due to an upstream yarn-berry bug
         domain = "ozone.yugoslavia.best";
         serviceHandle = "moderation.at.yugoslavia.best";
         serviceDID = "did:plc:kgpqgx33bhqf4sn7lb7thnzw";

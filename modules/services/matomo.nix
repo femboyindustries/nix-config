@@ -20,7 +20,7 @@ in {
       matomo = {
         enable = true;
 
-        package = pkgs.unstable.matomo;
+        package = pkgs.matomo;
         periodicArchiveProcessing = true;
         hostname = cfg.domain;
         nginx = {
@@ -34,7 +34,7 @@ in {
       mysql = {
         enable = true;
 
-        package = pkgs.unstable.mariadb;
+        package = pkgs.mariadb;
 
         settings = {
           mysqld = {

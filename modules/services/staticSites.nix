@@ -144,8 +144,8 @@ in {
         phpOptions = ''
           display_errors = on;
         '';
-        phpEnv."PATH" = lib.makeBinPath [ pkgs.unstable.php ];
-        phpPackage = pkgs.unstable.php;
+        phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
+        phpPackage = pkgs.php;
       };
     }) sites);
   };

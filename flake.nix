@@ -2,7 +2,7 @@
   description = "Amalgamated, Bespoke Frosted Flakes";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     nixos-hardware = {
@@ -20,7 +20,7 @@
     gd-icon-renderer-web.url = "github:oatmealine/gd-icon-renderer-web";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, /* hyprland, hyprpaper, hyprpicker, */ ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
     let
       system = "x86_64-linux";
 

@@ -16,13 +16,19 @@ in {
       type = types.bool;
       default = true;
     };
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.openssh_hpn;
+    };
   };
 
   config = mkIf cfg.enable {
-    programs.ssh.package = pkgs.unstable.openssh_hpn;
+    programs.ssh.package = cfg.package;
 
     services.openssh = {
       enable = true;
+      package = cfg.package;
 
       settings = {
         PasswordAuthentication = cfg.requirePassword;

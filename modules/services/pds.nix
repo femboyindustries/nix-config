@@ -42,8 +42,9 @@ in {
       }
     ];
 
-    services.pds = {
+    services.bluesky-pds = {
       enable = true;
+      pdsadmin.enable = true;
       package = cfg.package;
       settings = {
         # FUCK bsky pds configuration
@@ -76,7 +77,7 @@ in {
         PDS_TERMS_OF_SERVICE_URL = "https://youtu.be/QahiS1Tn_i4";
         PDS_CONTACT_EMAIL_ADDRESS = "pds@oat.zone";
         # branding (used in oauth provider)
-        PDS_LOGO_URL = "https://yugoslavia.best/favicon-32x32.png";
+        PDS_LOGO_URL = "https://at.yugoslavia.best/favicon.png";
         PDS_PRIMARY_COLOR = "#00ffff";
         PDS_ERROR_COLOR = "#ff00ff";
         PDS_WARNING_COLOR = "#ffff00";
@@ -90,11 +91,23 @@ in {
         PDS_DID_PLC_URL = "https://plc.directory";
         PDS_BSKY_APP_VIEW_URL = "https://api.bsky.app";
         PDS_BSKY_APP_VIEW_DID = "did:web:api.bsky.app";
-        PDS_CRAWLERS = "https://bsky.network";
-        # moderation service TODO PLEASE SWITCH THIS [matters less bc it's configurable by the appview]
+        # crawlers shamlessly stolen from
+        # <https://compare.hose.cam>
+        PDS_CRAWLERS = concatStringsSep "," [
+          "https://bsky.network"
+          "https://relay.cerulea.blue"
+          "https://relay.fire.hose.cam"
+          "https://relay2.fire.hose.cam"
+          "https://relay3.fr.hose.cam"
+          "https://relay.hayescmd.net"
+          "https://relay.xero.systems"
+          "https://relay.upcloud.world"
+          "https://relay.feeds.blue"
+          "https://atproto.africa"
+          "https://relay.whey.party"
+        ];
         PDS_MOD_SERVICE_URL = "https://mod.yugoslavia.best";
         PDS_MOD_SERVICE_DID = "did:plc:7ky7ww26gqwhdofqrxxdy7hb";
-        # report service TODO PLEASE SWITCH THIS
         PDS_REPORT_SERVICE_URL = "https://mod.yugoslavia.best";
         PDS_REPORT_SERVICE_DID = "did:plc:7ky7ww26gqwhdofqrxxdy7hb";
 
@@ -161,6 +174,8 @@ in {
       		default_type application/json;
       		add_header access-control-allow-headers "authorization,dpop,atproto-accept-labelers,atproto-proxy" always;
       		add_header access-control-allow-origin "*" always;
+          add_header X-Frame-Options SAMEORIGIN always;
+          add_header X-Content-Type-Options nosniff;
       		return 200 '{"lastInitiatedAt":"2025-07-14T14:22:43.912Z","status":"assured"}';
         '';
       };
@@ -169,6 +184,8 @@ in {
       		default_type application/json;
       		add_header access-control-allow-headers "authorization,dpop,atproto-accept-labelers,atproto-proxy" always;
   				add_header access-control-allow-origin "*" always;
+          add_header X-Frame-Options SAMEORIGIN always;
+          add_header X-Content-Type-Options nosniff;
   				return 200 '{"state":{"lastInitiatedAt":"2025-07-14T14:22:43.912Z","status":"assured","access":"full"},"metadata":{"accountCreatedAt":"2022-11-17T00:35:16.391Z"}}';
         '';
       };
