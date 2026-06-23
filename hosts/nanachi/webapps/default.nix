@@ -57,9 +57,6 @@ in {
         "yugoslavia.fishing".php = true;
         "rivervalleychocolate.com".dataDir = "/var/www/rivervalleychocolate.com";
         "rivervalleychocolate.com".php = true;
-        "sbard.mayf.pink".dataDir = "/var/www/sbard.mayf.pink/public";
-        "sbard.mayf.pink".php = true;
-        "sbard.mayf.pink".phpHandlePathing = true;
         #"pjsk.oat.zone".dataDir = "/var/www/pjsk.oat.zone";
         "mayf.pink".dataDir = "/var/www/mayf.pink";
         "mayf.pink".php = true;
