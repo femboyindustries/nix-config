@@ -74,11 +74,6 @@ in {
     };
   };
 
-  keyboard = {
-    locale = "en_US.UTF-8";
-    variant = "qwerty";
-  };
-
   security.acme.certs."at.yugoslavia.best" = {
     extraDomainNames = [ "*.at.yugoslavia.best" ];
 
@@ -100,7 +95,6 @@ in {
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCL75/Pg5bP7LaXE6uPyyv8QDRivWJC6YcH6oJJztkjqL6g+0xPPiN6I54q/bNF4nHA2BHVUktKUU9bGDEOpYIRq7kegp2/K/+FNTM1Kz6rJSrSc8e0Ogxg8vhD6maxqLU8q+D1OMhBu0UiWUB+GxXmeYfBtXPjpcE+AaJ80BPs7vwiulHPGn7UAcRuP36Z+3JJiN2BQnU2aizXWsgyU575Uy3DVvAt7eHon+SoJiTCs2//5KexJ42U6ZiE6f/oTFdiud70lpxhGgiiFvj6M9RZ0aLoxspiskW45jKLXIMJ+mO6husg9GfvCchbps3YkmH0hZ24Ii1EiFhi5HZMY0Lt mayflower"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrlqH2OShvXdzq1sV5IDuWQzeC9OHBVvwj0+Y0XXwi7 mayflower-thinkpad"
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCBKMXTLBJ5iIPiO9jiN+AHWxpgG1kcdI0h23+G1FLMnK+xhkmaP9Vjr9QbqQ4mmRqfGERfJW5H2/OvTEUXnrkAp1Jc8oPrc14/auwKivtbMC5tsWzioDMbcAYKrcP37D3Kw1P7nzSyAz3QsRXBRx26OE5NeTo4YfGl/TOkQnoBCDTt8kcziWEvUVeOgnHf3hnszs2H4P6RAyOqjuOH6BWhtbKsCHThTHaAadLgeH5nB1WXLYqG2N1KEzAhj8WBBzPmeZcMMRr5xkqYVj14cd+9syEaenV+wXapoPyDtOb6YtOKArN9RkT0OOqQk17OzxvGqHUEXQ4eGmNgc8BLsGJn rsa-key-20230402"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqwa9T+naK7UzN/c9F2QsM7PgAd0/eV42V5OczXuvC4 oatmealine@lucent-firepit"
         #fetchSSH "oatmealine@void-defragmented"
         #fetchSSH "oatmealine@beppy-phone"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAIphRdy+g7zfj+KxfONoD24lzk+/mGhQ0EnOe8QGf8 oatmealine@disroot.org" # gh actions
@@ -144,7 +138,7 @@ in {
     ];
   };
 
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Warsaw";
 
   networking = {
     firewall.allowPing = true;
