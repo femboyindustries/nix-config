@@ -77,7 +77,7 @@ in {
       } // (listToAttrs (map (value: {
         name = "${value}.femboy.industries";
         value = { dataDir = "/var/www/femboy.industries/_subdomains/${value}/"; };
-      }) ["sage"]));
+      }) []));
 
       matomo = {
         enable = true;
