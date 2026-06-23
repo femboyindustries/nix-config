@@ -32,10 +32,10 @@ use a local source, build remotely and deploy from there:
 
 3. **on any system (full remote)**
 
-   if you cannot do either of the other ones, you can clone the repo on the server,
-then make your changes and run `rebuild.sh`. this is the least preferred option
-because it means you have to either commit every change and push&pull, or edit
-the config on the server with a modal editor like nano/micro, but is always
+   if you cannot do either of the other ones, you can clone the repo on the
+server, then make your changes and run `rebuild.sh`. this is the least preferred
+option because it means you have to either commit every change and push&pull, or
+edit the config on the server with a modal editor like nano/micro, but is always
 available in a pinch
 
    ```sh
@@ -44,6 +44,14 @@ available in a pinch
    # ..if necessary, do your changes, then..
    ./rebuild.sh
    ```
+
+---
+
+generally due to all of the above methods relying on this repo being up-to-date,
+**commit and push** any changes that have been deployed immediately to prevent
+accidental rollbacks of your changes. this is a policy that has been very poorly
+followed over the history of this config but i am setting my foot down and
+forcing it early out of the gate. **commit and push your changes**. thanks
 
 ### Adding modules
 
