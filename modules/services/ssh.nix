@@ -20,7 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.ssh.package = pkgs.unstable.openssh_hpn;
-  
+
     services.openssh = {
       enable = true;
 
