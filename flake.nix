@@ -1,10 +1,8 @@
 {
-  description = "Frosted Flakes";
+  description = "Amalgamated, Bespoke Frosted Flakes";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
-
-    # WARNING: Where possible, prefer the stable branch of nixpkgs as nixpkgs-unstable may have incompatable or vulnerable software.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     nixos-hardware = {

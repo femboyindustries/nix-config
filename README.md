@@ -1,46 +1,61 @@
-# Frosted Flakes
+# Amalgamated, Bespoke Frosted Flakes
 
-Nix Flake dotfiles shared across a [few hosts](./hosts/). Most development here will go into the [`lucent-firepit`](https://dark-firepit.cloud/) host, however.
+A deeply rooted evil lies here. Something has gone very wrong. 1 like = 1 cup
+size up
 
-## Development
+documentation here is a mess. sorry
 
-_Commands here will use `lucent-firepit`-based paths and names as an example_
+## dev & deploy
 
-- To build the system (doesn't apply changes):
-    ```sh
-    nixos-rebuild build --upgrade --impure --flake /etc/dotfiles#lucent-firepit
-    ```
-- To build & switch to a new system (applies changes):
-    ```sh
-    doas nixos-rebuild switch --impure --upgrade --flake /etc/dotfiles#lucent-firepit
-    ```
+depending on your system, one or other option may be more available/preferred.
+pick your poison
 
-### `lucent-firepit`
+1. **on a nixos system (remote deploy)**
 
-Things here mostly only apply to the [`lucent-firepit`](https://dark-firepit.cloud/) host.
+   if you have a nixos system with a capable /nix/store, you can use a local
+source, build locally and then deploy it:
 
-#### Adding modules
+   ```sh
+   # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
+   nixos-rebuild --target-host nanachi --use-remote-sudo switch --flake .#nanachi --impure
+   ```
+
+2. **on a nix-capable system (remote build)**
+
+   if you have a *nix system with the capability and will to use Nix, you can
+use a local source, build remotely and deploy from there:
+
+   ```sh
+   # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
+   nixos-rebuild --build-host nanachi --target-host nanachi --use-remote-sudo switch --flake .#nanachi --impure
+   ```
+
+3. **on any system (full remote)**
+
+   if you cannot do either of the other ones, you can clone the repo on the server,
+then make your changes and run `rebuild.sh`. this is the least preferred option
+because it means you have to either commit every change and push&pull, or edit
+the config on the server with a modal editor like nano/micro, but is always
+available in a pinch
+
+   ```sh
+   # on the server, in your home directory (or wherever you feel is appropriate)
+   git clone https://git.oat.zone/oat/fi-nix-config && cd fi-nix-config
+   # ..if necessary, do your changes, then..
+   ./rebuild.sh
+   ```
+
+### Adding modules
 
 Generally when adding modules (even those pulled from `nixpkgs`) you'd want to:
 
-1. Create a new module under `modules/services/`; `gitea.nix` and `nitter.nix` are pretty okay examples of what to do
-2. **`git add .`** or else Nix will act clueless about everything you've just done
-3. Set it to enabled, set port, domain, etc. in `hosts/.../default.nix` or wherever else is more appropriate
-  - For webapps, follow what's done in `hosts/lucent-firepit/webapps/default.nix`; if you're doing something bigger, it may be worth abstracting into a seperate file
-4. Rebuild/switch to the new system (as described [above](#development))
-
-#### `yugoslavia-best.nix`
-
-God fucking help us lmao
-
-You're on your own if you try to edit this file. Please be ready to yell at Jill the moment you open it and to continue doing that for the entire time it is open
-
-#### Editing code
-
-**For now**, you can simply edit `/etc/dotfiles`; in the future it's planned to give every user their own seperate repository sandbox before pulling the changes into the main config at `/etc/dotfiles`.
-
-This can be done directly on the server (as long as you have the `dotfiles` group) through your favorite modal editor (`micro`, `nvim`, `hx`, `nano`, ...) or at [https://dev-firepit.oat.zone/](https://dev-firepit.oat.zone/) (authorization and further details are pinned in the Discord).
-
-If you encounter permission funnies, don't hesitate to `doas` your way into `chmod`dding/`chown`ing files as necessary; directories should be `775` and files should be `664`, however we've yet to figure out how to consistently enforce this across the directory.
-
-Be sure to commit regularly to prevent [tons of](https://git.oat.zone/dark-firepit/dotfiles/commit/021fab40f7f815708d4cf918ec0ac0bd16c0bc8f) [densely packed](https://git.oat.zone/dark-firepit/dotfiles/commit/07f9ac6a9ee53f6689a5f8ee87b94b96a409c375) [undocumented commits](https://git.oat.zone/dark-firepit/dotfiles/commit/9da0a143ae392ec7f8abc731e8c245f29b55e685) building up after noone bothers to commit anything.
+1. Create a new module under `modules/services/`; `forgejo.nix` and `pds.nix`
+   are pretty okay examples of what to do
+2. **`git add .`** or else Nix will act clueless about everything you've just
+   done
+3. Set it to enabled, set port, domain, etc. in `hosts/.../default.nix` or
+   wherever else is more appropriate
+   - For webapps, follow what's done in
+     `hosts/lucent-firepit/webapps/default.nix`; if you're doing something
+     bigger, it may be worth abstracting into a seperate file
+4. Rebuild/switch to the new system (as described [above](#dev--deploy))
