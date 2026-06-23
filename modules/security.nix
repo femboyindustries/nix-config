@@ -77,6 +77,9 @@ in {
       "net.ipv4.tcp_fastopen" = 3;
       "net.ipv4.tcp_conjestion_control" = "bbr";
       "net.core.default_qdisc" = "cake";
+
+      # allows steam-run and such to work
+      "kernel.unprivileged_userns_clone" = 1;
     };
 
     user = {
