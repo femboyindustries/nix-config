@@ -17,7 +17,7 @@ source, build locally and then deploy it:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --target-host nanachi --use-remote-sudo --ask-sudo-password switch --flake .#nanachi --impure
+   nixos-rebuild --target-host nanachi --sudo switch --flake .#nanachi --impure
    ```
 
 2. **on a nix-capable system (remote build)**
@@ -27,7 +27,7 @@ use a local source, build remotely and deploy from there:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --build-host nanachi --target-host nanachi --use-remote-sudo --ask-sudo-password switch --flake .#nanachi --impure
+   nixos-rebuild --build-host nanachi --target-host nanachi --sudo switch --flake .#nanachi --impure
    ```
 
 3. **on any system (full remote)**

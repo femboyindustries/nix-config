@@ -18,6 +18,8 @@
     nlw-api.url = "git+https://git.oat.zone/oat/nlw-api";
     cardgen.url = "git+https://git.oat.zone/oat/cardgen";
     gd-icon-renderer-web.url = "github:oatmealine/gd-icon-renderer-web";
+
+    nixpkgs-forgejo-runner.url = "github:emilylange/nixpkgs?ref=nixos/forgejo-runner";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:

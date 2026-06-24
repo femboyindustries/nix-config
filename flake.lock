@@ -296,6 +296,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-forgejo-runner": {
+      "locked": {
+        "lastModified": 1781457128,
+        "narHash": "sha256-3fgbowSSUAEsnUzANP3Nx2ZXu16nwLuhGSUM12EYugw=",
+        "owner": "emilylange",
+        "repo": "nixpkgs",
+        "rev": "ebbed83ea980369df17fef7c6820c8f5d26fc1e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emilylange",
+        "ref": "nixos/forgejo-runner",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -465,6 +481,7 @@
         "gd-icon-renderer-web": "gd-icon-renderer-web",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
+        "nixpkgs-forgejo-runner": "nixpkgs-forgejo-runner",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nlw-api": "nlw-api",
         "post-cohost-blogger": "post-cohost-blogger"
