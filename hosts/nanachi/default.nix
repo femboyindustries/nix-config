@@ -76,12 +76,13 @@ in {
 
   security.acme.certs."at.yugoslavia.best" = {
     extraDomainNames = [ "*.at.yugoslavia.best" ];
-
     dnsPropagationCheck = true;
 
     # https://go-acme.github.io/lego/dns/cloudflare/index.html
     dnsProvider = "cloudflare";
-    environmentFile = "/etc/yugoslavia.best-cloudflare-secret";
+    credentialFiles = {
+      CLOUDFLARE_DNS_API_TOKEN_FILE = "/etc/yugoslavia.best-cloudflare-secret";
+    };
   };
 
   modules = {

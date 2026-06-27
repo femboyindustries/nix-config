@@ -47,7 +47,7 @@ in {
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
-      
+
       serviceConfig = let
         # https://github.com/bluesky-social/ozone/blob/main/HOSTING.md#create-the-ozone-env-configuration-file
         # https://github.com/bluesky-social/ozone/blob/main/HOSTING.md#ozone-environment-variables
@@ -94,7 +94,7 @@ in {
         }
       ];
     };
-  
+
     services.nginx.virtualHosts."${cfg.domain}" = {
       forceSSL = true;
       enableACME = true;
@@ -111,7 +111,7 @@ in {
         '';
       };
     };
-    
+
     users = {
       users.ozone = {
         group = "ozone";

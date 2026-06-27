@@ -125,7 +125,7 @@ in {
       forceSSL = true;
       #enableACME = true;
       useACMEHost = "${cfg.domain}";
-      serverAliases = [ "${cfg.domain}" "*.${cfg.domain}" ];
+      serverAliases = [ "*.${cfg.domain}" ];
 
       # surely there's a better way to do this
       locations."= /" = {

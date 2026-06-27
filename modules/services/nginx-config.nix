@@ -21,7 +21,7 @@ in {
     services.nginx = {
       enable = true;
       #enable = lib.mkForce false;
-      
+
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;

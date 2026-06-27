@@ -21,7 +21,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    unrar unzip micro curl wget git
+    unrar unzip micro curl wget git coreutils
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

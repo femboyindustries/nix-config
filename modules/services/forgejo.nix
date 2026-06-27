@@ -47,7 +47,25 @@ in {
             type = "postgres";
             # leaving this blank intentionally
           };
-          settings = mkMerge [ (builtins.fromTOML (builtins.readFile ../../config/forgejo/app.toml)) {
+          settings = {
+            # https://forgejo.org/docs/latest/admin/config-cheat-sheet/
+            DEFAULT = {
+              APP_NAME = "Forgejo: femboy.industries hosted Git";
+            };
+            "repository" = {
+              DEFAULT_BRANCH = "main";
+              PREFERRED_LICENSES = "Anyone But Richard M Stallman license,Be Gay Do Crimes License,This is not a place of honour";
+            };
+            "ui" = {
+              DEFAULT_THEME = "forgejo-auto";
+              #THEMES = "forgejo-auto,forgejo-light,forgejo-dark";
+              CUSTOM_EMOJIS = concatStringsSep "," [
+                # default
+                "forgejo" "gitea" "codeberg" "gitlab" "git" "github" "gogs"
+                # custom
+                "pencil" "twinktime" "osaka" "Screenshot_20221211_121407" "emoji_9" "chart_with_neutral_trend" "devoid" "Grin" "hard" "GRINN" "emoji9EPIC" "guh" "Extreme" "theb" "unstar" "CamEdgeTrigger" "caterpillar" "Normal" "youdidwhatnow" "spongebob" "omega" "spungebob" "ppcat" "bwabwabwa" "OsakaTrue" "oska" "thescreamsofthedamned" "orang" "yeah" "ohmygah" "slug" "goldensigma" "colonthree" "yiikingout" "yay" "okheart" "colonthree" "blue_eating" "jonkler" "neurodiversion" "funsurprise" "skill_check" "catjump" "e3c" "bookmove" "fanowar" "easternlion" "jerma" "jopeful" "missing"
+              ];
+            };
             "ui.meta" = {
               AUTHOR = "femboy.industries";
               DESCRIPTION = "femboy.industries's shared git instance";
@@ -56,11 +74,57 @@ in {
               DOMAIN = cfg.domain;
               HTTP_PORT = cfg.port;
               ROOT_URL = "https://${cfg.domain}/";
+              DISABLE_SSH = true; # as long as we're behind cloudflare, ssh don't work
+            };
+            "security" = {
+              INSTALL_LOCK = true;
+              PASSWORD_HASH_ALGO = "argon2";
+              PASSWORD_CHECK_PWN = true;
+            };
+            "openid" = {
+              ENABLE_OPENID_SIGNIN = false;
+              ENABLE_OPENID_SIGNUP = false;
+            };
+            "oauth2_client" = {
+              UPDATE_AVATAR = true;
+            };
+            "service" = {
+              REGISTER_EMAIL_CONFIRM = false;
+              ENABLE_NOTIFY_MAIL = false;
+              ALLOW_ONLY_EXTERNAL_REGISTRATION = false;
+              ENABLE_CAPTCHA = false;
+              REQUIRE_SIGNIN_VIEW = false;
+              DEFAULT_KEEP_EMAIL_PRIVATE = true;
+              ENABLE_TIMETRACKING = false;
+              DISABLE_REGISTRATION = true;
+            };
+            "session" = {
+              PROVIDER = "file";
+              COOKIE_SECURE = true;
+            };
+            "picture" = {
+              ENABLE_FEDERATED_AVATAR = true;
+            };
+            "attachment" = {
+              ALLOWED_TYPES = "*/*";
+            };
+            "cron" = {
+              ENABLED = true;
+            };
+            "federation" = {
+              ENABLED = true;
+            };
+            "git" = {
+              PULL_REQUEST_PUSH_MESSAGE = false;
             };
             "actions" = {
               ENABLED = cfg.enableActions;
             };
-          }];
+            "other" = {
+              SHOW_FOOTER_POWERED_BY = false;
+              SHOW_FOOTER_TEMPLATE_LOAD_TIME = false;
+            };
+          };
         };
 
         nginx.virtualHosts."${cfg.domain}" = {
