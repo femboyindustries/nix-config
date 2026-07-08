@@ -52,6 +52,7 @@ in {
         #"tesco-underground-dev.oat.zone".auth = { tesco = builtins.readFile /etc/tesco; };
         "oat.zone".dataDir = "/var/www/oat.zone";
         "oat.zone".php = true;
+        "goungle.oat.zone".dataDir = "/var/www/goungle.oat.zone";
         #"beta-blog.oat.zone".dataDir = "/var/www/beta.blog.oat.zone";
         "yugoslavia.fishing".dataDir = "/var/www/yugoslavia.fishing";
         "yugoslavia.fishing".php = true;
