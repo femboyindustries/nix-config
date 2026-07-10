@@ -15,6 +15,7 @@ in {
     inputs.nlw-api.nixosModules.nlw-api
     inputs.cardgen.nixosModules.cardgen
     inputs.gd-icon-renderer-web.nixosModules.default
+    inputs.following-shim.nixosModules.following-shim
   ];
 
   services.logrotate.checkConfig = false;

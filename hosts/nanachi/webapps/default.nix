@@ -25,6 +25,12 @@ in {
       port = 3435;
       domain = "gdicon.oat.zone";
     };
+    services.following-shim = {
+      enable = true;
+      port = 2501;
+      domain = "following-shim.oat.zone";
+      feedURI = "at://did:plc:7eansezz3nlumwc7gfuiaksv/app.bsky.feed.generator/following-shim";
+    };
 
     modules.services = {
       forgejo = {

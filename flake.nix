@@ -20,6 +20,8 @@
     gd-icon-renderer-web.url = "github:oatmealine/gd-icon-renderer-web";
 
     nixpkgs-forgejo-runner.url = "github:emilylange/nixpkgs?ref=nixos/forgejo-runner";
+
+    following-shim.url = "git+https://tangled.org/oat.zone/following-shim";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
