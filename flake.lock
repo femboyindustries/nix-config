@@ -266,11 +266,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1783704161,
-        "narHash": "sha256-2EY3vXkJ6rgKEucRxWYTtWldHlP3XkE2rprjecWIeag=",
+        "lastModified": 1783706783,
+        "narHash": "sha256-lue896TDzY0gkPu3aMGOufxfwGnt/GQ48ZzKEdFNHBI=",
         "ref": "refs/heads/main",
-        "rev": "25df7188d03ceadb52b982b12a8e9727a8dc2489",
-        "revCount": 3,
+        "rev": "a07e7f7da74a7edab888da2e8d6090a82557bfd8",
+        "revCount": 5,
         "type": "git",
         "url": "https://tangled.org/oat.zone/following-shim"
       },
