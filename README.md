@@ -17,7 +17,7 @@ source, build locally and then deploy it:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --target-host nanachi --sudo switch --flake .#nanachi --impure
+   ./rebuild-remote-deploy.sh
    ```
 
 2. **on a nix-capable system (remote build)**
@@ -27,7 +27,7 @@ use a local source, build remotely and deploy from there:
 
    ```sh
    # on your system; relies on nanachi being a defined SSH host in your ~/.ssh/config
-   nixos-rebuild --build-host nanachi --target-host nanachi --sudo switch --flake .#nanachi --impure
+   ./rebuild-remote-build.sh
    ```
 
 3. **on any system (full remote)**
@@ -42,7 +42,7 @@ available in a pinch
    # on the server, in your home directory (or wherever you feel is appropriate)
    git clone https://git.oat.zone/oat/fi-nix-config && cd fi-nix-config
    # ..if necessary, do your changes, then..
-   ./rebuild.sh
+   ./rebuild-local.sh
    ```
 
 ---
