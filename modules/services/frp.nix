@@ -17,6 +17,21 @@ in {
       type = types.port;
       default = 7000;
     };
+
+    freePorts = {
+      from = mkOption {
+        type = types.port;
+        default = 48000;
+      };
+      to = mkOption {
+        type = types.port;
+        default = 54000;
+      };
+      add = mkOption {
+        type = types.listOf types.port;
+        default = [];
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -32,8 +47,18 @@ in {
           auth.method = "token";
           auth.tokenSource.type = "file";
           auth.tokenSource.file.path = "/etc/frp-token";
+
+          allowPorts = [
+            { start = cfg.freePorts.from; end = cfg.freePorts.to; }
+          ] ++ (lib.map (port: { single = port; }) cfg.freePorts.add);
         };
       };
     };
+
+    networking.firewall.allowedTCPPorts = [ cfg.port ] ++ cfg.freePorts.add;
+    networking.firewall.allowedUDPPorts = [ cfg.port ] ++ cfg.freePorts.add;
+
+    networking.firewall.allowedTCPPortRanges = [ { from = cfg.freePorts.from; to = cfg.freePorts.to; } ];
+    networking.firewall.allowedUDPPortRanges = [ { from = cfg.freePorts.from; to = cfg.freePorts.to; } ];
   };
 }

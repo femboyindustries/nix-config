@@ -136,6 +136,15 @@ in {
       frp = {
         enable = true;
         port = 7000;
+
+        freePorts.from = 48000;
+        freePorts.to = 54000;
+
+        # more permanent ports or ports requiring reverse proxying should go here
+        freePorts.add = [
+          # radio.oat.zone
+          24454
+        ];
       };
     };
   };
@@ -153,8 +162,8 @@ in {
 
   networking = {
     firewall.allowPing = true;
-    # minecraft proximity voice chat (and lots of other things by this point. oops)
-    firewall.allowedTCPPorts = [ 24454 24455 24464 25567 25577 4499 21025 21027 25599 25500 25974 27015 25678 11037 6567 ];
-    firewall.allowedUDPPorts = [ 24454 24455 24464 25567 25577 4499 21025 21027 25599 25500 25974 27015 25678 11037 6567 ];
+
+    # pls don't add to these w/o documentation; use the free port range (48k-54k) for one-off uses
+    #firewall.allowedTCPPorts = [];
   };
 }
