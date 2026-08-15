@@ -132,6 +132,11 @@ in {
           "did:plc:2oqojyy6wcdnrktx4gjcodzs" # mayf
         ];
       };
+
+      frp = {
+        enable = true;
+        port = 7000;
+      };
     };
   };
 

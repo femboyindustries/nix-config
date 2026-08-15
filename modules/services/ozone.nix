@@ -50,8 +50,7 @@ in {
     systemd.services.ozone = {
       description = "Bluesky Ozone Service";
 
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
+      after = [ "network.target" "postgresql.service" ];
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = let
@@ -73,12 +72,16 @@ in {
           OZONE_PORT = toString cfg.port;
 
           LOG_ENABLED = "1";
+
+          NODE_ENV = "production";
         };
       in {
         ExecStart = getExe cfg.package;
         Environment = lib.mapAttrsToList (k: v: "${k}=${if builtins.isInt v then toString v else v}") (
           lib.filterAttrs (_: v: v != null) envVars
         );
+
+        WorkingDirectory = "${cfg.package}/lib/ozone"; # this should probably be done in the package instead
 
         EnvironmentFile = [
           "/etc/ozone-secrets"
