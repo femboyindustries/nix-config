@@ -22,6 +22,8 @@
     nixpkgs-forgejo-runner.url = "github:emilylange/nixpkgs?ref=nixos/forgejo-runner";
 
     following-shim.url = "git+https://tangled.org/oat.zone/following-shim";
+
+    ozone.url = "git+https://tangled.org/cool-handle.ebil.club/ozone-nix";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:

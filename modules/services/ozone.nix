@@ -1,4 +1,4 @@
-{ pkgs, config, options, lib, ... }:
+{ pkgs, config, options, lib, inputs, system, ... }:
 
 with lib;
 let
@@ -9,7 +9,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs._.ozone;
+      default = inputs.ozone.packages.${system}.default;
       example = "pkgs.ozone";
     };
 
@@ -38,6 +38,12 @@ in {
       description = "DID of the service handle";
       example = "did:plc:7eansezz3nlumwc7gfuiaksv";
     };
+
+    adminDIDs = mkOption {
+      type = types.str;
+      default = cfg.serviceDID;
+      description = "DIDs of accounts with access to the instance, comma-seperated";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -54,7 +60,7 @@ in {
         envVars = {
           OZONE_SERVER_DID = cfg.serviceDID;
           OZONE_PUBLIC_URL = "https://${cfg.domain}";
-          OZONE_ADMIN_DIDS = cfg.serviceDID;
+          OZONE_ADMIN_DIDS = cfg.adminDIDs;
           #OZONE_ADMIN_PASSWORD
           #OZONE_SIGNING_KEY_HEX
           OZONE_DB_POSTGRES_URL = "postgresql:///ozone?host=/run/postgresql";

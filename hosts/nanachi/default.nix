@@ -123,10 +123,14 @@ in {
       };
 
       ozone = {
-        #enable = true; # off for now due to an upstream yarn-berry bug
+        enable = true;
         domain = "ozone.yugoslavia.best";
         serviceHandle = "moderation.at.yugoslavia.best";
         serviceDID = "did:plc:kgpqgx33bhqf4sn7lb7thnzw";
+        adminDIDs = lib.concatStringsSep "," [
+          "did:plc:7eansezz3nlumwc7gfuiaksv" # jade
+          "did:plc:2oqojyy6wcdnrktx4gjcodzs" # mayf
+        ];
       };
     };
   };

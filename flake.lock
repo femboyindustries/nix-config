@@ -476,6 +476,22 @@
     },
     "nixpkgs_8": {
       "locked": {
+        "lastModified": 1760284886,
+        "narHash": "sha256-TK9Kr0BYBQ/1P5kAsnNQhmWWKgmZXwUQr4ZMjCzWf2c=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cf3f5c4def3c7b5f1fc012b3d839575dbe552d43",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_9": {
+      "locked": {
         "lastModified": 1768323494,
         "narHash": "sha256-yBXJLE6WCtrGo7LKiB6NOt6nisBEEkguC/lq/rP3zRQ=",
         "owner": "NixOS",
@@ -509,10 +525,28 @@
         "url": "https://git.oat.zone/oat/nlw-api"
       }
     },
+    "ozone": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_8"
+      },
+      "locked": {
+        "lastModified": 1773358730,
+        "narHash": "sha256-R4ADo/f2Y2AaPSdogHJ4pEIXGamQWr+QEFCKZrUEnaE=",
+        "ref": "refs/heads/master",
+        "rev": "62994746a81891e3f68e8771a5b36fb0ca12411a",
+        "revCount": 8,
+        "type": "git",
+        "url": "https://tangled.org/cool-handle.ebil.club/ozone-nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://tangled.org/cool-handle.ebil.club/ozone-nix"
+      }
+    },
     "post-cohost-blogger": {
       "inputs": {
         "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_8"
+        "nixpkgs": "nixpkgs_9"
       },
       "locked": {
         "lastModified": 1769863178,
@@ -538,6 +572,7 @@
         "nixpkgs-forgejo-runner": "nixpkgs-forgejo-runner",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nlw-api": "nlw-api",
+        "ozone": "ozone",
         "post-cohost-blogger": "post-cohost-blogger"
       }
     },
