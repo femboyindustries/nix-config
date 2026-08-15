@@ -2,7 +2,7 @@
 
 let
   inherit (builtins) attrValues readDir pathExists;
-  inherit (lib) id filterAttrs hasPrefix hasSuffix nameValuePair removeSuffix mapAttrs' trace fix fold isAttrs;
+  inherit (lib) id filterAttrs hasPrefix hasSuffix nameValuePair removeSuffix mapAttrs' trace fix foldr isAttrs;
 in rec {
   mapModules' = dir: fn: dirfn:
     filterAttrs
@@ -23,5 +23,5 @@ in rec {
 
   mapModules = dir: fn: mapModules' dir fn (path: if pathExists "${path}/default.nix" then fn path else null);
   mapModulesRec = dir: fn: mapModules' dir fn (path: mapModulesRec path fn);
-  mapModulesRec' = dir: fn: fix (f: attrs: fold (x: xs: (if isAttrs x then f x else [x]) ++ xs) [] (attrValues attrs)) (mapModulesRec dir fn);
+  mapModulesRec' = dir: fn: fix (f: attrs: foldr (x: xs: (if isAttrs x then f x else [x]) ++ xs) [] (attrValues attrs)) (mapModulesRec dir fn);
 }

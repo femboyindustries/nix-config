@@ -2,7 +2,8 @@
 
 with lib;
 let
-  colors = builtins.fromJSON ''{
+  colors = builtins.fromJSON ''
+  {
     "white": "\u0080",
     "purple": "\u0081",
     "yellow": "\u0082",

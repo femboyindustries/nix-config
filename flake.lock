@@ -40,11 +40,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1758529191,
-        "narHash": "sha256-/3htisxAFEv5aHrQVOLBnqO+kqBPMFkLe/NDn1V2+TY=",
+        "lastModified": 1786786989,
+        "narHash": "sha256-C87F497ypswx6vH1dDEh0gvsg0nYGB22ShDCvJXrhIs=",
         "ref": "refs/heads/main",
-        "rev": "68c99d3ac3e222f544b4baa755be1c264d83ae3f",
-        "revCount": 2,
+        "rev": "71dc1aee3c36e28851dffb7e1efdf69d52c6e496",
+        "revCount": 3,
         "type": "git",
         "url": "https://git.oat.zone/oat/cardgen"
       },
@@ -266,11 +266,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1783706783,
-        "narHash": "sha256-lue896TDzY0gkPu3aMGOufxfwGnt/GQ48ZzKEdFNHBI=",
+        "lastModified": 1786787210,
+        "narHash": "sha256-GheyT0txtE+NLhxdJitO5Mu85o1bPDin/hlMG0WQkT4=",
         "ref": "refs/heads/main",
-        "rev": "a07e7f7da74a7edab888da2e8d6090a82557bfd8",
-        "revCount": 5,
+        "rev": "4a302482ece4b041626c9492a42d61c75e427975",
+        "revCount": 6,
         "type": "git",
         "url": "https://tangled.org/oat.zone/following-shim"
       },
@@ -512,11 +512,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1758529390,
-        "narHash": "sha256-/xPKhsvhrkwJgLBcS+yG9gxHNixSie7YHwd6JxL9FDA=",
+        "lastModified": 1786787114,
+        "narHash": "sha256-jnGzBEO7POOYEypNW40JMhF3Mo4foiC4gwGFS2wteaM=",
         "ref": "refs/heads/main",
-        "rev": "e3566e04c493aa72c2a8ff5833be195d37132e8a",
-        "revCount": 44,
+        "rev": "d8b46e4a53656518b4566deea62c987be5b962dc",
+        "revCount": 45,
         "type": "git",
         "url": "https://git.oat.zone/oat/nlw-api"
       },
@@ -549,11 +549,11 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1769863178,
-        "narHash": "sha256-reL2rzTsHQPnp/dJhLwEkC6RZS58G7Md3j2GB5zIvBw=",
+        "lastModified": 1786787056,
+        "narHash": "sha256-uz2PVOKWtyf7hYDzoQUv/AV5as05p9yvaftOFqYVyxg=",
         "ref": "refs/heads/main",
-        "rev": "67fb845ecfcc58a20dbc91e1a8643bf40bcebea2",
-        "revCount": 33,
+        "rev": "b43e0797417b017d63bae498a257d17aadf89a6c",
+        "revCount": 36,
         "type": "git",
         "url": "https://git.oat.zone/oat/post-cohost-blogger"
       },
