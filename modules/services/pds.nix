@@ -95,12 +95,12 @@ in {
         # <https://compare.hose.cam>
         PDS_CRAWLERS = concatStringsSep "," [
           "https://bsky.network"
-          "https://relay.cerulea.blue"
+          #"https://relay.cerulea.blue" # defunct
           "https://relay.fire.hose.cam"
           "https://relay2.fire.hose.cam"
           "https://relay3.fr.hose.cam"
-          "https://relay.hayescmd.net"
-          "https://relay.xero.systems"
+          #"https://relay.hayescmd.net" # does not resolve as of 2026/08/17
+          #"https://relay.xero.systems" # conn refused as of 2026/08/17
           "https://relay.upcloud.world"
           "https://relay.feeds.blue"
           "https://atproto.africa"
