@@ -19,19 +19,35 @@ in {
       description = ''
         Domain to host the PDS under.
 
-        NOTE that you must also have set up a wildcard DNS entry with the proper TLS certificates;
-        eg. if `domain` is `example.com`, then both `example.com` and `*.example.com` must have valid
-        A records and certificates.
+        NOTE that you must also have set up a wildcard DNS entry with the proper
+        TLS certificates; eg. if `domain` is `example.com`, then both
+        `example.com` and `*.example.com` must have valid A records and
+        certificates.
 
-        The NGINX configuration here will assume both are registered under `example.com` and set
-        `useACMEHost` to the given domain.
+        The NGINX configuration here will assume both are registered under
+        `example.com` and set `useACMEHost` to the given domain.
       '';
       example = "pds.example.com";
+    };
+
+    announcementsAccount = mkOption {
+      type = types.str;
+      default = null;
+      description = ''
+        Optional announcements account DID.
+
+        Sets up a service that mirrors the posts on the account, working even if
+        the PDS is down.
+      '';
     };
 
     port = mkOption {
       type = types.port;
       default = 2583;
+    };
+    announcementsPort = mkOption {
+      type = types.port;
+      default = 9194;
     };
   };
 
@@ -188,6 +204,31 @@ in {
           add_header X-Content-Type-Options nosniff;
   				return 200 '{"state":{"lastInitiatedAt":"2025-07-14T14:22:43.912Z","status":"assured","access":"full"},"metadata":{"accountCreatedAt":"2022-11-17T00:35:16.391Z"}}';
         '';
+      };
+      locations."/announcements" = mkIf (cfg.announcementsAccount != null) {
+        proxyPass = "http://127.0.0.1:${toString cfg.announcementsPort}/";
+      };
+    };
+
+    systemd.services."pds-announcements-mirror" = mkIf (cfg.announcementsAccount != null) {
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      environment = {
+        PORT = toString cfg.announcementsPort;
+        PDS_BASE = "";
+        ANNOUNCEMENTS_REPO = cfg.announcementsAccount;
+        CACHE_DIR = "/var/lib/pds-announcements-mirror";
+        NODE_ENV = "production";
+      };
+
+      serviceConfig = {
+        ExecStart = getExe pkgs._.pds-announcements-mirror;
+        DynamicUser = "yes";
+        Restart = "always";
+        StateDirectory = "pds-announcements-mirror";
+        StateDirectoryMode = "0755";
       };
     };
   };

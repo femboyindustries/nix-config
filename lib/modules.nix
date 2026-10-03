@@ -9,14 +9,19 @@ in rec {
       (name: type: type != null && !(hasPrefix "_" name))
       (mapAttrs'
         (name: type:
-          let path = "${toString dir}/${name}"; in
+          let
+            path = "${toString dir}/${name}";
+            parentName = lib.lists.last (lib.strings.splitString "/" (toString dir));
+          in
           if type == "directory"
           then nameValuePair name (dirfn path)
           else if
             type == "regular" &&
-            name != "default.nix" &&
-            hasSuffix ".nix" name
-          then nameValuePair (removeSuffix ".nix" name) (fn path)
+            hasSuffix ".nix" name 
+          then
+            if name != "default.nix" 
+            then nameValuePair (removeSuffix ".nix" name) (fn path)
+            else nameValuePair parentName (fn path)
           else nameValuePair "" null
         )
         (readDir dir));

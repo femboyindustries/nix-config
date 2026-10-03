@@ -119,7 +119,13 @@ in {
       pds = {
         enable = true;
         domain = "at.yugoslavia.best";
-        package = pkgs.unstable.bluesky-pds;
+        package = pkgs.unstable.bluesky-pds.overrideAttrs {
+          preBuild = ''
+            echo "export const hasExplicitSlur = () => false" > node_modules/@atproto/pds/dist/handle/explicit-slurs.js
+            echo "export const reservedSubdomains = {}" > node_modules/@atproto/pds/dist/handle/reserved.js
+          '';
+        };
+        announcementsAccount = "did:plc:xivqcmlbofj64kl7px2az3vj";
       };
 
       ozone = {
