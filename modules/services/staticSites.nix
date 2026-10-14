@@ -34,6 +34,12 @@ let
       default = false;
     };
 
+    spa = mkOption {
+      type = types.bool;
+      description = "Use /index.html as a fallback instead of returning a 404";
+      default = false;
+    };
+
     disableLogsForMisc = mkOption {
       type = types.bool;
       description = "Disables access logs for /favicon.ico and /robots.txt";
@@ -115,6 +121,12 @@ in {
               '';
             }
           )
+
+          ( mkIf (site.spa) {
+            "/".extraConfig = ''
+              try_files $uri $uri/ /index.html?$query_string;
+            '';
+          })
         ];
         forceSSL = site.forceSSL;
         addSSL = !site.forceSSL;
