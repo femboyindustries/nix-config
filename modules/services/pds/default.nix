@@ -97,6 +97,8 @@ in {
         PDS_PRIMARY_COLOR = "#00ffff";
         PDS_ERROR_COLOR = "#ff00ff";
         PDS_WARNING_COLOR = "#ffff00";
+        PDS_BACKGROUND_DARK_URL = "https://at.yugoslavia.best/background.png";
+        PDS_BACKGROUND_LIGHT_URL = "https://at.yugoslavia.best/background.png";
 
         # database (sqlite)
         PDS_DATA_DIRECTORY = "/var/lib/pds/data";
@@ -156,19 +158,19 @@ in {
       locations."= /favicon.png" = {
         root = "/var/www/${cfg.domain}";
         extraConfig = ''
-          if ($host != "${cfg.domain}") {
-            return 301 $scheme://${cfg.domain}$request_uri;
-          }
           try_files /favicon.png =404;
         '';
       };
       locations."= /favicon.ico" = {
         root = "/var/www/${cfg.domain}";
         extraConfig = ''
-          if ($host != "${cfg.domain}") {
-            return 301 $scheme://${cfg.domain}$request_uri;
-          }
           try_files /favicon.ico =404;
+        '';
+      };
+      locations."= /background.png" = {
+        root = "/var/www/${cfg.domain}";
+        extraConfig = ''
+          try_files /background.png =404;
         '';
       };
 
