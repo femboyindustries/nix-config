@@ -135,7 +135,7 @@ in {
       };
 
       environmentFiles = [
-        "/var/lib/pds/secrets.env"
+        "/var/lib/pds/secrets_new.env"
       ];
     };
 
