@@ -2,7 +2,7 @@
   description = "Amalgamated, Bespoke Frosted Flakes";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-26.05";
+    nixpkgs.url = "nixpkgs/release-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     nixos-hardware = {
