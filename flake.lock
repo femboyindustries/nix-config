@@ -371,18 +371,18 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "nixpkgs-master": {
       "locked": {
-        "lastModified": 1792502884,
-        "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
+        "lastModified": 1792610113,
+        "narHash": "sha256-hLGrZkC5sGOVx1zRSlZjiySygg+WXNi/i6EZ8LL8/Hw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+        "rev": "d0ddb216ef2798ff260f8207d6cf769cc630b11a",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-unstable",
+        "ref": "master",
         "type": "indirect"
       }
     },
@@ -417,11 +417,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1792593785,
-        "narHash": "sha256-dEQs/r/DSIvSjw5pQro/BAqsUnFNNZ3I/qmFYzatGvc=",
+        "lastModified": 1792607972,
+        "narHash": "sha256-X6Y3dlcrDrs09H32zpjVwXIplL140DQzNelKEH9VlSM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8c259fc0dd1f3ccc1aaf4f9156ab16b7328b5a4f",
+        "rev": "dcf00dd52469732de413d0a245d9ef5faaec428e",
         "type": "github"
       },
       "original": {
@@ -442,22 +442,6 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_6": {
-      "locked": {
-        "lastModified": 1768323494,
-        "narHash": "sha256-yBXJLE6WCtrGo7LKiB6NOt6nisBEEkguC/lq/rP3zRQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2c3e5ec5df46d3aeee2a1da0bfedd74e21f4bf3a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -504,7 +488,9 @@
     "post-cohost-blogger": {
       "inputs": {
         "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1786787056,
@@ -528,7 +514,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-forgejo-runner": "nixpkgs-forgejo-runner",
-        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-master": "nixpkgs-master",
         "nlw-api": "nlw-api",
         "ozone": "ozone",
         "post-cohost-blogger": "post-cohost-blogger"

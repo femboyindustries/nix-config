@@ -28,7 +28,7 @@ in {
     oatmealine = {
       conf = {
         packages = with pkgs; [ bat tmux micro direnv nix-direnv ripgrep htop unzip zip ];
-        shell = pkgs.unstable.fish;
+        shell = pkgs.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [
@@ -48,7 +48,7 @@ in {
     mayflower = {
       conf = {
         packages = with pkgs; [ micro tmux ];
-        shell = pkgs.unstable.fish;
+        shell = pkgs.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" "yugoslavia" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [
@@ -64,7 +64,7 @@ in {
     zydra = {
       conf = {
         packages = with pkgs; [ micro tmux ];
-        shell = pkgs.unstable.fish;
+        shell = pkgs.fish;
         extraGroups = [ "wheel" "nix-users" "dotfiles" ];
         initialHashedPassword = "!";
         openssh.authorizedKeys.keys = fetchSSHKeys [ "zydra@thedragon" "zydra@overlord" ];
@@ -105,7 +105,7 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID9BFJWinbzlv75QFkrlREI+C5+QOlncc9u+2uGKYfFx redbirdrabbit@gmail.com"
       ];
       packages = with pkgs; [ tmux micro ];
-      shell = pkgs.unstable.fish;
+      shell = pkgs.fish;
     };
 
     services = {
@@ -119,7 +119,7 @@ in {
       pds = {
         enable = true;
         domain = "at.yugoslavia.best";
-        package = pkgs.unstable.bluesky-pds.overrideAttrs {
+        package = pkgs.master.bluesky-pds.overrideAttrs {
           preBuild = ''
             echo "export const hasExplicitSlur = () => false" > node_modules/@atproto/pds/dist/handle/explicit-slurs.js
             echo "export const reservedSubdomains = {}" > node_modules/@atproto/pds/dist/handle/reserved.js

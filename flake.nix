@@ -3,17 +3,12 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/release-26.05";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "nixpkgs/master";
 
-    nixos-hardware = {
-      url = "github:nixos/nixos-hardware";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    post-cohost-blogger = {
-      url = "git+https://git.oat.zone/oat/post-cohost-blogger";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
+    post-cohost-blogger.url = "git+https://git.oat.zone/oat/post-cohost-blogger";
+    post-cohost-blogger.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
 
     nlw-api.url = "git+https://git.oat.zone/oat/nlw-api";
     nlw-api.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
@@ -31,7 +26,7 @@
     #ozone.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-master, ... }:
     let
       system = "x86_64-linux";
 
@@ -50,7 +45,7 @@
       packages."${system}" = mapModules ./packages (p: pkgs.callPackage p { });
       overlay = final: prev: {
         _ = self.packages."${system}";
-        unstable = mkPkgs nixpkgs-unstable [];
+        master = mkPkgs nixpkgs-master [];
       };
       #overlays = mapModules ./overlays import;
       nixosModules = mapModulesRec ./modules import;
