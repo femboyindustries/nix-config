@@ -125,9 +125,9 @@ in {
           "https://relay.whey.party"
         ];
         PDS_MOD_SERVICE_URL = "https://mod.yugoslavia.best";
-        PDS_MOD_SERVICE_DID = "did:plc:7ky7ww26gqwhdofqrxxdy7hb";
+        PDS_MOD_SERVICE_DID = "did:plc:kgpqgx33bhqf4sn7lb7thnzw";
         PDS_REPORT_SERVICE_URL = "https://mod.yugoslavia.best";
-        PDS_REPORT_SERVICE_DID = "did:plc:7ky7ww26gqwhdofqrxxdy7hb";
+        PDS_REPORT_SERVICE_DID = "did:plc:kgpqgx33bhqf4sn7lb7thnzw";
 
         # debug
         LOG_ENABLED = "true";
@@ -230,7 +230,7 @@ in {
         DynamicUser = "yes";
         Restart = "always";
         StateDirectory = "pds-announcements-mirror";
-        StateDirectoryMode = "0755";
+        StateDirectoryMode = "0750";
       };
     };
   };

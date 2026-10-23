@@ -12,8 +12,7 @@ in {
     services.nlw-api = {
       enable = true;
       domain = "nlw.oat.zone";
-      apiKey = builtins.readFile /etc/sheets-api-key;
-      #apiKey = "";
+      apiKeyFile = "/etc/sheets-api-key";
       port = 1995;
     };
     services.cardgen = {

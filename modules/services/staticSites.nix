@@ -155,6 +155,11 @@ in {
         };
         phpOptions = ''
           display_errors = on;
+          
+          # fixes a possible webshell/RCE thru /evil.jpg/index.php
+          "cgi.fix_pathinfo" = 0;
+          # mitigate CVE-2026-115560 until 8.5.13
+          "session.upload_progress.enabled" = 0;
         '';
         phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
         phpPackage = pkgs.php;

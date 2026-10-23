@@ -56,8 +56,10 @@ in {
       '';
 
       # prevent invalid domains from being used
-      virtualHosts."_".locations."/".return = "444";
-      virtualHosts."a".locations."/".return = "444";
+      virtualHosts."_" = {
+        default = true;
+        locations."/".return = "444";
+      };
     };
 
     networking.firewall.allowedTCPPorts = [ 443 80 ];

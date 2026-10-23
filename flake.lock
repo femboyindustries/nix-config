@@ -1,39 +1,5 @@
 {
   "nodes": {
-    "ameba-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1690573222,
-        "narHash": "sha256-TdyEnTloaciSpkPmnm+OM75sz9jaCaQ3VoDEepfescU=",
-        "owner": "crystal-ameba",
-        "repo": "ameba",
-        "rev": "7b8316f0616ef140cd29b7bf9d7e242009f80d1c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crystal-ameba",
-        "ref": "v1.5.0",
-        "repo": "ameba",
-        "type": "github"
-      }
-    },
-    "bdwgc-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1685120683,
-        "narHash": "sha256-KHijT4BBKfDvTpHpwognN+3ZXoC6JabBTFSYFyOUT9o=",
-        "owner": "ivmai",
-        "repo": "bdwgc",
-        "rev": "d1ff06cc503a74dca0150d5e988f2c93158b0cdf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ivmai",
-        "ref": "v8.2.4",
-        "repo": "bdwgc",
-        "type": "github"
-      }
-    },
     "cardgen": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -42,134 +8,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1786786989,
-        "narHash": "sha256-C87F497ypswx6vH1dDEh0gvsg0nYGB22ShDCvJXrhIs=",
+        "lastModified": 1792754659,
+        "narHash": "sha256-AFgGYyLgZLMTP9QymC3mRHLOLZhoA/byNXVobj8Okuo=",
         "ref": "refs/heads/main",
-        "rev": "71dc1aee3c36e28851dffb7e1efdf69d52c6e496",
-        "revCount": 3,
+        "rev": "bdb38ed7a3f8d2efb26dedb2eb27507de066fe0e",
+        "revCount": 6,
         "type": "git",
         "url": "https://git.oat.zone/oat/cardgen"
       },
       "original": {
         "type": "git",
         "url": "https://git.oat.zone/oat/cardgen"
-      }
-    },
-    "crystal-aarch64-darwin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697184042,
-        "narHash": "sha256-zHvZo/t13QsKTJOOp6v6ZNw7cwjKZ29TajRNC3vUaCI=",
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-darwin-universal.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-darwin-universal.tar.gz"
-      }
-    },
-    "crystal-flake": {
-      "inputs": {
-        "ameba-src": "ameba-src",
-        "bdwgc-src": "bdwgc-src",
-        "crystal-aarch64-darwin": "crystal-aarch64-darwin",
-        "crystal-src": "crystal-src",
-        "crystal-x86_64-darwin": "crystal-x86_64-darwin",
-        "crystal-x86_64-linux": "crystal-x86_64-linux",
-        "crystalline-src": "crystalline-src",
-        "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1697498174,
-        "narHash": "sha256-cuGNIqwO8Zdex277Fp+pwwPfjxS44Kpnbggj5Cv2RhQ=",
-        "owner": "manveru",
-        "repo": "crystal-flake",
-        "rev": "2b34b26d2969e862282e83e85e59899d41cafeab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "manveru",
-        "repo": "crystal-flake",
-        "type": "github"
-      }
-    },
-    "crystal-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697181881,
-        "narHash": "sha256-+ytVFf0t6ZDcJ+bQaDC012/YlOTpo7G6WGBMGlRltt4=",
-        "owner": "crystal-lang",
-        "repo": "crystal",
-        "rev": "c6f3552f5be159eb06c8f348c6b9e23ff7f17dbc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crystal-lang",
-        "ref": "1.10.1",
-        "repo": "crystal",
-        "type": "github"
-      }
-    },
-    "crystal-x86_64-darwin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697184042,
-        "narHash": "sha256-zHvZo/t13QsKTJOOp6v6ZNw7cwjKZ29TajRNC3vUaCI=",
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-darwin-universal.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-darwin-universal.tar.gz"
-      }
-    },
-    "crystal-x86_64-linux": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697182606,
-        "narHash": "sha256-QhWySbDISW3GNcNXpTJN7tucbW5sTTeo0r2D/T7VHwo=",
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-linux-x86_64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/crystal-lang/crystal/releases/download/1.10.1/crystal-1.10.1-1-linux-x86_64.tar.gz"
-      }
-    },
-    "crystalline-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696955782,
-        "narHash": "sha256-EMRq8FqVhzdrlH/HPlJnE3DhjdEIsdxFV69jA1VvTpk=",
-        "owner": "elbywan",
-        "repo": "crystalline",
-        "rev": "48f4b48658ba9268db8b2d56d402ce659d019e54",
-        "type": "github"
-      },
-      "original": {
-        "owner": "elbywan",
-        "ref": "v0.11.0",
-        "repo": "crystalline",
-        "type": "github"
-      }
-    },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1672152762,
-        "narHash": "sha256-U8iWWHgabN07zfbgedogMVWrEP1Zywyf3Yx3OYHSSgE=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "19e0f88324d90509141e192664ded98bb88ef9b2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
       }
     },
     "flake-utils": {
@@ -285,16 +134,15 @@
     },
     "gd-icon-renderer-web": {
       "inputs": {
-        "crystal-flake": "crystal-flake",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1768913579,
-        "narHash": "sha256-fK0XfSqWCPGI3ZyeREUX7Ra5Vgh0Is1ksw7h4RxouXI=",
+        "lastModified": 1792756506,
+        "narHash": "sha256-kxaobKea8CxlvsMgkzk8eYkP9hEHcu6I3qrEeF2at1c=",
         "owner": "oatmealine",
         "repo": "gd-icon-renderer-web",
-        "rev": "f0bcf1535868ae4c01c6661aca8ef4673e62d686",
+        "rev": "3f0bd94aba05bb3dcdcee319b68ee30278aed1de",
         "type": "github"
       },
       "original": {
@@ -305,7 +153,7 @@
     },
     "nixos-hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1782166108,
@@ -323,16 +171,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1677543769,
-        "narHash": "sha256-LwbqS8vGisXl2WHpK9r5+kodr0zoIT8F2YB0R4y1TsA=",
+        "lastModified": 1792615934,
+        "narHash": "sha256-MlvRfa1O5Cqc2/a+gG+l9TSuowEoCKCmrJ1d9oAVm0I=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b26d52c9feb6476580016e78935cbf96eb3e2115",
+        "rev": "da6dc0e7b26060f2f71ce3ef7088fb56ee44fa36",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-22.11",
+        "ref": "nixos-26.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -349,24 +197,6 @@
       "original": {
         "owner": "emilylange",
         "ref": "nixos/forgejo-runner",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib": {
-      "locked": {
-        "dir": "lib",
-        "lastModified": 1671359686,
-        "narHash": "sha256-3MpC6yZo+Xn9cPordGz2/ii6IJpP2n8LE8e/ebUXLrs=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "04f574a1c0fde90b51bf68198e2297ca4e7cccf4",
-        "type": "github"
-      },
-      "original": {
-        "dir": "lib",
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -388,22 +218,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1685573264,
-        "narHash": "sha256-Zffu01pONhs/pqH07cjlF10NnMDLok8ix5Uk4rhOnZQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "380be19fbd2d9079f677978361792cb25e8a3635",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-22.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1767892417,
         "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
         "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
@@ -415,7 +229,7 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1792607972,
         "narHash": "sha256-X6Y3dlcrDrs09H32zpjVwXIplL140DQzNelKEH9VlSM=",
@@ -430,7 +244,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1760284886,
         "narHash": "sha256-TK9Kr0BYBQ/1P5kAsnNQhmWWKgmZXwUQr4ZMjCzWf2c=",
@@ -454,11 +268,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786787114,
-        "narHash": "sha256-jnGzBEO7POOYEypNW40JMhF3Mo4foiC4gwGFS2wteaM=",
+        "lastModified": 1792754689,
+        "narHash": "sha256-v+8gak+JlWuCa8MjNx9Aa1QoCPV53sK/gsxfOHuFrcY=",
         "ref": "refs/heads/main",
-        "rev": "d8b46e4a53656518b4566deea62c987be5b962dc",
-        "revCount": 45,
+        "rev": "2545fa08b3cd5905a6717e0382c131dafd24e8e3",
+        "revCount": 49,
         "type": "git",
         "url": "https://git.oat.zone/oat/nlw-api"
       },
@@ -469,7 +283,7 @@
     },
     "ozone": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1773358730,
@@ -512,7 +326,7 @@
         "following-shim": "following-shim",
         "gd-icon-renderer-web": "gd-icon-renderer-web",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-forgejo-runner": "nixpkgs-forgejo-runner",
         "nixpkgs-master": "nixpkgs-master",
         "nlw-api": "nlw-api",

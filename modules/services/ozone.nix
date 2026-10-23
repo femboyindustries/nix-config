@@ -89,7 +89,7 @@ in {
         User = "ozone";
         Group = "ozone";
         StateDirectory = "ozone";
-        StateDirectoryMode = "0755";
+        StateDirectoryMode = "0750";
         Restart = "always";
       };
     };
