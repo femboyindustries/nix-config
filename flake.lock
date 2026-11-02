@@ -185,6 +185,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1793646512,
+        "narHash": "sha256-PQCa0azC8r5nzOxCtwg8l0KqtQ8Mvt+7gMvYMRaApIk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c0ec71aa324e94f9f62493cf7d9d1a83ea6256dc",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "master",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1789546076,
@@ -296,6 +311,7 @@
         "gd-icon-renderer-web": "gd-icon-renderer-web",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-master": "nixpkgs-master",
         "nlw-api": "nlw-api",
         "ozone": "ozone",
         "post-cohost-blogger": "post-cohost-blogger"

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/release-26.05";
+    nixpkgs-master.url = "nixpkgs/master";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -23,7 +24,7 @@
     #ozone.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
   };
 
-  outputs = inputs @ { self, nixpkgs, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-master, ... }:
     let
       system = "x86_64-linux";
 
@@ -42,7 +43,7 @@
       packages."${system}" = mapModules ./packages (p: pkgs.callPackage p { });
       overlay = final: prev: {
         _ = self.packages."${system}";
-        #master = mkPkgs nixpkgs-master [];
+        master = mkPkgs nixpkgs-master [];
       };
       #overlays = mapModules ./overlays import;
       nixosModules = mapModulesRec ./modules import;
