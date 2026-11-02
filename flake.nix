@@ -15,8 +15,6 @@
     cardgen.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
     gd-icon-renderer-web.url = "github:oatmealine/gd-icon-renderer-web";
 
-    nixpkgs-forgejo-runner.url = "github:emilylange/nixpkgs?ref=nixos/forgejo-runner";
-
     following-shim.url = "git+https://tangled.org/oat.zone/following-shim";
     following-shim.inputs.nixpkgs.follows = "nixpkgs"; # TODO: remove once nodejs fixes hit nixos-26.05
 

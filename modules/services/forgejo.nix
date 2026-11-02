@@ -4,10 +4,6 @@ with lib;
 let
   cfg = config.modules.services.forgejo;
 in {
-  imports = [
-    "${inputs.nixpkgs-forgejo-runner}/nixos/modules/services/continuous-integration/forgejo-runner.nix"
-  ];
-
   options.modules.services.forgejo = {
     enable = mkOption {
       type = types.bool;

@@ -156,11 +156,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1782166108,
-        "narHash": "sha256-/EtnQBcKbsaCAGQ5VRcplrHRkR4ryqyLMpBfkVuG9Xw=",
+        "lastModified": 1793355509,
+        "narHash": "sha256-/Zs18x+IW4LuVH0rKxra0WPRgsk0DQsi0Bwkf8sOC5c=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "875776f0252fcb8618bb948640a0d1f7a5b362be",
+        "rev": "04c6b94fa104bc23650983a4513aea196794d321",
         "type": "github"
       },
       "original": {
@@ -185,29 +185,13 @@
         "type": "github"
       }
     },
-    "nixpkgs-forgejo-runner": {
-      "locked": {
-        "lastModified": 1781457128,
-        "narHash": "sha256-3fgbowSSUAEsnUzANP3Nx2ZXu16nwLuhGSUM12EYugw=",
-        "owner": "emilylange",
-        "repo": "nixpkgs",
-        "rev": "ebbed83ea980369df17fef7c6820c8f5d26fc1e5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emilylange",
-        "ref": "nixos/forgejo-runner",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1767892417,
-        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
-        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
+        "lastModified": 1789546076,
+        "narHash": "sha256-vWkSk5bbfTqdtMoSgD9FshACO8JCvXTFi+3cqEp0mH0=",
+        "rev": "b1b875982b17dabde9b4a37f3e229e74913e6db3",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1074753.b1b875982b17/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -216,11 +200,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1792607972,
-        "narHash": "sha256-X6Y3dlcrDrs09H32zpjVwXIplL140DQzNelKEH9VlSM=",
+        "lastModified": 1793644210,
+        "narHash": "sha256-5yrDN5fFzDHLBLXoukYnm9VRwyqazBQegGcheV3tTyw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dcf00dd52469732de413d0a245d9ef5faaec428e",
+        "rev": "2a1042259182962c5e054abf02a6bccd44146377",
         "type": "github"
       },
       "original": {
@@ -312,7 +296,6 @@
         "gd-icon-renderer-web": "gd-icon-renderer-web",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-forgejo-runner": "nixpkgs-forgejo-runner",
         "nlw-api": "nlw-api",
         "ozone": "ozone",
         "post-cohost-blogger": "post-cohost-blogger"
