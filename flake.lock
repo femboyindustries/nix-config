@@ -138,11 +138,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1792756506,
-        "narHash": "sha256-kxaobKea8CxlvsMgkzk8eYkP9hEHcu6I3qrEeF2at1c=",
+        "lastModified": 1794227587,
+        "narHash": "sha256-I2I6Uf7Mg9yHL9da97kuz2GJT2P/U1s1d82f16rPQjw=",
         "owner": "oatmealine",
         "repo": "gd-icon-renderer-web",
-        "rev": "3f0bd94aba05bb3dcdcee319b68ee30278aed1de",
+        "rev": "bc1f925857bb4096810fb69d307baec6a1b7afee",
         "type": "github"
       },
       "original": {
